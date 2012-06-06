@@ -5,17 +5,20 @@
 package br.com.ademoc.sgas.DomainModel;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 /**
- *
- * @author www
+ * Entity Usuario
+ * @version 1.0  06/06/2012
+ * @author Kennedi Paulo S. Malheiros
  */
-@Entity
+@Entity (name="usuarios")
 public class Usuario implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -23,10 +26,21 @@ public class Usuario implements Serializable {
     @Column(name="codigo")
     private Long id;
     
-    @Column (length=255)
+    @Column (length=100, nullable=false)
     private String nome;
     
+    @Column (name="login", length=50, nullable=false)
+    private String login;
     
+    @Column (name="senha", length=32, nullable=false)
+    private String senha;
+    
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column (name="dtcadastro", nullable=false)
+    private Date dtcadastro;
+    
+    @Column (name="nivel", nullable=false)
+    private boolean nivel;
     
     
     public Long getId() {
@@ -36,6 +50,52 @@ public class Usuario implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public Date getDtcadastro() {
+        return dtcadastro;
+    }
+
+    public void setDtcadastro(Date dtcadastro) {
+        this.dtcadastro = dtcadastro;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public boolean isNivel() {
+        return nivel;
+    }
+
+    public void setNivel(boolean nivel) {
+        this.nivel = nivel;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    //Contrutor da Classe usuario
+    public void Usuario() {
+    }
+    
+    
 
     @Override
     public int hashCode() {
