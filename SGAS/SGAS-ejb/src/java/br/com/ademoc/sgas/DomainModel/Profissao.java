@@ -16,17 +16,21 @@ import javax.persistence.Id;
  * @since 1.0 06/06/2012
  * @author Kennedi Paulo S. Malheiros
  */
-@Entity (name="profissoes")
+@Entity(name = "profissoes")
 public class Profissao implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column (name="codigo")
+    @Column(name = "codigo")
     private Long id;
-
-    @Column (name="descricao", length=255, nullable=false)
+    @Column(name = "descricao", length = 255, nullable = false)
     private String descricao;
-    
+
+    //Construtor Classe
+    public void Profissao() {
+    }
+
     public Long getId() {
         return id;
     }
@@ -43,11 +47,6 @@ public class Profissao implements Serializable {
         this.descricao = descricao;
     }
 
-    //Construtor Classe
-    public void Profissao(){
-        
-    }
-    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -72,5 +71,4 @@ public class Profissao implements Serializable {
     public String toString() {
         return "br.com.ademoc.sgas.DomainModel.Profissao[ id=" + id + " ]";
     }
-    
 }

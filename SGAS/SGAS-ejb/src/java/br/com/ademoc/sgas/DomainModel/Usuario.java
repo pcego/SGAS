@@ -13,36 +13,38 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
 /**
  * Entity Usuario
- * @version 1.0  06/06/2012
+ *
+ * @version 1.0
+ * @since 1.0 06/06/2012
  * @author Kennedi Paulo S. Malheiros
  */
-@Entity (name="usuarios")
+@Entity(name = "usuarios")
 public class Usuario implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="codigo")
+    @Column(name = "codigo")
     private Long id;
-    
-    @Column (length=100, nullable=false)
+    @Column(length = 100, nullable = false)
     private String nome;
-    
-    @Column (name="login", length=50, nullable=false)
+    @Column(name = "login", length = 50, nullable = false)
     private String login;
-    
-    @Column (name="senha", length=32, nullable=false)
+    @Column(name = "senha", length = 32, nullable = false)
     private String senha;
-    
     @Temporal(TemporalType.TIMESTAMP)
-    @Column (name="dtcadastro", nullable=false)
+    @Column(name = "dtcadastro", nullable = false)
     private Date dtcadastro;
-    
-    @Column (name="nivel", nullable=false)
+    @Column(name = "nivel", nullable = false)
     private boolean nivel;
-    
-    
+
+    //Contrutor da Classe usuario
+    public void Usuario() {
+    }
+
     public Long getId() {
         return id;
     }
@@ -91,12 +93,6 @@ public class Usuario implements Serializable {
         this.senha = senha;
     }
 
-    //Contrutor da Classe usuario
-    public void Usuario() {
-    }
-    
-    
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -121,5 +117,4 @@ public class Usuario implements Serializable {
     public String toString() {
         return "br.com.ademoc.sgas.DomainModel.Usuario[ id=" + id + " ]";
     }
-    
 }

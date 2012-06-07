@@ -16,17 +16,21 @@ import javax.persistence.Id;
  * @since 1.0 06/06/2012
  * @author Kennedi Paulo S. Malheiros
  */
-@Entity (name="categorias")
+@Entity(name = "categorias")
 public class Categoria implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column (name="codigo")
+    @Column(name = "codigo")
     private Long id;
-
-    @Column (name="descricao", nullable=false, length=255)
+    @Column(name = "descricao", nullable = false, length = 255)
     private String descricao;
-    
+
+    //Contrutor Classe
+    public void Categoria() {
+    }
+
     public Long getId() {
         return id;
     }
@@ -43,11 +47,6 @@ public class Categoria implements Serializable {
         this.descricao = descricao;
     }
 
-    //Contrutor Classe
-    public void Categoria(){
-        
-    }
-    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -72,5 +71,4 @@ public class Categoria implements Serializable {
     public String toString() {
         return "br.com.ademoc.sgas.DomainModel.Categoria[ id=" + id + " ]";
     }
-    
 }
