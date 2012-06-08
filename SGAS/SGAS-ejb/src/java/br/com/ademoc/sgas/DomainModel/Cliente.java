@@ -5,21 +5,84 @@
 package br.com.ademoc.sgas.DomainModel;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.util.Date;
+import javax.persistence.*;
 
 /**
  *
  * @author www
  */
-@Entity
+@Entity(name = "clientes")
 public class Cliente implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "codigo")
     private Long id;
+    @OneToOne
+    private DadosGeral dadosGeral;
+    @ManyToOne
+    private Usuario usuario;
+    @ManyToOne
+    private TipoDeficiencia tipoDeficiencia;
+    @Column(name = "nome", length = 100, nullable = false)
+    private String nome;
+    @Column(name = "rg", length = 12, nullable = true)
+    private String rg;
+    @Column(name = "rgOrgaoExpedidor", length = 10, nullable = true)
+    private String rgOrgaoExpedidor;
+    @Temporal(TemporalType.DATE)
+    private Date rgDataExpedicao;
+    @Column(name = "cpf", length = 14, nullable = true, unique = false)
+    private String cpf;
+    @Column(name = "tituloEleitor", length = 20, nullable = true)
+    private String tituloEleitor;
+    @Column(name = "tituloZona", nullable = true)
+    private int tituloZona;
+    @Column(name = "tituloSecao", nullable = true)
+    private int tituloSecao;
+    @Column(name = "cnh", length = 20, nullable = true)
+    private String cnh;
+    @Column(name = "categoriaCNH", length = 2, nullable = true)
+    private String categoriaCNH;
+    //Certidao de Nascimento
+    @Column(name = "certNasc", length = 15, nullable = true)
+    private String certNasc;
+    //Quanidade de Feficiente na Familia
+    @Column(name = "qtdDefFamilia", nullable = false)
+    private int qtdDefFamilia;
+    @Column(name = "rendaFamiliar", nullable = false)
+    private double rendaFamiliar;
+    @Column(name = "moradia", length = 20, nullable = false)
+    private String moradia;
+    @Column(name = "contribuinte", nullable = false)
+    private Boolean contribuinte;
+    @Column(name = "escolaridade", length = 50, nullable = false)
+    private String escolaridade;
+    @Column(name = "estadoCivil", length = 15, nullable = false)
+    private String estadoCivil;
+    @Column(name = "filiacaoMae", length = 100, nullable = false)
+    private String filiacaoMae;
+    @Column(name = "filiacaoPai", length = 100, nullable = false)
+    private String filiacaoPai;
+    //Data de Nascimento
+    @Temporal(TemporalType.DATE)
+    private Date dtNasc;
+    @Column(name = "sexo", length = 10, nullable = false)
+    private String sexo;
+    @Column(name = "obs", length = 255, nullable = true)
+    private String obs;
+    @Column(name = "naturalidade", length = 30, nullable = false)
+    private String naturalidade;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataAtualizacao;
+    //Ultimo usuario que atualizou o cadastro.
+    @ManyToMany
+    private Usuario usuarioAtualizacao;
+
+    public void Cliente() {
+    }
 
     public Long getId() {
         return id;
@@ -27,6 +90,230 @@ public class Cliente implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getCategoriaCNH() {
+        return categoriaCNH;
+    }
+
+    public void setCategoriaCNH(String categoriaCNH) {
+        this.categoriaCNH = categoriaCNH;
+    }
+
+    public String getCertNasc() {
+        return certNasc;
+    }
+
+    public void setCertNasc(String certNasc) {
+        this.certNasc = certNasc;
+    }
+
+    public String getCnh() {
+        return cnh;
+    }
+
+    public void setCnh(String cnh) {
+        this.cnh = cnh;
+    }
+
+    public Boolean getContribuinte() {
+        return contribuinte;
+    }
+
+    public void setContribuinte(Boolean contribuinte) {
+        this.contribuinte = contribuinte;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public DadosGeral getDadosGeral() {
+        return dadosGeral;
+    }
+
+    public void setDadosGeral(DadosGeral dadosGeral) {
+        this.dadosGeral = dadosGeral;
+    }
+
+    public Date getDataAtualizacao() {
+        return dataAtualizacao;
+    }
+
+    public void setDataAtualizacao(Date dataAtualizacao) {
+        this.dataAtualizacao = dataAtualizacao;
+    }
+
+    public Date getDtNasc() {
+        return dtNasc;
+    }
+
+    public void setDtNasc(Date dtNasc) {
+        this.dtNasc = dtNasc;
+    }
+
+    public String getEscolaridade() {
+        return escolaridade;
+    }
+
+    public void setEscolaridade(String escolaridade) {
+        this.escolaridade = escolaridade;
+    }
+
+    public String getEstadoCivil() {
+        return estadoCivil;
+    }
+
+    public void setEstadoCivil(String estadoCivil) {
+        this.estadoCivil = estadoCivil;
+    }
+
+    public String getFiliacaoMae() {
+        return filiacaoMae;
+    }
+
+    public void setFiliacaoMae(String filiacaoMae) {
+        this.filiacaoMae = filiacaoMae;
+    }
+
+    public String getFiliacaoPai() {
+        return filiacaoPai;
+    }
+
+    public void setFiliacaoPai(String filiacaoPai) {
+        this.filiacaoPai = filiacaoPai;
+    }
+
+    public String getMoradia() {
+        return moradia;
+    }
+
+    public void setMoradia(String moradia) {
+        this.moradia = moradia;
+    }
+
+    public String getNaturalidade() {
+        return naturalidade;
+    }
+
+    public void setNaturalidade(String naturalidade) {
+        this.naturalidade = naturalidade;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getObs() {
+        return obs;
+    }
+
+    public void setObs(String obs) {
+        this.obs = obs;
+    }
+
+    public int getQtdDefFamilia() {
+        return qtdDefFamilia;
+    }
+
+    public void setQtdDefFamilia(int qtdDefFamilia) {
+        this.qtdDefFamilia = qtdDefFamilia;
+    }
+
+    public double getRendaFamiliar() {
+        return rendaFamiliar;
+    }
+
+    public void setRendaFamiliar(double rendaFamiliar) {
+        this.rendaFamiliar = rendaFamiliar;
+    }
+
+    public String getRg() {
+        return rg;
+    }
+
+    public void setRg(String rg) {
+        this.rg = rg;
+    }
+
+    public Date getRgDataExpedicao() {
+        return rgDataExpedicao;
+    }
+
+    public void setRgDataExpedicao(Date rgDataExpedicao) {
+        this.rgDataExpedicao = rgDataExpedicao;
+    }
+
+    public String getRgOrgaoExpedidor() {
+        return rgOrgaoExpedidor;
+    }
+
+    public void setRgOrgaoExpedidor(String rgOrgaoExpedidor) {
+        this.rgOrgaoExpedidor = rgOrgaoExpedidor;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
+    public TipoDeficiencia getTipoDeficiencia() {
+        return tipoDeficiencia;
+    }
+
+    public void setTipoDeficiencia(TipoDeficiencia tipoDeficiencia) {
+        this.tipoDeficiencia = tipoDeficiencia;
+    }
+
+    public String getTituloEleitor() {
+        return tituloEleitor;
+    }
+
+    public void setTituloEleitor(String tituloEleitor) {
+        this.tituloEleitor = tituloEleitor;
+    }
+
+    public int getTituloSecao() {
+        return tituloSecao;
+    }
+
+    public void setTituloSecao(int tituloSecao) {
+        this.tituloSecao = tituloSecao;
+    }
+
+    public int getTituloZona() {
+        return tituloZona;
+    }
+
+    public void setTituloZona(int tituloZona) {
+        this.tituloZona = tituloZona;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Usuario getUsuarioAtualizacao() {
+        return usuarioAtualizacao;
+    }
+
+    public void setUsuarioAtualizacao(Usuario usuarioAtualizacao) {
+        this.usuarioAtualizacao = usuarioAtualizacao;
     }
 
     @Override
@@ -53,5 +340,4 @@ public class Cliente implements Serializable {
     public String toString() {
         return "br.com.ademoc.sgas.DomainModel.Cliente[ id=" + id + " ]";
     }
-    
 }
