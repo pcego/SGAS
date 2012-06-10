@@ -5,35 +5,21 @@
 package br.com.ademoc.sgas.DomainModel;
 
 import java.io.Serializable;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 /**
- * @version 1.0
- * @since 1.0 06/06/2012
- * @author Kennedi Paulo S. Malheiros
+ *
+ * @author pcego
  */
 @Entity
-@Table(name = "tipoaparelhos")
-public class TipoAparelho implements Serializable {
-
+public class Agendamento implements Serializable {
     private static final long serialVersionUID = 1L;
-    
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="codigo")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
-    @Column(name="descricao",length=100, nullable = false)
-    private String descricao;
-
-    //Construtor Classe
-    public void TipoAparelho() {
-    }
 
     public Long getId() {
         return id;
@@ -41,14 +27,6 @@ public class TipoAparelho implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
     }
 
     @Override
@@ -61,10 +39,10 @@ public class TipoAparelho implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TipoAparelho)) {
+        if (!(object instanceof Agendamento)) {
             return false;
         }
-        TipoAparelho other = (TipoAparelho) object;
+        Agendamento other = (Agendamento) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -73,6 +51,7 @@ public class TipoAparelho implements Serializable {
 
     @Override
     public String toString() {
-        return "br.com.ademoc.sgas.DomainModel.TipoAparelho[ id=" + id + " ]";
+        return "br.com.ademoc.sgas.DomainModel.Agendamento[ id=" + id + " ]";
     }
+    
 }

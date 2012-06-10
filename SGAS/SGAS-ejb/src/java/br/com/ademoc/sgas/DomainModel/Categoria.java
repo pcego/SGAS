@@ -10,21 +10,25 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * @version 1.0
  * @since 1.0 06/06/2012
  * @author Kennedi Paulo S. Malheiros
  */
-@Entity(name = "categorias")
+@Entity
+@Table(name = "categorias")
 public class Categoria implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "codigo")
     private Long id;
-    @Column(name = "descricao", nullable = false, length = 255)
+    
+    @Column(name = "descricao", nullable = false, length = 100)
     private String descricao;
 
     //Contrutor Classe

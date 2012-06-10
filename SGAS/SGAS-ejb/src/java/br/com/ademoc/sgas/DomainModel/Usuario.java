@@ -6,11 +6,17 @@ package br.com.ademoc.sgas.DomainModel;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.enterprise.event.Observes;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -21,25 +27,37 @@ import javax.persistence.TemporalType;
  * @since 1.0 06/06/2012
  * @author Kennedi Paulo S. Malheiros
  */
-@Entity(name = "usuarios")
+@Entity
+@Table(name = "usuarios")
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "codigo")
     private Long id;
+    
     @Column(length = 100, nullable = false)
     private String nome;
-    @Column(name = "login", length = 50, nullable = false)
-    private String login;
+    
+    @OneToOne(cascade= CascadeType.ALL,fetch= FetchType.LAZY)
+    @JoinColumn(name="dadosgeral")
+    private DadosGeral dadosGeral;
+    
+    @Column(name = "logon", length = 50, nullable = false)
+    private String logon;
+    
     @Column(name = "senha", length = 32, nullable = false)
     private String senha;
+    
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "dtcadastro", nullable = false)
+    @Column(name = "dtcadastro", nullable = false)    
     private Date dtcadastro;
+    
     @Column(name = "nivel", nullable = false)
     private boolean nivel;
+    
 
     //Contrutor da Classe usuario
     public void Usuario() {
@@ -61,12 +79,12 @@ public class Usuario implements Serializable {
         this.dtcadastro = dtcadastro;
     }
 
-    public String getLogin() {
-        return login;
+    public String getLogon() {
+        return logon;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setLogon(String login) {
+        this.logon = login;
     }
 
     public boolean isNivel() {

@@ -5,33 +5,42 @@
 package br.com.ademoc.sgas.DomainModel;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  * @version 1.0
  * @since 1.0 06/06/2012
  * @author Kennedi Paulo S. Malheiros
  */
-@Entity(name = "tiposdeficiencias")
+@Entity
+@Table(name="tiposdeficiencias")
 public class TipoDeficiencia implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "codigo")
     private Long id;
-    //Duvida em utilizar CascadeType.Qual?
-    @ManyToOne
+        
+    @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE},fetch= FetchType.EAGER)
+    @JoinColumn(name="tipoaparelho",nullable=false)
     TipoAparelho tipoAparelho;
-    @ManyToOne
+    
+    @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE},fetch= FetchType.EAGER)
+    @JoinColumn(name="categoria",nullable=false)        
     Categoria categoria;
-    @Column(name = "descricao", length = 255, nullable = false)
+    
+    @Column(name = "descricao", length = 100, nullable = false)
     private String descricao;
 
     //Construtor da Classe

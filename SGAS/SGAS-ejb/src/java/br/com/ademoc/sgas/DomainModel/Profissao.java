@@ -5,32 +5,53 @@
 package br.com.ademoc.sgas.DomainModel;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.xml.ws.soap.MTOM;
 
 /**
  * @version 1.0
  * @since 1.0 06/06/2012
  * @author Kennedi Paulo S. Malheiros
  */
-@Entity(name = "profissoes")
+@Entity
+@Table(name="profissoes")
 public class Profissao implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "codigo")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "codigo")    
     private Long id;
-    @Column(name = "descricao", length = 255, nullable = false)
+    
+    @Column(name="descricao",length =100,nullable = false)
     private String descricao;
+    
+    @ManyToMany(cascade= CascadeType.PERSIST,fetch= FetchType.EAGER,mappedBy="profissao")
+    private List<Cliente> cliente;
 
     //Construtor Classe
     public void Profissao() {
     }
-
+    
+    public List<Cliente> getCliente() {
+        return cliente;
+    }
+    
+    
+    public void setCliente(List<Cliente> cliente) {
+        this.cliente = cliente;
+    }
+    
     public Long getId() {
         return id;
     }
@@ -45,6 +66,14 @@ public class Profissao implements Serializable {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+    
+    public void addCliente(Cliente cliente){
+        this.cliente.add(cliente);
+    }
+    
+    public void removeCliente(Cliente cliente){
+        this.cliente.remove(cliente);
     }
 
     @Override

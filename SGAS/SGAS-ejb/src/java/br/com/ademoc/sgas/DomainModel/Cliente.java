@@ -6,80 +6,120 @@ package br.com.ademoc.sgas.DomainModel;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.*;
 
 /**
  *
  * @author www
  */
-@Entity(name = "clientes")
+@Entity
+@Table(name="clientes")
 public class Cliente implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "codigo")
     private Long id;
-    @OneToOne
+    
+    @OneToOne(cascade= CascadeType.ALL,fetch= FetchType.LAZY)
+    @JoinColumn(name="dadosgerais",nullable=false)
     private DadosGeral dadosGeral;
-    @ManyToOne
+    
+    @ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE},fetch= FetchType.EAGER)
+    @JoinColumn(name="usuario",nullable=false)
     private Usuario usuario;
-    @ManyToOne
+    
+    @ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE},fetch= FetchType.EAGER)
+    @JoinColumn(name="tipodeficiencia",nullable=false)    
     private TipoDeficiencia tipoDeficiencia;
+    
     @Column(name = "nome", length = 100, nullable = false)
     private String nome;
+    
     @Column(name = "rg", length = 12, nullable = true)
     private String rg;
-    @Column(name = "rgOrgaoExpedidor", length = 10, nullable = true)
+    
+    @Column(name = "rgOrgaoexpedidor", length = 10, nullable = true)
     private String rgOrgaoExpedidor;
+    
     @Temporal(TemporalType.DATE)
+    @Column(name="rgdataexpedicao",nullable= true)
     private Date rgDataExpedicao;
-    @Column(name = "cpf", length = 14, nullable = true, unique = false)
+    
+    @Column(name = "cpf", length = 14, nullable = true, unique = true)
     private String cpf;
-    @Column(name = "tituloEleitor", length = 20, nullable = true)
+    
+    @Column(name = "tituloeleitor", length = 20, nullable = true)
     private String tituloEleitor;
-    @Column(name = "tituloZona", nullable = true)
+    
+    @Column(name = "titulozona", nullable = true)
     private int tituloZona;
-    @Column(name = "tituloSecao", nullable = true)
+    
+    @Column(name = "titulosecao", nullable = true)
     private int tituloSecao;
+    
     @Column(name = "cnh", length = 20, nullable = true)
     private String cnh;
-    @Column(name = "categoriaCNH", length = 2, nullable = true)
+    
+    @Column(name = "categoriacnh", length = 2, nullable = true)
     private String categoriaCNH;
+    
     //Certidao de Nascimento
-    @Column(name = "certNasc", length = 15, nullable = true)
+    @Column(name = "certnasc", length = 15, nullable = true)
     private String certNasc;
+    
     //Quanidade de Feficiente na Familia
-    @Column(name = "qtdDefFamilia", nullable = false)
+    @Column(name = "qtddeffamilia", nullable = false)
     private int qtdDefFamilia;
-    @Column(name = "rendaFamiliar", nullable = false)
+    
+    @Column(name = "rendafamiliar", nullable = false,precision=8,scale=2)
     private double rendaFamiliar;
+    
     @Column(name = "moradia", length = 20, nullable = false)
     private String moradia;
+    
     @Column(name = "contribuinte", nullable = false)
     private Boolean contribuinte;
+    
     @Column(name = "escolaridade", length = 50, nullable = false)
     private String escolaridade;
-    @Column(name = "estadoCivil", length = 15, nullable = false)
+    
+    @Column(name = "estadocivil", length = 15, nullable = false)
     private String estadoCivil;
-    @Column(name = "filiacaoMae", length = 100, nullable = false)
+    
+    @Column(name = "filiacaomae", length = 100, nullable = false)
     private String filiacaoMae;
-    @Column(name = "filiacaoPai", length = 100, nullable = false)
+    
+    @Column(name = "filiacaopai", length = 100, nullable = true)
     private String filiacaoPai;
+    
     //Data de Nascimento
     @Temporal(TemporalType.DATE)
     private Date dtNasc;
+    
     @Column(name = "sexo", length = 10, nullable = false)
     private String sexo;
+    
     @Column(name = "obs", length = 255, nullable = true)
     private String obs;
+    
     @Column(name = "naturalidade", length = 30, nullable = false)
     private String naturalidade;
+    
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataAtualizacao;
+    
     //Ultimo usuario que atualizou o cadastro.
-    @ManyToMany
+    @ManyToOne(cascade= CascadeType.REFRESH,fetch= FetchType.EAGER)
+    @JoinColumn(name="usuarioatualizacao", nullable=true)
     private Usuario usuarioAtualizacao;
+    
+    @ManyToMany(cascade= {CascadeType.PERSIST,CascadeType.MERGE},fetch= FetchType.EAGER)
+    @JoinTable(name="clientesxprofissoes",joinColumns={@JoinColumn(name="cliente")},inverseJoinColumns={@JoinColumn(name="profissao")})
+    private List<Profissao> profissoes;
 
     public void Cliente() {
     }
@@ -315,6 +355,24 @@ public class Cliente implements Serializable {
     public void setUsuarioAtualizacao(Usuario usuarioAtualizacao) {
         this.usuarioAtualizacao = usuarioAtualizacao;
     }
+    
+    
+    public List<Profissao> getProfissoes() {
+        return profissoes;
+    }
+
+   
+    public void setProfissoes(List<Profissao> profissoes) {
+        this.profissoes = profissoes;
+    }
+    
+    public void addProfissao(Profissao profissao){
+        this.profissoes.add(profissao);
+    }
+    
+    public void removeProfissao(Profissao profissao){
+        this.profissoes.remove(profissao);
+    }
 
     @Override
     public int hashCode() {
@@ -340,4 +398,6 @@ public class Cliente implements Serializable {
     public String toString() {
         return "br.com.ademoc.sgas.DomainModel.Cliente[ id=" + id + " ]";
     }
+
+    
 }
