@@ -10,4 +10,5 @@ package br.com.ademoc.sgas.DomainModel;
  */
 public interface IRepositorioCliente <Cliente> extends Repositorio<Cliente> {
     
+    
 }
