@@ -4,10 +4,16 @@
  */
 package br.com.ademoc.sgas.DomainModel;
 
+import javax.ejb.Remote;
+
 /**
  *
  * @author pcego
  */
-public interface IRepositorioDadosGeral {
+@Remote
+public interface IRepositorioDadosGeral<DadosGeral> extends Repositorio<DadosGeral> {
+    
+    DadosGeral getTodosOsDados(int codigo);
+    
     
 }
