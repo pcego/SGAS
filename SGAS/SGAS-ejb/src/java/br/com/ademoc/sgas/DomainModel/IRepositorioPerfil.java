@@ -4,10 +4,19 @@
  */
 package br.com.ademoc.sgas.DomainModel;
 
+import java.util.List;
+import javax.ejb.Remote;
+
 /**
  *
  * @author pcego
  */
-public interface IRepositorioPerfil {
+
+@Remote
+public interface IRepositorioPerfil<Perfil> extends Repositorio<Perfil>{
+    
+    List<Perfil> listarTodos();
+    List<Perfil> listarPorSexo(String sexo);
+    List<Perfil> listarPorEscolaridade(String escolaridade);
     
 }
