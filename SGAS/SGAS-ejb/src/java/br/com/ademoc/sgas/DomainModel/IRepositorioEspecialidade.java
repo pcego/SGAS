@@ -4,10 +4,16 @@
  */
 package br.com.ademoc.sgas.DomainModel;
 
+import java.util.List;
+import javax.ejb.Remote;
+
 /**
  *
- * @author pcego
+ * @author pcego , kennedi Paulo S. Malheiros
  */
-public interface IRepositorioEspecialidade {
+@Remote
+public interface IRepositorioEspecialidade extends Repositorio<Especialidade> {
+    
+    List<Especialidade> listaTodos();
     
 }
