@@ -16,7 +16,7 @@ public interface Repositorio <T> {
    
     public boolean salvar(T obj);
     public boolean apagar(T obj);
-    public T abrir(Long codigo);
+    public T abrir(Long codigo) throws Exception;
    
     
 }
