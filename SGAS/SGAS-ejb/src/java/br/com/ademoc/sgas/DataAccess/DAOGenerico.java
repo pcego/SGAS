@@ -30,18 +30,27 @@ public abstract class DAOGenerico<T> implements Repositorio<T> {
     protected abstract Long getID(T obj);
 
     @Override
-    public T abrir(Long codigo) throws Exception{
-        
+    public T abrir(Long codigo) throws Exception {
+
         return (T) getManager().find(type, codigo);
     }
 
     @Override
-        public boolean apagar(T obj) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public boolean apagar(T obj) {
+
+        try {
+
+            getManager().remove(getManager().getReference(type, getID(obj)));
+            return true;
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
     }
 
     @Override
-        public boolean salvar(T obj) {
+    public boolean salvar(T obj) {
 
         try {
             getManager().merge(obj);
@@ -55,4 +64,3 @@ public abstract class DAOGenerico<T> implements Repositorio<T> {
 
     }
 }
-
