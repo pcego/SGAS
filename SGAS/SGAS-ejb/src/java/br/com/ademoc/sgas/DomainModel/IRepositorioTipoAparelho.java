@@ -4,10 +4,16 @@
  */
 package br.com.ademoc.sgas.DomainModel;
 
+import java.util.List;
+import javax.ejb.Remote;
+
 /**
  *
  * @author pcego
  */
-public interface IRepositorioTipoAparelho {
+@Remote
+public interface IRepositorioTipoAparelho extends Repositorio<TipoAparelho> {
+    
+    List<TipoAparelho> listaTodos();
     
 }

@@ -6,11 +6,13 @@ package br.com.ademoc.sgas.DomainModel;
 
 import java.util.Date;
 import java.util.List;
+import javax.ejb.Remote;
 
 /**
  * 
- * @author Kennedi Paulo S. Malheiros
+ * @author Paulo Césa,  Kennedi Paulo S. Malheiros
  */
+@Remote
 public interface IRepositorioEncaminhamento extends Repositorio<Encaminhamento> {
     
     List<Encaminhamento> listaTodos();

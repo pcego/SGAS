@@ -4,11 +4,21 @@
  */
 package br.com.ademoc.sgas.DomainModel;
 
+import java.util.List;
+import javax.ejb.Remote;
+
 /**
  *
  * @author pcego
  */
-public interface IRepositorioCliente <Cliente> extends Repositorio<Cliente> {
-    
-    
+@Remote
+public interface IRepositorioCliente<Cliente> extends Repositorio<Cliente> {
+
+    List<Cliente> listaTodos();
+
+    List<Cliente> buscaPorCpf(String cpf);
+
+    List<Cliente> listaPorNome(String nome);
+
+    List<Cliente> listaContribuintes();
 }
