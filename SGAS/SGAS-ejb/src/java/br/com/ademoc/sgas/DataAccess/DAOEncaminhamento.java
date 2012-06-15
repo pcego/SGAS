@@ -43,16 +43,22 @@ public class DAOEncaminhamento extends DAOGenerico<Encaminhamento> implements IR
 
     @Override
     public List<Encaminhamento> listaPorCliente(Cliente cliente) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Query consulta = getManager().createQuery("select enc from Encaminhamento enc where enc.cliente = :cliente");
+        consulta.setParameter("cliente", cliente);
+        return consulta.getResultList();
     }
 
     @Override
     public List<Encaminhamento> listaPorData(Date data) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Query consulta = getManager().createQuery("select enc from Encaminhamento enc where enc.data = :data");
+        consulta.setParameter("data", data);
+        return consulta.getResultList();
     }
 
     @Override
     public List<Encaminhamento> listaPorUsuario(Usuario usuario) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Query consulta = getManager().createQuery("select enc from Encaminhamento enc where enc.usuario = :usuario");
+        consulta.setParameter("usuario", usuario);
+        return consulta.getResultList();
     }
 }
