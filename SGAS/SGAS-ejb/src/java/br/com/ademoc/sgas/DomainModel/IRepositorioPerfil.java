@@ -13,7 +13,7 @@ import javax.ejb.Remote;
  */
 
 @Remote
-public interface IRepositorioPerfil<Perfil> extends Repositorio<Perfil>{
+public interface IRepositorioPerfil extends Repositorio<Perfil>{
     
     List<Perfil> listarTodos();
     List<Perfil> listarPorSexo(String sexo);

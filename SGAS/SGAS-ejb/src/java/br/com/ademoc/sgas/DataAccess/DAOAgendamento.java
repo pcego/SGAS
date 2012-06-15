@@ -37,7 +37,8 @@ public class DAOAgendamento extends DAOGenerico<Agendamento> implements IReposit
     @Override
     public List<Agendamento> listaPorData(Date data) {
 
-        Query consulta = getManager().createQuery("select a from Agendamento where a.data = data");
+        Query consulta = getManager().createQuery("select a from Agendamento a where a.data = :data");
+        consulta.setParameter("data", data);
         return consulta.getResultList();
 
     }
@@ -45,21 +46,24 @@ public class DAOAgendamento extends DAOGenerico<Agendamento> implements IReposit
     @Override
     public List<Agendamento> listaAgendamentoPorProfissional(Profissional profissional) {
 
-        Query consulta = getManager().createQuery("select a from Agendamento a where a.profissional = profissional");
+        Query consulta = getManager().createQuery("select a from Agendamento a where a.profissional = :profissional");
+        consulta.setParameter("profissional", profissional);
         return consulta.getResultList();
     }
 
     @Override
     public List<Agendamento> listaAgendamentoPorCliente(Cliente cliente) {
 
-        Query consulta = getManager().createQuery("select a from Agendamento a where a.cliente = cliente");
+        Query consulta = getManager().createQuery("select a from Agendamento a where a.cliente = :cliente");
+        consulta.setParameter("cliente", cliente);
         return consulta.getResultList();
     }
 
     @Override
     public List<Agendamento> listaPorUsuario(Usuario usuario) {
 
-        Query consulta = getManager().createQuery("select a from Agendamento a where a.usuario = usuario");
+        Query consulta = getManager().createQuery("select a from Agendamento a where a.usuario = :usuario");
+        consulta.setParameter("usuario", usuario);
         return consulta.getResultList();
     }
 
