@@ -17,7 +17,7 @@ public interface IRepositorioEncaminhamento extends Repositorio<Encaminhamento> 
     
     List<Encaminhamento> listaTodos();
     
-    List<Encaminhamento> listaPorVaga(Vaga vaga);
+    List<Encaminhamento> listaPorVaga(String vaga);
     
     List<Encaminhamento> listaPorCliente(Cliente cliente);
     
