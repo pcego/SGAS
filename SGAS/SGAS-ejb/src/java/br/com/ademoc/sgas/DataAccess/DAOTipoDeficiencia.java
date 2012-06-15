@@ -4,18 +4,35 @@
  */
 package br.com.ademoc.sgas.DataAccess;
 
+import br.com.ademoc.sgas.DomainModel.IRepositorioTipoDeficiencia;
+import br.com.ademoc.sgas.DomainModel.TipoDeficiencia;
+import java.util.List;
 import javax.ejb.Stateless;
-import javax.ejb.LocalBean;
+import javax.persistence.Query;
 
 /**
  *
  * @author pcego
  */
 @Stateless
-@LocalBean
-public class DAOTipoDeficiencia {
+public class DAOTipoDeficiencia extends DAOGenerico<TipoDeficiencia> implements IRepositorioTipoDeficiencia {
+    
+    public DAOTipoDeficiencia(){
+        
+        super(TipoDeficiencia.class);
+    }
+    
+    @Override
+    protected Long getID(TipoDeficiencia obj) {
+        
+        return obj.getId();
+    }
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+    @Override
+    public List listarTodos() {
+        
+        Query consulta = getManager().createQuery("select td from TipoDeficiencia td");
+        return consulta.getResultList();
+    }
     
 }
