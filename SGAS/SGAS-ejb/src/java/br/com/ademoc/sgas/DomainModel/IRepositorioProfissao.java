@@ -13,17 +13,9 @@ import javax.ejb.Remote;
  * @author pcego
  */
 @Remote
-public interface IRepositorioProfissao extends Repositorio<Profissional> {
-    
-    List<Profissional> listaTodos();
-    
-    List<Profissional> listaPorNome(String nome);
-    
-    List<Profissional> listaPorEspecialidade(Especialidade especialidade);
-    
-    List<Profissional> listaPorSexo(String sexo);
-    
-    List<Profissional> listaPorDtNasc(Date data);
-    
-    
+public interface IRepositorioProfissao extends Repositorio<Profissao> {
+
+    List<Profissao> listaTodos();
+
+    List<Profissao> listaPorDescricao(String descricao);
 }
