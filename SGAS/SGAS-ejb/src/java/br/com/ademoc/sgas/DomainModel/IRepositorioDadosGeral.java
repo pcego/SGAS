@@ -11,7 +11,7 @@ import javax.ejb.Remote;
  * @author pcego
  */
 @Remote
-public interface IRepositorioDadosGeral<DadosGeral> extends Repositorio<DadosGeral> {
+public interface IRepositorioDadosGeral extends Repositorio<DadosGeral> {
     
     DadosGeral getTodosOsDados(int codigo);
     

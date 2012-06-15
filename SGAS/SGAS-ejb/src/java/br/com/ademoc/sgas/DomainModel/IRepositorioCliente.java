@@ -12,7 +12,7 @@ import javax.ejb.Remote;
  * @author pcego
  */
 @Remote
-public interface IRepositorioCliente<Cliente> extends Repositorio<Cliente> {
+public interface IRepositorioCliente extends Repositorio<Cliente> {
 
     List<Cliente> listaTodos();
 
