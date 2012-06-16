@@ -15,7 +15,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="clientes")
-public class Cliente implements Serializable {
+public class Cliente extends DadosGeral implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
@@ -23,11 +23,8 @@ public class Cliente implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "codigo")
     private Long id;
-    
-    @OneToOne(cascade= CascadeType.ALL,fetch= FetchType.LAZY)
-    @JoinColumn(name="dadosgerais",nullable=false)
-    private DadosGeral dadosGeral;
-    
+     
+       
     @ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE},fetch= FetchType.EAGER)
     @JoinColumn(name="usuario",nullable=false)
     private Usuario usuario;
@@ -98,6 +95,7 @@ public class Cliente implements Serializable {
     
     //Data de Nascimento
     @Temporal(TemporalType.DATE)
+    @Column(name="dtnasc")
     private Date dtNasc;
     
     @Column(name = "sexo", length = 10, nullable = false)
@@ -110,6 +108,7 @@ public class Cliente implements Serializable {
     private String naturalidade;
     
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="dtatualizacao")
     private Date dataAtualizacao;
     
     //Ultimo usuario que atualizou o cadastro.
@@ -118,7 +117,8 @@ public class Cliente implements Serializable {
     private Usuario usuarioAtualizacao;
     
     @ManyToMany(cascade= {CascadeType.PERSIST,CascadeType.MERGE},fetch= FetchType.EAGER)
-    @JoinTable(name="clientesxprofissoes",joinColumns={@JoinColumn(name="cliente")},inverseJoinColumns={@JoinColumn(name="profissao")})
+    @JoinTable(name="clientesxprofissoes")
+    @JoinColumn(name="profissao")
     private List<Profissao> profissoes;
 
     public void Cliente() {
@@ -172,14 +172,7 @@ public class Cliente implements Serializable {
         this.cpf = cpf;
     }
 
-    public DadosGeral getDadosGeral() {
-        return dadosGeral;
-    }
-
-    public void setDadosGeral(DadosGeral dadosGeral) {
-        this.dadosGeral = dadosGeral;
-    }
-
+    
     public Date getDataAtualizacao() {
         return dataAtualizacao;
     }

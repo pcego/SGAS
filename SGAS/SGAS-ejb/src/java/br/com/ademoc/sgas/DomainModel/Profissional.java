@@ -26,7 +26,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name="profissionais")
-public class Profissional implements Serializable {
+public class Profissional extends DadosGeral implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
@@ -38,11 +38,7 @@ public class Profissional implements Serializable {
     @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE},fetch= FetchType.EAGER)
     @JoinColumn(name="especialidade",nullable=false)
     private Especialidade especialidade;
-    
-    @OneToOne(cascade= CascadeType.ALL,fetch= FetchType.LAZY)
-    @JoinColumn(name="dadosgerais",nullable=false)
-    private DadosGeral dadosGeral;
-    
+            
     @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE},fetch= FetchType.EAGER)
     @JoinColumn(name="usuario",nullable=false)
     private Usuario usuario;
@@ -90,15 +86,7 @@ public class Profissional implements Serializable {
     public void setCartProfissional(String cartProfissional) {
         this.cartProfissional = cartProfissional;
     }
-
-    public DadosGeral getDadosGeral() {
-        return dadosGeral;
-    }
-
-    public void setDadosGeral(DadosGeral dadosGeral) {
-        this.dadosGeral = dadosGeral;
-    }
-
+   
     public Date getDtAtualizacao() {
         return dtAtualizacao;
     }

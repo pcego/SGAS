@@ -29,7 +29,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "usuarios")
-public class Usuario implements Serializable {
+public class Usuario extends DadosGeral implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
@@ -38,13 +38,9 @@ public class Usuario implements Serializable {
     @Column(name = "codigo")
     private Long id;
     
-    @Column(length = 100, nullable = false)
+    @Column(name="nome",length = 100, nullable = false)
     private String nome;
-    
-    @OneToOne(cascade= CascadeType.ALL,fetch= FetchType.LAZY)
-    @JoinColumn(name="dadosgeral")
-    private DadosGeral dadosGeral;
-    
+            
     @Column(name = "logon", length = 50, nullable = false)
     private String logon;
     
