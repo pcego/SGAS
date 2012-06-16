@@ -13,7 +13,7 @@ import javax.ejb.Remote;
  */
 
 @Remote
-public interface IRepositorioTipoDeficiencia<TipoDeficiencia> extends Repositorio<TipoDeficiencia> {
+public interface IRepositorioTipoDeficiencia extends Repositorio<TipoDeficiencia> {
     
     List<TipoDeficiencia> listarTodos();
     

@@ -29,13 +29,13 @@ public class DAOCliente extends DAOGenerico<Cliente> implements IRepositorioClie
 
     @Override
     public List<Cliente> listaTodos() {
-        Query consulta = getManager().createQuery("select cli from Cliente cli");
+        Query consulta = getManager().createQuery("select cli from Cliente cli order by cli.nome");
         return consulta.getResultList();
     }
 
     @Override
     public List<Cliente> buscaPorCpf(String cpf) {
-        Query consulta = getManager().createQuery("select cli from Cliente cli where cli.cpf=:cpf");
+        Query consulta = getManager().createQuery("select cli from Cliente cli where cli.cpf=:cpf order by cli.nome");
         consulta.setParameter("cpf", cpf);
         return consulta.getResultList();
 
@@ -51,7 +51,7 @@ public class DAOCliente extends DAOGenerico<Cliente> implements IRepositorioClie
 
     @Override
     public List<Cliente> listaContribuintes() {
-        Query consulta = getManager().createQuery("select cli from Cliente cli where cli.contribuinte = 1");
+        Query consulta = getManager().createQuery("select cli from Cliente cli where cli.contribuinte = 1 order by cli.nome");
         return consulta.getResultList();
     }
 }
