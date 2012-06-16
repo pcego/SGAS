@@ -15,6 +15,7 @@ import javax.persistence.PersistenceContext;
 public abstract class DAOGenerico<T> implements Repositorio<T> {
 
     private Class type;
+    
     @PersistenceContext(unitName = "SGAS-ejbPU")
     protected EntityManager manager;
 
@@ -53,7 +54,7 @@ public abstract class DAOGenerico<T> implements Repositorio<T> {
     public boolean salvar(T obj) {
 
         try {
-            getManager().merge(obj);
+            getManager().persist(obj);
             getManager().flush();
             return true;
 
