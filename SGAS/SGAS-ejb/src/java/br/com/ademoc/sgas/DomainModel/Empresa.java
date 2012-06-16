@@ -26,7 +26,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name="empresas")
-public class Empresa implements Serializable {
+public class Empresa extends DadosGeral implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
@@ -34,11 +34,7 @@ public class Empresa implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="codigo")    
     private Long id;
-    
-    @OneToOne(cascade= CascadeType.ALL,fetch= FetchType.LAZY)
-    @JoinColumn(name="dadosgerais",nullable=false)
-    private DadosGeral dadosGeral;
-    
+            
     @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE},fetch= FetchType.EAGER)
     @JoinColumn(name="usuario",nullable=false)
     private Usuario usuario;
@@ -89,14 +85,7 @@ public class Empresa implements Serializable {
         this.cnpj = cnpj;
     }
 
-    public DadosGeral getDadosGeral() {
-        return dadosGeral;
-    }
-
-    public void setDadosGeral(DadosGeral dadosGeral) {
-        this.dadosGeral = dadosGeral;
-    }
-
+   
     public Date getDtAtualizacao() {
         return dtAtualizacao;
     }
