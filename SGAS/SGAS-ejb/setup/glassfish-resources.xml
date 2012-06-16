@@ -15,8 +15,8 @@
         <property name="serverName" value="localhost"/>
         <property name="portNumber" value="1433"/>
         <property name="databaseName" value="sgas"/>
-        <property name="User" value="sa"/>
-        <property name="Password" value="pc081120"/>
+        <property name="User" value="ademoc"/>
+        <property name="Password" value="123"/>
         <property name="URL" value="jdbc:sqlserver://localhost:1433;databaseName=sgas"/>
         <property name="driverClass" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
     </jdbc-connection-pool>

@@ -36,7 +36,7 @@ public class Profissao implements Serializable {
     @Column(name="descricao",length =100,nullable = false)
     private String descricao;
     
-    @ManyToMany(cascade= CascadeType.PERSIST,fetch= FetchType.EAGER,mappedBy="profissao")
+    @ManyToMany(cascade= CascadeType.PERSIST,fetch= FetchType.EAGER)
     private List<Cliente> cliente;
 
     //Construtor Classe
