@@ -6,18 +6,14 @@ package br.com.ademoc.sgascliente.Presentation.Console;
 
 import br.com.ademoc.sgas.DomainModel.IRepositorioUsuario;
 import br.com.ademoc.sgas.DomainModel.Usuario;
-import java.text.DateFormat;
-import java.text.Format;
-import java.text.ParseException;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.ejb.EJB;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import sun.util.calendar.CalendarDate;
 
 /**
  *
@@ -40,7 +36,7 @@ public class Main {
             IRepositorioUsuario repo = (IRepositorioUsuario) context.lookup("java:global/SGAS/SGAS-ejb/DAOUsuario");
             
             Usuario usuario = new Usuario();
-            usuario.setNome("Gislene");
+            usuario.setNome("Kennedi");
             usuario.setLogon("root");
             usuario.setSenha("124");
             usuario.setNivel(true);
@@ -59,6 +55,16 @@ public class Main {
             
             
             repo.salvar(usuario);
+            
+            List<Usuario> list = repo.listaTodos();
+            
+            Iterator<Usuario> i = list.listIterator();
+            while(i.hasNext()){
+                                            
+                System.out.println(i.next().getNome());
+            }
+            
+            
                    
             
         } catch (NamingException ex) {
