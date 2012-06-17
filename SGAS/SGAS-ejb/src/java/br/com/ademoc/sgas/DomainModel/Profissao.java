@@ -6,17 +6,7 @@ package br.com.ademoc.sgas.DomainModel;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-import javax.xml.ws.soap.MTOM;
+import javax.persistence.*;
 
 /**
  * @version 1.0
@@ -36,9 +26,8 @@ public class Profissao implements Serializable {
     
     @Column(name="descricao",length =100,nullable = false)
     private String descricao;
-    
-    @ManyToMany(cascade= CascadeType.PERSIST,fetch= FetchType.EAGER)
-    @JoinColumn(name="cliente")
+       
+    @ManyToMany(mappedBy = "profissoes")
     private List<Cliente> cliente;
 
     //Construtor Classe

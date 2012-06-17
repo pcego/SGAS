@@ -40,7 +40,7 @@ public class Main {
             IRepositorioUsuario repo = (IRepositorioUsuario) context.lookup("java:global/SGAS/SGAS-ejb/DAOUsuario");
             
             Usuario usuario = new Usuario();
-            usuario.setNome("Paulo César");
+            usuario.setNome("Gislene");
             usuario.setLogon("root");
             usuario.setSenha("124");
             usuario.setNivel(true);

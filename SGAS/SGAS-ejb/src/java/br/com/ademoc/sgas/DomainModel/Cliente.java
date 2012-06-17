@@ -116,9 +116,8 @@ public class Cliente extends DadosGeral implements Serializable {
     @JoinColumn(name="usuarioatualizacao", nullable=true)
     private Usuario usuarioAtualizacao;
     
-    @ManyToMany(cascade= {CascadeType.PERSIST,CascadeType.MERGE},fetch= FetchType.EAGER)
-    @JoinTable(name="clientesxprofissoes")
-    @JoinColumn(name="profissao")
+    @ManyToMany(cascade= {CascadeType.PERSIST, CascadeType.MERGE}, fetch= FetchType.EAGER)
+    @JoinTable(name="clientes_profissoes", joinColumns={@JoinColumn(name="cliente_id")}, inverseJoinColumns={@JoinColumn(name="profissao_id")})        
     private List<Profissao> profissoes;
 
     public void Cliente() {
