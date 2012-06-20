@@ -31,8 +31,8 @@ public class Main {
         try {
             
             Calendar c = Calendar.getInstance();
-            Context context = (Context) new InitialContext();
             
+            Context context = (Context) new InitialContext();            
             IRepositorioUsuario repo = (IRepositorioUsuario) context.lookup("java:global/SGAS/SGAS-ejb/DAOUsuario");
             
             Usuario usuario = new Usuario();
@@ -43,15 +43,15 @@ public class Main {
             usuario.setDtcadastro(c.getTime());
             usuario.setDataCadastro(c.getTime());
             usuario.setEmail("pcego@uol.com.br");
-            usuario.setEndBairro("teste");
-            usuario.setEndCep("teste");
-            usuario.setEndCidade("teste");
-            usuario.setEndComplemento("teste");
-            usuario.setEndEstado("teste");
+            usuario.setEndBairro("Todos os Santos");
+            usuario.setEndCep("39400-000");
+            usuario.setEndCidade("Montes Claros");
+            usuario.setEndComplemento("Casa");
+            usuario.setEndEstado("Minas Gerais");
             usuario.setEndNumero(112);
-            usuario.setEndRua("teste");
-            usuario.setTelefone("3333333");
-            usuario.setCelular("5555555");
+            usuario.setEndRua("Santa Lúcia");
+            usuario.setTelefone("3213-6281");
+            usuario.setCelular("8822-1797");
             
             
             repo.salvar(usuario);
