@@ -19,7 +19,6 @@ import javax.persistence.TemporalType;
  * @author pcego
  */
 @Stateless
-@LocalBean
 public class DAOProfissional extends DAOGenerico<Profissional> implements IRepositorioProfissional {
 
     public DAOProfissional() {

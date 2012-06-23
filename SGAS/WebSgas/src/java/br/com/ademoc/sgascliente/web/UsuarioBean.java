@@ -6,7 +6,6 @@ package br.com.ademoc.sgascliente.web;
 
 import br.com.ademoc.sgas.DomainModel.IRepositorioUsuario;
 import br.com.ademoc.sgas.DomainModel.Usuario;
-
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -26,6 +25,7 @@ public class UsuarioBean implements Serializable {
     
     @EJB
     IRepositorioUsuario repo;
+    
     private String codigo;
     private String nome;
     private String logon;
@@ -46,7 +46,8 @@ public class UsuarioBean implements Serializable {
 
     Calendar calendar = Calendar.getInstance();
     
-    public UsuarioBean() {
+    public UsuarioBean() {        
+        
     }
 
     public Date getDtcadastro() {
