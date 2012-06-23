@@ -5,7 +5,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets" 
       xmlns:p="http://primefaces.prime.com.tr/ui" >
     <h:head>
-        <title>Facelet Title</title>
+        <title>SGAS WEB - Cadastro de Usuario</title>
     </h:head>
     <h:body>
         <ui:include src="cabecalho.xhtml"/>
@@ -58,7 +58,7 @@
                 <br/>
                 <h:outputLabel id="tituloCep" value="Cep: " />
                 <br/>
-                <p:inputText id="endCep" value="#{usuario.endCep}"  size="20"/>
+                <p:inputMask id="endCep" value="#{usuario.endCep}" mask="99999-999"  size="20"/>
                 <br/>
                 <h:outputLabel id="tituloEmail" value="Email: "/>
                 <br/>
@@ -66,19 +66,20 @@
                 <br/>
                 <h:outputLabel id="tituloTelefone" value="Telefone: "/>
                 <br/>
-                <p:inputText id="telefone" value="#{usuario.telefone}" size="20" />
+                <p:inputMask id="telefone" value="#{usuario.telefone}" mask="(99)99999999" size="20" />
                 <br/>
                 <h:outputLabel id="tituloCelular" value="Celular: "/>
                 <br/>
-                <p:inputText id="celular" value="#{usuario.celular}" size="20" />
+                <p:inputMask id="celular" value="#{usuario.celular}"  mask="(99)99999999" size="20" />
                 <br/>
 
-                <h:commandButton id="btsalvar" value="Salvar" action="#{usuario.salvar()}"/>
-                <h:commandButton id="btabrir" value="Abrir" action="#{usuario.abrir()}"/>            
+                <p:commandButton id="btsalvar" value="Salvar" action="#{usuario.salvar()}"/>
+                <p:commandButton id="btabrir" value="Abrir" action="#{usuario.abrir()}"/>            
 
             </h:form>
 
         </p:panel>
+        <ui:include src="rodape.xhtml"/>
     </h:body>
 </html>
 
