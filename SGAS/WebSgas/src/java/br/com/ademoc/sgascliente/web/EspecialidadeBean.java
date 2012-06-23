@@ -10,6 +10,8 @@ import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -46,7 +48,19 @@ public class EspecialidadeBean implements Serializable {
     public void salvar() {
         Especialidade especialidade = new Especialidade();
         especialidade.setDescricao(descricao);
-        repo.salvar(especialidade);
+        
+        boolean confirme;
+        confirme = repo.salvar(especialidade);
+        
+                if (confirme == true) {
+            FacesMessage message = new FacesMessage("Salvo com Sucesso");
+
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        } else {
+            FacesMessage message = new FacesMessage("ERRO so Salvar, verifique os campos, ou tente novamente mais tarde");
+
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
         
     }
 }

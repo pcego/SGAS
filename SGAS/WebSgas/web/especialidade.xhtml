@@ -15,8 +15,9 @@
                 <h:outputLabel id="tituloNome" value="Especialidade: "/>
                 <p:inputText id="descricao" value="#{especialidade.descricao}" size="45"/>
                 <br/>
-                <p:commandButton id="btsalvar" value="Salvar" action="#{especialidade.salvar()}" />
 
+                <ui:include src="botao.xhtml"/>
+                <p:growl id="messages" />
             </h:form>
 
         </p:panel>

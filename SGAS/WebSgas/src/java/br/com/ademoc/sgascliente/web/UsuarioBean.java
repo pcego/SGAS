@@ -6,6 +6,9 @@ package br.com.ademoc.sgascliente.web;
 
 import br.com.ademoc.sgas.DomainModel.IRepositorioUsuario;
 import br.com.ademoc.sgas.DomainModel.Usuario;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -15,15 +18,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import java.util.Calendar;
+import javax.enterprise.context.RequestScoped;
+
 /**
  *
  * @author pcego
  */
 @Named(value = "usuario")
-@SessionScoped
+@RequestScoped
 public class UsuarioBean implements Serializable {
 
-    
     @EJB
     IRepositorioUsuario repo;
     private String codigo;
@@ -43,9 +47,8 @@ public class UsuarioBean implements Serializable {
     private String telefone;
     private String celular;
     private Date dataCadastro;
-
     Calendar calendar = Calendar.getInstance();
-    
+
     public UsuarioBean() {
     }
 
@@ -213,10 +216,10 @@ public class UsuarioBean implements Serializable {
         celular = usuario.getCelular();
         dataCadastro = usuario.getDataCadastro();
     }
-    
-    public void salvar(){
+
+    public void salvar() {
         Usuario usuario = new Usuario();
-        
+
         usuario.setNome(nome);
         usuario.setLogon(logon);
         usuario.setSenha(senha);
@@ -233,7 +236,43 @@ public class UsuarioBean implements Serializable {
         usuario.setTelefone(telefone);
         usuario.setCelular(celular);
         usuario.setDataCadastro(calendar.getTime());
-        
-        repo.salvar(usuario);
+
+        boolean confirme;
+        confirme = repo.salvar(usuario);
+
+        if (confirme == true) {
+            FacesMessage message = new FacesMessage("Salvo com Sucesso");
+
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        } else {
+            FacesMessage message = new FacesMessage("ERRO so Salvar, verifique os campos, ou tente novamente mais tarde");
+
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+
+
+    }
+
+    public void apagar() {
+        Usuario usuario = new Usuario();
+        Long id = Long.parseLong(codigo);
+        usuario.setId(id);
+
+        boolean confirme;
+
+        confirme = repo.apagar(usuario);
+
+
+        if (confirme == true) {
+            FacesMessage message = new FacesMessage("Excluido com Sucesso");
+
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        } else if (confirme == false) {
+            FacesMessage message = new FacesMessage("ERRO ao Excluir, verifique os campos, ou tente novamente mais tarde");
+
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+
+
     }
 }

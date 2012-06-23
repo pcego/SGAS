@@ -11,7 +11,7 @@
     <h:body>
         <ui:include src="cabecalho.xhtml"/>
         <p:panel>
-            <h:form>
+            <h:form >
                 <br/>
                 <h:outputLabel id="tituloCodigo" value="Codigo: "/>
                 <br/>
@@ -74,8 +74,11 @@
                 <p:inputMask id="celular" value="#{usuario.celular}"  mask="(99)99999999" size="20" />
                 <br/>
 
-                <p:commandButton id="btsalvar" value="Salvar" action="#{usuario.salvar()}"/>
-                <p:commandButton id="btabrir" value="Abrir" action="#{usuario.abrir()}"/>            
+
+                
+
+                <ui:include src="botao.xhtml"/>
+                <p:growl id="messages" />
 
             </h:form>
 
