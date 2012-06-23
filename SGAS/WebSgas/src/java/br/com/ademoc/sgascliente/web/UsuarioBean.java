@@ -30,6 +30,7 @@ public class UsuarioBean implements Serializable {
 
     @EJB
     IRepositorioUsuario repo;
+    
     private String codigo;
     private String nome;
     private String logon;
@@ -49,7 +50,8 @@ public class UsuarioBean implements Serializable {
     private Date dataCadastro;
     Calendar calendar = Calendar.getInstance();
 
-    public UsuarioBean() {
+    public UsuarioBean() {        
+        
     }
 
     public Date getDtcadastro() {

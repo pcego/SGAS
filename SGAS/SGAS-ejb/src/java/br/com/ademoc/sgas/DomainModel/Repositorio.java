@@ -4,6 +4,7 @@
  */
 package br.com.ademoc.sgas.DomainModel;
 
+import br.com.ademoc.sgas.DataAccess.DAOGenerico;
 import javax.ejb.Remote;
 
 /**
@@ -12,10 +13,10 @@ import javax.ejb.Remote;
  */
 
 @Remote
-public interface Repositorio <T> {
+public interface Repositorio <T>{
    
     public boolean salvar(T obj);
-    public boolean apagar(T obj);
+    public boolean apagar(T obj);    
     public T abrir(Long codigo) throws Exception;
    
     
