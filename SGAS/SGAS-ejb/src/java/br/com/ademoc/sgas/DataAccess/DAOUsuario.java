@@ -25,7 +25,7 @@ public class DAOUsuario extends DAOGenerico<Usuario> implements IRepositorioUsua
 
     @Override
     protected Long getID(Usuario obj) {
-
+            
         return obj.getId();
     }
 
