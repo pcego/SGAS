@@ -200,7 +200,7 @@ public class UsuarioBean implements Serializable {
         logon = usuario.getLogon();
         senha = usuario.getSenha();
         dtcadastro = usuario.getDtcadastro();
-        nivel = usuario.getNivel();
+        nivel = usuario.isNivel();
         endRua = usuario.getEndRua();
         endNumero = usuario.getEndNumero();
         endComplemento = usuario.getEndComplemento();

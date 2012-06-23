@@ -1,0 +1,17 @@
+/* 
+    Document   : css
+    Created on : 22/06/2012, 20:29:55
+    Author     : www
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+titulo{
+    font-size: 20;
+    color: activeborder;
+}
+

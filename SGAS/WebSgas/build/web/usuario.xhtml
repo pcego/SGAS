@@ -1,78 +1,85 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this template, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.prime.com.tr/ui">
-    <head>
-        <title>Cadastro de Usuario</title>
-    </head>
-    <body>
-        <h:form>
-            <h:outputLabel id="tituloCodigo" value="Codigo: "/>
-            <h:inputText id="codigo" value="#{usuario.codigo}"/>
-            <br/>
-            <h:outputLabel id="tituloNome" value="Nome: "/>
-            <br/>
-            <h:inputText id="nome" value="#{usuario.nome}" size="40"/>
-            <br/>
-            <h:outputLabel id="tituloLogon" value="Logon: "/>
-            <br/>
-            <h:inputText id="logon" value="#{usuario.logon}" size="20" />
-            <br/>
-            <h:outputLabel id="tituloSenha" value="Senha: " />
-            <br/>
-            <h:inputText id="senha" value="#{usuario.senha}" size="20" />
-            <br/>
-            <h:outputLabel id="tituloNivel" value="Nivel Admin: "/>
-            <br/>
-            <h:selectBooleanCheckbox id="nivel" value="#{usuario.nivel}" />            
-            <br/>
-            <h:outputLabel id="tituloRua" value="Rua: "/>
-            <br/>
-            <h:inputText id="endRua" value="#{usuario.endRua}" size="40" />
-            <br/>
-            <h:outputLabel id="tituloNumero" value=" Numero: "/>
-            <br/>
-            <h:inputText id="endNumero" value="#{usuario.endNumero}" size="15" />
-            <br/>
-            <h:outputLabel id="tituloNComplemento" value="Complemento: "/>
-            <br/>
-            <h:inputText id="endComplemento" value="#{usuario.endComplemento}" size="40" />
-            <br/>
-            <h:outputLabel id="tituloBairro" value="Bairro: "/>
-            <br/>
-            <h:inputText id="endBairro" value="#{usuario.endBairro}" size="20"/>
-            <br/>
-            <h:outputLabel id="tituloCidade" value="Cidade: "/>
-            <br/>
-            <h:inputText id="endCidade" value="#{usuario.endCidade}" size="20"/>
-            <br/>
-            <h:outputLabel id="tituloEstado" value="Estado: "/>
-            <br/>
-            <h:inputText id="endEstado" value="#{usuario.endEstado}" size="20"/>
-            <br/>
-            <h:outputLabel id="tituloCep" value="Cep: " />
-            <br/>
-            <h:inputText id="endCep" value="#{usuario.endCep}"  size="20"/>
-            <br/>
-            <h:outputLabel id="tituloEmail" value="Email: "/>
-            <br/>
-            <h:inputText id="email" value="#{usuario.email}" size="40"/>
-            <br/>
-            <h:outputLabel id="tituloTelefone" value="Telefone: "/>
-            <br/>
-            <h:inputText id="telefone" value="#{usuario.telefone}" size="20" />
-            <br/>
-            <h:outputLabel id="tituloCelular" value="Celular: "/>
-            <br/>
-            <h:inputText id="celular" value="#{usuario.celular}" size="20" />
-            <br/>
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets" 
+      xmlns:p="http://primefaces.prime.com.tr/ui" 
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:include src="cabecalho.xhtml"/>
+        <p:panel>
+            <h:form>
+                <br/>
+                <h:outputLabel id="tituloCodigo" value="Codigo: "/>
+                <br/>
+                <p:inputText id="codigo" value="#{usuario.codigo}"/>
+                <br/>
+                <h:outputLabel id="tituloNome" value="Nome: "/>
+                <br/>
+                <p:inputText id="nome" value="#{usuario.nome}" size="40"/>
+                <br/>
+                <h:outputLabel id="tituloLogon" value="Logon: "/>
+                <br/>
+                <p:inputText id="logon" value="#{usuario.logon}" size="20" />
+                <br/>
+                <h:outputLabel id="tituloSenha" value="Senha: " />
+                <br/>
+                <p:password id="senha" value="#{usuario.senha}" feedback="true" minLength="8" size="20" />
+                <br/>
+                <h:outputLabel id="tituloNivel" value="Nivel Admin: "/>
+                <br/>
+                <h:selectBooleanCheckbox id="nivel" value="#{usuario.nivel}" />            
+                <br/>
+                <h:outputLabel id="tituloRua" value="Rua: "/>
+                <br/>
+                <p:inputText id="endRua" value="#{usuario.endRua}" size="40" />
+                <br/>
+                <h:outputLabel id="tituloNumero" value=" Numero: "/>
+                <br/>
+                <p:inputText id="endNumero" value="#{usuario.endNumero}" size="15" />
+                <br/>
+                <h:outputLabel id="tituloNComplemento" value="Complemento: "/>
+                <br/>
+                <p:inputText id="endComplemento" value="#{usuario.endComplemento}" size="40" />
+                <br/>
+                <h:outputLabel id="tituloBairro" value="Bairro: "/>
+                <br/>
+                <p:inputText id="endBairro" value="#{usuario.endBairro}" size="20"/>
+                <br/>
+                <h:outputLabel id="tituloCidade" value="Cidade: "/>
+                <br/>
+                <p:inputText id="endCidade" value="#{usuario.endCidade}" size="20"/>
+                <br/>
+                <h:outputLabel id="tituloEstado" value="Estado: "/>
+                <br/>
+                <p:inputText id="endEstado" value="#{usuario.endEstado}" size="20"/>
+                <br/>
+                <h:outputLabel id="tituloCep" value="Cep: " />
+                <br/>
+                <p:inputText id="endCep" value="#{usuario.endCep}"  size="20"/>
+                <br/>
+                <h:outputLabel id="tituloEmail" value="Email: "/>
+                <br/>
+                <p:inputText id="email" value="#{usuario.email}" size="40"/>
+                <br/>
+                <h:outputLabel id="tituloTelefone" value="Telefone: "/>
+                <br/>
+                <p:inputText id="telefone" value="#{usuario.telefone}" size="20" />
+                <br/>
+                <h:outputLabel id="tituloCelular" value="Celular: "/>
+                <br/>
+                <p:inputText id="celular" value="#{usuario.celular}" size="20" />
+                <br/>
 
-            <h:commandButton id="btsalvar" value="Salvar" action="#{usuario.salvar()}"/>
-            <h:commandButton id="btabrir" value="Abrir" action="#{usuario.abrir()}"/>            
+                <h:commandButton id="btsalvar" value="Salvar" action="#{usuario.salvar()}"/>
+                <h:commandButton id="btabrir" value="Abrir" action="#{usuario.abrir()}"/>            
 
-        </h:form>
-    </body>
+            </h:form>
+
+        </p:panel>
+    </h:body>
 </html>
+

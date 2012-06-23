@@ -56,13 +56,13 @@ public class Main {
             
             repo.salvar(usuario);
             
-            List<Usuario> list = repo.listaTodos();
+     //       List<Usuario> list = repo.listaTodos();
             
-            Iterator<Usuario> i = list.listIterator();
-            while(i.hasNext()){
+    //        Iterator<Usuario> i = list.listIterator();
+    //        while(i.hasNext()){
                                             
-                System.out.println(i.next().getNome());
-            }
+    //            System.out.println(i.next().getNome());
+ //           }
             
             
                    
