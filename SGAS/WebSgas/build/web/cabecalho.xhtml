@@ -14,15 +14,13 @@
 
         <h:form>
 
-            
+
 
             <h3>SGAS WEB </h3>
             <p:menubar>
+                <p:menuitem value="Principal" url="index.xhtml" icon="ui-icon-close" />
                 <p:submenu label="Cadastro" icon="ui-icon-document">
-                    <p:menuitem value="Usuario" url="usuario.xhtml" />
-                    <p:separator/>
-                    <p:menuitem value="Especialidade" url="especialidade.xhtml" />
-
+                    <p:menuitem value="Usuario" url="usuario.xhtml" />                    
                     <p:separator/>
                     <p:menuitem value="Profissional" url="profissional.xhtml" />
                     <p:separator />
@@ -30,33 +28,36 @@
                     <p:separator/>
                     <p:menuitem value="Cliente" url="cliente.xhtml" />
                 </p:submenu>
+ 
+                <p:submenu label="Cadastro Adm" icon="ui-icon-document">
 
-                <p:submenu label="Edit" icon="ui-icon-pencil">
-                    <p:menuitem value="Undo" url="#" icon="ui-icon-arrowreturnthick-1-w" />
-                    <p:menuitem value="Redo" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+                    <p:menuitem value="Especialidade" url="especialidade.xhtml" />
+                    <p:separator/>
+                    <p:menuitem value="Categoria Deficiência" url="categoria.xhtml" />
+                    <p:separator/>
+                    <p:menuitem value="Tipo de Aparelho" url="tipoAparelho.xhtml" />
+                    <p:separator/>
+                    <p:menuitem value="Tipo de Deficiência" url="tipoDeficiencia.xhtml" />
+                    <p:separator/>
+                    <p:menuitem value="Tipo de Profissão" url="profissao.xhtml" />
+
+
                 </p:submenu>
 
-                <p:submenu label="Help" icon="ui-icon-help">
-                    <p:menuitem value="Contents" url="#" />
-                    <p:submenu label="Search" icon="ui-icon-search">
-                        <p:submenu label="Text">
-                            <p:menuitem value="Workspace" url="#" />
-                        </p:submenu>
-                        <p:menuitem value="File" url="#" />
+                <p:submenu label="Agendamento" icon="ui-icon-pencil">
+                    <p:menuitem value="Em breve..." url="#" icon="ui-icon-arrowreturnthick-1-w" />
+
+                </p:submenu>
+
+                <p:submenu label="Relatorio" icon="ui-icon-help">
+                    <p:menuitem value="Clientes" url="#" />
+                    <p:submenu label="Vagas" icon="ui-icon-search">
+                        <p:menuitem value="Aberta" url="#" />
+                        <p:menuitem value="Fechada" url="#" />
                     </p:submenu>
                 </p:submenu>
 
-                <p:submenu label="Actions" icon="ui-icon-gear">
-                    <p:submenu label="Ajax" icon="ui-icon-refresh">
-                        <p:menuitem value="Save" actionListener="#{buttonBean.save}" icon="ui-icon-disk" update="messages"/>
-                        <p:menuitem value="Update" actionListener="#{buttonBean.update}" icon="ui-icon-arrowrefresh-1-w" update="messages"/>
-                    </p:submenu>
-                    <p:submenu label="Non-Ajax" icon="ui-icon-newwin">
-                        <p:menuitem value="Delete" actionListener="#{buttonBean.delete}" icon="ui-icon-close" update="messages" ajax="false"/>
-                    </p:submenu>
-                </p:submenu>
-
-                <p:menuitem value="Quit" url="http://www.primefaces.org" icon="ui-icon-close" />
+                <p:menuitem value="Sair" url="#" icon="ui-icon-close" />
             </p:menubar>
 
 

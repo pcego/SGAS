@@ -6,7 +6,7 @@
       xmlns:p="http://primefaces.prime.com.tr/ui" 
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
-        <title>SGAS WEB - Cadastro Especialidade</title>
+        <title>SGAS WEb - Cadastro - Categoria de Deficiência</title>
     </h:head>
     <h:body>
         <ui:include src="cabecalho.xhtml"/>
@@ -15,13 +15,14 @@
                 <br/>
                 <h:outputLabel id="tituloCodigo" value="Codigo: "/>
                 <br/>
-                <p:inputText id="codigo" value="#{especialidade.codigo}" size="20"/>
+                <p:inputText id="codigo" value="#{categoriaBean.codigo}" size="20"/>
                 <br/>
-                <h:outputLabel id="tituloNome" value="Especialidade: "/>
+                <h:outputLabel id="tituloNome" value="Categoria: "/>
                 <br/>
-                <p:inputText id="descricao" value="#{especialidade.descricao}" size="45"/>
+                <p:inputText id="categoria" value="#{categoriaBean.descricao}" size="45"/>
                 <br/>
                 <br/>
+
 
                 <p:commandButton id="btNovo" value="Novo" onclick="confirmationNovo.show()" type="reset"/>
                 <p:commandButton id="btAltera" value="Altera" onclick="confirmationAltera.show()" type="button"/>
@@ -52,8 +53,8 @@
 
                 <p:growl id="messages" />
 
-            </h:form>
 
+            </h:form>
         </p:panel>
         <ui:include src="rodape.xhtml"/>
     </h:body>

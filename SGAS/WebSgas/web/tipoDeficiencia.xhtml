@@ -6,22 +6,32 @@
       xmlns:p="http://primefaces.prime.com.tr/ui" 
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
-        <title>SGAS WEB - Cadastro Especialidade</title>
+        <title>SGAS WEb - Cadastro - Deficiência </title>
     </h:head>
     <h:body>
+
         <ui:include src="cabecalho.xhtml"/>
         <p:panel>
             <h:form>
                 <br/>
                 <h:outputLabel id="tituloCodigo" value="Codigo: "/>
                 <br/>
-                <p:inputText id="codigo" value="#{especialidade.codigo}" size="20"/>
+                <p:inputText id="codigo" value="#{tipoDeficienciaBean.codigo}" size="20"/>
                 <br/>
-                <h:outputLabel id="tituloNome" value="Especialidade: "/>
+                <h:outputLabel id="tituloAparelho" value="Aparelho: "/>
                 <br/>
-                <p:inputText id="descricao" value="#{especialidade.descricao}" size="45"/>
+                <p:inputText id="aparelho" value="#{tipoDeficienciaBean.aparelho}" size="20"/>
+                <br/>
+                <h:outputLabel id="tituloCategoria" value="Categoria: "/>
+                <br/>
+                <p:inputText id="categoria" value="#{tipoDeficienciaBean.categoria}" size="20"/>
+                <br/>
+                <h:outputLabel id="tituloDescricao" value="Descrição: "/>
+                <br/>
+                <p:inputText id="descricao" value="#{tipoDeficienciaBean.descricao}" size="50"/>
                 <br/>
                 <br/>
+
 
                 <p:commandButton id="btNovo" value="Novo" onclick="confirmationNovo.show()" type="reset"/>
                 <p:commandButton id="btAltera" value="Altera" onclick="confirmationAltera.show()" type="button"/>
@@ -33,7 +43,7 @@
                                  header="Confirmação para salvar" severity="alert" widgetVar="confirmationSalvar">
 
                     <p:commandButton id="confirmSalvar" value="Sim" update="messages" oncomplete="confirmationSalvar.hide()"
-                                     actionListener="#{categoriaBean.salvar()}" />
+                                     actionListener="#{tipoDeficienciaBean.salvar()}" />
                     <p:commandButton id="naoSalvar" value="Não" onclick="confirmationSalvar.hide()" type="button" /> 
                 </p:confirmDialog>
                 <!-- Imprimir msg de confirmação ou erro ao salvar -->
@@ -45,16 +55,17 @@
                                  header="Confirmação para excluir" severity="alert" widgetVar="confirmationApagar">
 
                     <p:commandButton id="confirmApagar" value="Sim" update="messages" oncomplete="confirmationApagar.hide()"
-                                     actionListener="#{categoriaBean.apagar()}" />
+                                     actionListener="#{tipoDeficienciaBean.apagar()}" />
                     <p:commandButton id="naoApagar" value="Não" onclick="confirmationApagar.hide()" type="button" /> 
                 </p:confirmDialog>
                 <!-- Imprimir msg de confirmação ou erro ao salvar -->
 
                 <p:growl id="messages" />
 
-            </h:form>
 
+            </h:form>
         </p:panel>
+
         <ui:include src="rodape.xhtml"/>
     </h:body>
 </html>

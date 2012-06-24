@@ -6,24 +6,77 @@
       xmlns:p="http://primefaces.prime.com.tr/ui" 
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
-        <title>Cadastro de Profissional</title>
+        <title>SGAS WEB - Cadastro de Profissional</title>
     </h:head>
     <h:body>
         <ui:include src="cabecalho.xhtml"/>
         <p:panel>
             <h:form>
-                <h:outputLabel id="tituloNome" value="Nome"/>
-                <p:inputText id="nome" value="#{profissional.nome}" size="40"/>
                 <br/>
                 <br/>
-                <h:outputLabel id="emContrucao" value="EM CONTRUÇÃO AGUARDEM..." style="H4"/>
+                
+                <h:outputLabel id="tituloCodigo" value="Codigo: "/>
+                <br/>
+                <p:inputText id="codigo" value="#{profissionalBean.codigo}" size="20"/>
+                <br/>
+                <h:outputLabel id="tituloNome" value="Nome: "/>
+                <br/>
+                <p:inputText id="nome" value="#{profissionalBean.nome}" size="20"/>
+                <br/>
+                <h:outputLabel id="titulodtnasc" value="Data Nascimento: "/>
+                <br/>
+                <p:inputMask id="dtnasc" value="#{profissionalBean.dtnasc}" mask="99/99/9999" size="20"/>
+                <br/>
+                <h:outputLabel id="tituloCartProfissional" value="Carteira Profissional: "/>
+                <br/>
+                <p:inputText id="cartprofissional" value="#{profissionalBean.cartProfissional}" size="20"/>
+                <br/>
+                <h:outputLabel id="tituloStatus" value="Status: "/>
+                
+                <h:selectBooleanCheckbox id="status" value="#{profissionalBean.status}"  />
+                <h:outputLabel id="tituloAtivo" value=" Ativo " />
+                <br/>
+                <h:outputLabel id="tituloSexo" value="Sexo: "/>
+                <br/>
+                <p:inputText id="sexo" value="#{profissionalBean.sexo}" size="20"/>
+                <br/>
+                <h:outputLabel id="tituloEspecialidade" value="Especialidade: "/>
+                <br/>
+                <p:inputText id="especialidade" value="#{profissionalBean.especialidade}" size="20"/>
+                <br/>
+                <br/>
+                <p:commandButton id="btNovo" value="Novo" onclick="confirmationNovo.show()" type="reset"/>
+                <p:commandButton id="btAltera" value="Altera" onclick="confirmationAltera.show()" type="button"/>
+                <p:commandButton id="btApagar" value="Excluir" onclick="confirmationApagar.show()" type="button"/>
+                <p:commandButton id="btSalvar" value="Salvar" onclick="confirmationSalvar.show()" type="button"/>
 
+                <!-- Criando metodo de confirmação so Salvar -->
+                <p:confirmDialog id="confirmDialogSalvar" message="Tem certeza que deseja salvar?"
+                                 header="Confirmação para salvar" severity="alert" widgetVar="confirmationSalvar">
+
+                    <p:commandButton id="confirmSalvar" value="Sim" update="messages" oncomplete="confirmationSalvar.hide()"
+                                     actionListener="#{profissionalBean.salvar()}" />
+                    <p:commandButton id="naoSalvar" value="Não" onclick="confirmationSalvar.hide()" type="button" /> 
+                </p:confirmDialog>
+                <!-- Imprimir msg de confirmação ou erro ao salvar -->
+
+
+
+                <!-- Criando metodo de confirmação so Apagar -->
+                <p:confirmDialog id="confirmDialogApagar" message="Tem certeza que deseja Excluir?"
+                                 header="Confirmação para excluir" severity="alert" widgetVar="confirmationApagar">
+
+                    <p:commandButton id="confirmApagar" value="Sim" update="messages" oncomplete="confirmationApagar.hide()"
+                                     actionListener="#{profissionalBean.apagar()}" />
+                    <p:commandButton id="naoApagar" value="Não" onclick="confirmationApagar.hide()" type="button" /> 
+                </p:confirmDialog>
+                <!-- Imprimir msg de confirmação ou erro ao salvar -->
+
+                <p:growl id="messages" />
 
             </h:form>
-
         </p:panel>
-        <ui:include src="botao.xhtml"/>
-        <p:growl id="messages" />
+        <ui:include src="rodape.xhtml"/>
     </h:body>
 </html>
 

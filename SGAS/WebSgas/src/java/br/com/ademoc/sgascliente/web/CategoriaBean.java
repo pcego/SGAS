@@ -4,8 +4,8 @@
  */
 package br.com.ademoc.sgascliente.web;
 
-import br.com.ademoc.sgas.DomainModel.IRepositorioEspecialidade;
-import br.com.ademoc.sgas.DomainModel.Especialidade;
+import br.com.ademoc.sgas.DomainModel.IRepositorioCategoria;
+import br.com.ademoc.sgas.DomainModel.Categoria;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -17,41 +17,39 @@ import javax.faces.context.FacesContext;
  *
  * @author www
  */
-@Named(value = "especialidade")
+@Named(value = "categoriaBean")
 @RequestScoped
-public class EspecialidadeBean implements Serializable {
-    
+public class CategoriaBean implements Serializable{
+
     @EJB
-    IRepositorioEspecialidade repo;
+    IRepositorioCategoria repo;
     private String codigo;
     private String descricao;
-    
+
     public String getCodigo() {
         return codigo;
     }
-    
+
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
-    
+
     public String getDescricao() {
         return descricao;
     }
-    
+
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    
-    public EspecialidadeBean() {
-    }
-    
+
     public void salvar() {
-        Especialidade especialidade = new Especialidade();
-        especialidade.setDescricao(descricao);
-        
+        Categoria categoria = new Categoria();
+
+        categoria.setDescricao(descricao);
+
         boolean confirme;
-        confirme = repo.salvar(especialidade);
-        
+        confirme = repo.salvar(categoria);
+
         if (confirme == true) {
             FacesMessage message = new FacesMessage("Salvo com Sucesso");
 
@@ -61,6 +59,30 @@ public class EspecialidadeBean implements Serializable {
 
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
-        
+    }
+
+    public void apagar() {
+        Categoria categoria = new Categoria();
+        Long id = Long.parseLong(codigo);
+        categoria.setId(id);
+
+        boolean confirme;
+
+        confirme = repo.apagar(categoria);
+
+
+        if (confirme == true) {
+            FacesMessage message = new FacesMessage("Excluido com Sucesso");
+
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        } else if (confirme == false) {
+            FacesMessage message = new FacesMessage("ERRO ao Excluir, verifique os campos, ou tente novamente mais tarde");
+
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+    }
+
+    
+    public CategoriaBean() {
     }
 }

@@ -14,12 +14,14 @@ import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import java.util.Calendar;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
 /**
  *
  * @author www
  */
-@Named(value = "profissional")
+@Named(value = "profissionalBean")
 @RequestScoped
 public class ProfissionalBean implements Serializable {
 
@@ -34,7 +36,7 @@ public class ProfissionalBean implements Serializable {
     private boolean status;
     private String sexo;
     private Date dtAtualizacao;
-    private int usuarioAtualizacao;
+    private Usuario usuarioAtualizacao;
     Calendar calendar = Calendar.getInstance();
 
     public ProfissionalBean() {
@@ -120,11 +122,11 @@ public class ProfissionalBean implements Serializable {
         this.usuario = usuario;
     }
 
-    public int getUsuarioAtualizacao() {
+    public Usuario getUsuarioAtualizacao() {
         return usuarioAtualizacao;
     }
 
-    public void setUsuarioAtualizacao(int usuarioAtualizacao) {
+    public void setUsuarioAtualizacao(Usuario usuarioAtualizacao) {
         this.usuarioAtualizacao = usuarioAtualizacao;
     }
 
@@ -138,8 +140,41 @@ public class ProfissionalBean implements Serializable {
         profissional.setCartProfissional(cartProfissional);
         profissional.setStatus(status);
         profissional.setDtAtualizacao(calendar.getTime());
-        profissional.setUsuarioAtualizacao(usuario);
+        profissional.setUsuarioAtualizacao(usuarioAtualizacao);
 
 
+        boolean confirme;
+        confirme = repo.salvar(profissional);
+
+        if (confirme == true) {
+            FacesMessage message = new FacesMessage("Salvo com Sucesso");
+
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        } else {
+            FacesMessage message = new FacesMessage("ERRO so Salvar, verifique os campos, ou tente novamente mais tarde");
+
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+    }
+
+    public void apagar() {
+        Profissional profissional = new Profissional();
+        Long id = Long.parseLong(codigo);
+        profissional.setId(id);
+
+        boolean confirme;
+
+        confirme = repo.apagar(profissional);
+
+
+        if (confirme == true) {
+            FacesMessage message = new FacesMessage("Excluido com Sucesso");
+
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        } else if (confirme == false) {
+            FacesMessage message = new FacesMessage("ERRO ao Excluir, verifique os campos, ou tente novamente mais tarde");
+
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
     }
 }

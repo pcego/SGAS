@@ -4,9 +4,8 @@
  */
 package br.com.ademoc.sgascliente.web;
 
-import br.com.ademoc.sgas.DomainModel.IRepositorioEspecialidade;
-import br.com.ademoc.sgas.DomainModel.Especialidade;
-import java.io.Serializable;
+import br.com.ademoc.sgas.DomainModel.IRepositorioProfissao;
+import br.com.ademoc.sgas.DomainModel.Profissao;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -17,41 +16,39 @@ import javax.faces.context.FacesContext;
  *
  * @author www
  */
-@Named(value = "especialidade")
+@Named(value = "profissaoBean")
 @RequestScoped
-public class EspecialidadeBean implements Serializable {
-    
+public class ProfissaoBean {
+
     @EJB
-    IRepositorioEspecialidade repo;
+    IRepositorioProfissao repo;
     private String codigo;
     private String descricao;
-    
+
     public String getCodigo() {
         return codigo;
     }
-    
+
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
-    
+
     public String getDescricao() {
         return descricao;
     }
-    
+
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    
-    public EspecialidadeBean() {
-    }
-    
+
     public void salvar() {
-        Especialidade especialidade = new Especialidade();
-        especialidade.setDescricao(descricao);
-        
+        Profissao profissao = new Profissao();
+
+        profissao.setDescricao(descricao);
+
         boolean confirme;
-        confirme = repo.salvar(especialidade);
-        
+        confirme = repo.salvar(profissao);
+
         if (confirme == true) {
             FacesMessage message = new FacesMessage("Salvo com Sucesso");
 
@@ -61,6 +58,29 @@ public class EspecialidadeBean implements Serializable {
 
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
-        
+    }
+
+    public void apagar() {
+        Profissao profissao = new Profissao();
+        Long id = Long.parseLong(codigo);
+        profissao.setId(id);
+
+        boolean confirme;
+
+        confirme = repo.apagar(profissao);
+
+
+        if (confirme == true) {
+            FacesMessage message = new FacesMessage("Excluido com Sucesso");
+
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        } else if (confirme == false) {
+            FacesMessage message = new FacesMessage("ERRO ao Excluir, verifique os campos, ou tente novamente mais tarde");
+
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+    }
+
+    public ProfissaoBean() {
     }
 }
