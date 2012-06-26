@@ -4,7 +4,6 @@
  */
 package br.com.ademoc.sgascliente.web;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
@@ -17,15 +16,21 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 
 //import org.primefaces.examples.domain.Player;
+public class TipoAparelhoConverter implements Converter {
 
-public class PlayerConverter implements Converter {
-
-    public static List<TipoAparelho> playerDB;
     IRepositorioTipoAparelho repo;
-   
- //       playerDB = repo.listaTodos();
-     
-    
+    public static List<TipoAparelho> listagem;
+
+    public List<TipoAparelho> getListagem() {
+        if (listagem == null) {
+            listagem = repo.listaTodos();
+        }
+        return listagem;
+    }
+
+    public void setListagem(List<TipoAparelho> listagem) {
+        TipoAparelhoConverter.listagem = listagem;
+    }
 
     @Override
     public Object getAsObject(FacesContext facesContext, UIComponent component, String submittedValue) {
@@ -35,13 +40,13 @@ public class PlayerConverter implements Converter {
             try {
                 int number = Integer.parseInt(submittedValue);
 
-                for (TipoAparelho p : playerDB) {
+                for (TipoAparelho p : listagem) {
                     if (p.getId() == number) {
                         return p;
                     }
                 }
 
-            } catch(NumberFormatException exception) {
+            } catch (NumberFormatException exception) {
                 throw new ConverterException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Conversion Error", "Not a valid player"));
             }
         }
@@ -58,4 +63,3 @@ public class PlayerConverter implements Converter {
         }
     }
 }
-                    

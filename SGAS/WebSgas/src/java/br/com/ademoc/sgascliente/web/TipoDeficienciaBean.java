@@ -61,10 +61,9 @@ public class TipoDeficienciaBean implements Serializable {
     private TipoAparelho selectedPlayer1;
     private List<TipoAparelho> players;
     private Iterable<TipoAparelho> playerDB;
-    
 
     public void AutoCompleteBean() {
-        players = PlayerConverter.playerDB;
+        players = TipoAparelhoConverter.listagem;
     }
 
     public TipoAparelho getSelectedPlayer1() {
@@ -75,7 +74,6 @@ public class TipoDeficienciaBean implements Serializable {
         this.selectedPlayer1 = selectedPlayer1;
     }
 
-    
     public List<TipoAparelho> completePlayer(String query) {
         List<TipoAparelho> suggestions = new ArrayList<TipoAparelho>();
 
@@ -88,54 +86,6 @@ public class TipoDeficienciaBean implements Serializable {
         return suggestions;
     }
 
-    
-    
-    
-    
-       public Object getAsObject(FacesContext facesContext, UIComponent component, String submittedValue) {
-        if (submittedValue.trim().equals("")) {
-            return null;
-        } else {
-            try {
-                int number = Integer.parseInt(submittedValue);
-
-                for (TipoAparelho p : playerDB) {
-                    if (p.getId() == number) {
-                        return p;
-                    }
-                }
-
-            } catch(NumberFormatException exception) {
-                throw new ConverterException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Conversion Error", "Not a valid player"));
-            }
-        }
-
-        return null;
-    }
-
-    public String getAsString(FacesContext facesContext, UIComponent component, Object value) {
-        if (value == null || value.equals("")) {
-            return "";
-        } else {
-            return String.valueOf(((TipoAparelho) value).getId());
-        }
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     public TipoAparelho getAparelho() {
         return aparelho;
     }
