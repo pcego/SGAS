@@ -76,12 +76,37 @@
 
                 
 
-                
-                
+                <p:commandButton id="btNovo" value="Novo" onclick="confirmationNovo.show()" type="reset"/>
+                <p:commandButton id="btAltera" value="Altera" onclick="confirmationAltera.show()" type="button"/>
+                <p:commandButton id="btApagar" value="Excluir" onclick="confirmationApagar.show()" type="button"/>
+                <p:commandButton id="btSalvar" value="Salvar" onclick="confirmationSalvar.show()" type="button"/>
+
+                <!-- Criando metodo de confirmação so Salvar -->
+                <p:confirmDialog id="confirmDialogSalvar" message="Tem certeza que deseja salvar?"
+                                 header="Confirmação para salvar" severity="alert" widgetVar="confirmationSalvar">
+
+                    <p:commandButton id="confirmSalvar" value="Sim" update="messages" oncomplete="confirmationSalvar.hide()"
+                                     actionListener="#{usuario.salvar()}" />
+                    <p:commandButton id="naoSalvar" value="Não" onclick="confirmationSalvar.hide()" type="button" /> 
+                </p:confirmDialog>
+                <!-- Imprimir msg de confirmação ou erro ao salvar -->
+
+
+
+                <!-- Criando metodo de confirmação so Apagar -->
+                <p:confirmDialog id="confirmDialogApagar" message="Tem certeza que deseja Excluir?"
+                                 header="Confirmação para excluir" severity="alert" widgetVar="confirmationApagar">
+
+                    <p:commandButton id="confirmApagar" value="Sim" update="messages" oncomplete="confirmationApagar.hide()"
+                                     actionListener="#{usuario.apagar()}" />
+                    <p:commandButton id="naoApagar" value="Não" onclick="confirmationApagar.hide()" type="button" /> 
+                </p:confirmDialog>
+                <!-- Imprimir msg de confirmação ou erro ao salvar -->
+
                 <p:growl id="messages" />
 
-            </h:form>
 
+            </h:form>
         </p:panel>
         <ui:include src="rodape.xhtml"/>
     </h:body>

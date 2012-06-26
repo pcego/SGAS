@@ -20,7 +20,13 @@
                 <br/>
                 <h:outputLabel id="tituloAparelho" value="Aparelho: "/>
                 <br/>
-                <p:inputText id="aparelho" value="#{tipoDeficienciaBean.aparelho}" size="20"/>
+
+
+                <p:autoComplete value="#{tipoDeficienciaBean.selectedPlayer1}" id="basicPojo" completeMethod="#{tipoDeficienciaBean.completePlayer(query)}"
+                                var="p" itemLabel="#{p.nome}" itemValue="#{p}" converter="player" forceSelection="true"/>
+
+
+
                 <br/>
                 <h:outputLabel id="tituloCategoria" value="Categoria: "/>
                 <br/>

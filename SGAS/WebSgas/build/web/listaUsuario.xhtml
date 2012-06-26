@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml" 
+       xmlns:h="http://java.sun.com/jsf/html"
+       xmlns:ui="http://java.sun.com/jsf/facelets" 
+       xmlns:p="http://primefaces.prime.com.tr/ui"
+       xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:include src="cabecalho.xhtml"/>
+        <br/>
+        <h:form>
+            <p:dataTable id="tblClientes" value="#{usuario.listagem}" var="item" 
+                         paginator="true" rows="4"  emptyMessage="Nenhum registro...">              
+
+
+
+                <p:column sortBy="#{item.id}" filterBy="#{item.id}" > 
+                    <f:facet name="header"> 
+                        <h:outputText value="ID" /> 
+                    </f:facet> 
+                    <h:outputText value="#{item.id}"/> 
+                </p:column> 
+
+
+                <p:column sortBy="#{item.nome}" filterBy="#{item.nome}"> 
+                    <f:facet name="header"> 
+                        <h:outputText value="Nome"/> 
+                    </f:facet> 
+                    <h:outputText value="#{item.nome}"/> 
+                </p:column> 
+                <p:column> 
+                    <f:facet name="header"> 
+                        <h:outputText value="Editar"/> 
+                    </f:facet> 
+                    <a href="faces/editarCliente.xhtml?id=#{item.id}">Editar</a>
+                </p:column> 
+           
+
+                <p:column> 
+                    <f:facet name="header"> 
+                        <h:outputText value="Excluir"/> 
+                    </f:facet> 
+                    <p:commandButton id="btApagar" value="Excluir"  onclick="confirmationApagar.show()" type="butto">
+                        <f:setPropertyActionListener target="#{usuario.codigo}" value="#{item.id}" />
+                    </p:commandButton>
+                </p:column> 
+                
+            </p:dataTable>
+
+
+            <!-- Criando metodo de confirmação so Apagar -->
+            <p:confirmDialog id="confirmDialogApagar" message="Tem certeza que deseja Excluir?"
+                             header="Confirmação para excluir" severity="alert" widgetVar="confirmationApagar">
+
+                <p:commandButton id="confirmApagar" value="Sim" update="messages" oncomplete="confirmationApagar.hide()"
+                                 action="#{usuario.apagar()}" >
+                </p:commandButton>
+                <p:commandButton id="naoApagar" value="Não" onclick="confirmationApagar.hide()" type="button" /> 
+            </p:confirmDialog>
+            <!-- Imprimir msg de confirmação ou erro ao salvar -->
+
+            <p:growl id="messages" />
+
+
+        </h:form>
+        <br/>
+        <ui:include src="rodape.xhtml"/>
+    </h:body>
+</html>
+
