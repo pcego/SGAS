@@ -35,7 +35,7 @@
                                          header="Confirmação para salvar" severity="alert" widgetVar="confirmationSalvar">
 
                             <p:commandButton id="confirmSalvar" value="Sim" update="messages" oncomplete="confirmationSalvar.hide()"
-                                             actionListener="#{categoriaBean.salvar()}" />
+                                             actionListener="#{especialidade.salvar()}" />
                             <p:commandButton id="naoSalvar" value="Não" onclick="confirmationSalvar.hide()" type="button" /> 
                         </p:confirmDialog>
                         <!-- Imprimir msg de confirmação ou erro ao salvar -->
@@ -44,7 +44,7 @@
                         <p:confirmDialog id="confirmDialogApagar" message="Tem certeza que deseja Excluir?"
                                          header="Confirmação para excluir" severity="alert" widgetVar="confirmationApagar">
                             <p:commandButton id="confirmApagar" value="Sim" update="messages" oncomplete="confirmationApagar.hide()"
-                                             actionListener="#{categoriaBean.apagar()}" />
+                                             actionListener="#{especialidade.apagar()}" />
                             <p:commandButton id="naoApagar" value="Não" onclick="confirmationApagar.hide()" type="button" /> 
                         </p:confirmDialog>
                         <!-- Imprimir msg de confirmação ou erro ao salvar -->
