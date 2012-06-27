@@ -57,19 +57,13 @@ public class CategoriaBean implements Serializable {
 
     public void salvar() {
         Categoria categoria = new Categoria();
-
         categoria.setDescricao(descricao);
-
-        boolean confirme;
-        confirme = repo.salvar(categoria);
-
-        if (confirme == true) {
+        try {
+            repo.salvar(categoria);
             FacesMessage message = new FacesMessage("Salvo com Sucesso");
-
             FacesContext.getCurrentInstance().addMessage(null, message);
-        } else {
+        } catch (Exception e) {
             FacesMessage message = new FacesMessage("ERRO so Salvar, verifique os campos, ou tente novamente mais tarde");
-
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }
@@ -78,19 +72,12 @@ public class CategoriaBean implements Serializable {
         Categoria categoria = new Categoria();
         Long id = Long.parseLong(codigo);
         categoria.setId(id);
-
-        boolean confirme;
-
-        confirme = repo.apagar(categoria);
-
-
-        if (confirme == true) {
+        try {
+            repo.apagar(categoria);
             FacesMessage message = new FacesMessage("Excluido com Sucesso");
-
             FacesContext.getCurrentInstance().addMessage(null, message);
-        } else if (confirme == false) {
+        } catch (Exception e) {
             FacesMessage message = new FacesMessage("ERRO ao Excluir, verifique os campos, ou tente novamente mais tarde");
-
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }

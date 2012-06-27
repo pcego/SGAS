@@ -43,19 +43,13 @@ public class ProfissaoBean {
 
     public void salvar() {
         Profissao profissao = new Profissao();
-
         profissao.setDescricao(descricao);
-
-        boolean confirme;
-        confirme = repo.salvar(profissao);
-
-        if (confirme == true) {
+        try {
+            repo.salvar(profissao);
             FacesMessage message = new FacesMessage("Salvo com Sucesso");
-
             FacesContext.getCurrentInstance().addMessage(null, message);
-        } else {
+        } catch (Exception e) {
             FacesMessage message = new FacesMessage("ERRO so Salvar, verifique os campos, ou tente novamente mais tarde");
-
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }
@@ -64,19 +58,12 @@ public class ProfissaoBean {
         Profissao profissao = new Profissao();
         Long id = Long.parseLong(codigo);
         profissao.setId(id);
-
-        boolean confirme;
-
-        confirme = repo.apagar(profissao);
-
-
-        if (confirme == true) {
+        try {
+            repo.apagar(profissao);
             FacesMessage message = new FacesMessage("Excluido com Sucesso");
-
             FacesContext.getCurrentInstance().addMessage(null, message);
-        } else if (confirme == false) {
+        } catch (Exception e) {
             FacesMessage message = new FacesMessage("ERRO ao Excluir, verifique os campos, ou tente novamente mais tarde");
-
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }

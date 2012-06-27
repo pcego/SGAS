@@ -92,26 +92,18 @@ public class perfilBean {
 
     public void salvar() {
         Perfil perfil = new Perfil();
-        
         perfil.setVaga(vaga);
         perfil.setHabilidades(habilidade);
         perfil.setSexo(sexo);
         perfil.setIdadeMinima(idadeMinima);
         perfil.setIdadeMaxima(idadeMaxima);
         perfil.setEscolaridade(escolaridade);
-
-
-
-        boolean confirme;
-        confirme = repo.salvar(perfil);
-
-        if (confirme == true) {
+        try {
+            repo.salvar(perfil);
             FacesMessage message = new FacesMessage("Salvo com Sucesso");
-
             FacesContext.getCurrentInstance().addMessage(null, message);
-        } else {
+        } catch (Exception e) {
             FacesMessage message = new FacesMessage("ERRO so Salvar, verifique os campos, ou tente novamente mais tarde");
-
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }
@@ -120,19 +112,12 @@ public class perfilBean {
         Perfil perfil = new Perfil();
         Long id = Long.parseLong(codigo);
         perfil.setId(id);
-
-        boolean confirme;
-
-        confirme = repo.apagar(perfil);
-
-
-        if (confirme == true) {
+        try {
+            repo.apagar(perfil);
             FacesMessage message = new FacesMessage("Excluido com Sucesso");
-
             FacesContext.getCurrentInstance().addMessage(null, message);
-        } else if (confirme == false) {
+        } catch (Exception e) {
             FacesMessage message = new FacesMessage("ERRO ao Excluir, verifique os campos, ou tente novamente mais tarde");
-
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }

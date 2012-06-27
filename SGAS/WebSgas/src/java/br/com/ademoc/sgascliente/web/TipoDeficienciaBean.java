@@ -10,12 +10,9 @@ import br.com.ademoc.sgas.DomainModel.IRepositorioCategoria;
 import br.com.ademoc.sgas.DomainModel.TipoDeficiencia;
 import br.com.ademoc.sgas.DomainModel.TipoAparelho;
 import br.com.ademoc.sgas.DomainModel.Categoria;
-
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -32,56 +29,46 @@ import javax.faces.convert.ConverterException;
 @RequestScoped
 public class TipoDeficienciaBean implements Serializable {
 
-
-    
     @EJB
     IRepositorioTipoDeficiencia repo;
     IRepositorioTipoAparelho repoTipoAparelho;
     IRepositorioCategoria repoCategoria;
-    
     private String codigo;
     private TipoAparelho aparelho;
     private Categoria categoria;
     private String descricao;
-    
     TipoDeficiencia tipoDeficiencia;
-    
-    public TipoDeficiencia getTipoDeficiencia() {
-        return tipoDeficiencia;
-    }
-    
-    
-        public void setVenda(TipoDeficiencia tipoDeficiencia) {
-        this.tipoDeficiencia = tipoDeficiencia;
-        this.codigo =  tipoDeficiencia.getId().toString();
-        this.aparelho =  tipoDeficiencia.getTipoAparelho();
-        this.categoria = tipoDeficiencia.getCategoria();
-        this.descricao = tipoDeficiencia.getDescricao();
-    }
-    
-    
-        
     List<TipoDeficiencia> listagem;
-    String id, nome, erro, filtro, mensagem;
-    
     List<Categoria> categorias;
     List<TipoAparelho> aparelhos;
 
+    public TipoDeficiencia getTipoDeficiencia() {
+        return tipoDeficiencia;
+    }
+
+    public void setVenda(TipoDeficiencia tipoDeficiencia) {
+        this.tipoDeficiencia = tipoDeficiencia;
+        this.codigo = tipoDeficiencia.getId().toString();
+        this.aparelho = tipoDeficiencia.getTipoAparelho();
+        this.categoria = tipoDeficiencia.getCategoria();
+        this.descricao = tipoDeficiencia.getDescricao();
+    }
+
     public List<TipoAparelho> getAparelhos() {
-      if(aparelhos == null)
+        if (aparelhos == null) {
             aparelhos = repoTipoAparelho.listaTodos();
+        }
         return aparelhos;
     }
-    
-    
 
     public void setAparelhos(List<TipoAparelho> aparelhos) {
         this.aparelhos = aparelhos;
     }
 
     public List<Categoria> getCategorias() {
-                if(categorias == null)
+        if (categorias == null) {
             categorias = repoCategoria.listaTodas();
+        }
         return categorias;
     }
 
@@ -90,9 +77,10 @@ public class TipoDeficienciaBean implements Serializable {
     }
 
     public List<TipoDeficiencia> getListagem() {
-                if(listagem == null)
+        if (listagem == null) {
             listagem = repo.listarTodos();
-        
+        }
+
         return listagem;
     }
 
@@ -100,30 +88,17 @@ public class TipoDeficienciaBean implements Serializable {
         this.listagem = listagem;
     }
 
-
-        
-    
-        public List<TipoAparelho> buscaAparelhos(String val){
-        List<TipoAparelho> suggestions = new ArrayList<TipoAparelho>();  
-          
-        for(TipoAparelho c : getAparelhos()) {  
-            if(c.getDescricao().startsWith(val))  
-                suggestions.add(c);  
-        }  
-          
-        return suggestions;  
+    public List<TipoAparelho> buscaAparelhos(String val) {
+        List<TipoAparelho> suggestions = new ArrayList<TipoAparelho>();
+        for (TipoAparelho c : getAparelhos()) {
+            if (c.getDescricao().startsWith(val)) {
+                suggestions.add(c);
+            }
+        }
+        return suggestions;
     }
-    
 
-        
-        
-        
-        
-        
-        
-        
-        
-        public TipoAparelho getAparelho() {
+    public TipoAparelho getAparelho() {
         return aparelho;
     }
 
@@ -159,24 +134,16 @@ public class TipoDeficienciaBean implements Serializable {
     }
 
     public void salvar() {
-        
-        
         TipoDeficiencia deficiencia = new TipoDeficiencia();
-
         deficiencia.setCategoria(categoria);
         deficiencia.setTipoAparelho(aparelho);
         deficiencia.setDescricao(descricao);
-
-        boolean confirme;
-        confirme = repo.salvar(deficiencia);
-
-        if (confirme == true) {
+        try {
+            repo.salvar(deficiencia);
             FacesMessage message = new FacesMessage("Salvo com Sucesso");
-
             FacesContext.getCurrentInstance().addMessage(null, message);
-        } else {
+        } catch (Exception e) {
             FacesMessage message = new FacesMessage("ERRO so Salvar, verifique os campos, ou tente novamente mais tarde");
-
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }
@@ -185,20 +152,14 @@ public class TipoDeficienciaBean implements Serializable {
         TipoDeficiencia deficiencia = new TipoDeficiencia();
         Long id = Long.parseLong(codigo);
         deficiencia.setId(id);
-
-        boolean confirme;
-
-        confirme = repo.apagar(deficiencia);
-
-
-        if (confirme == true) {
+        try {
+            repo.apagar(deficiencia);
             FacesMessage message = new FacesMessage("Excluido com Sucesso");
-
             FacesContext.getCurrentInstance().addMessage(null, message);
-        } else if (confirme == false) {
+        } catch (Exception e) {
             FacesMessage message = new FacesMessage("ERRO ao Excluir, verifique os campos, ou tente novamente mais tarde");
-
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }
+    
 }

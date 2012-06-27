@@ -26,6 +26,7 @@ public class TipoAparelhoBean implements Serializable {
     IRepositorioTipoAparelho repo;
     private String codigo;
     private String descricao;
+    List<TipoAparelho> listagem;
 
     public String getCodigo() {
         return codigo;
@@ -44,48 +45,34 @@ public class TipoAparelhoBean implements Serializable {
     }
 
     public void salvar() {
-
         try {
             TipoAparelho tipoAparelho = new TipoAparelho();
             tipoAparelho.setDescricao(descricao);
             repo.salvar(tipoAparelho);
-
             FacesMessage messageConfirme = new FacesMessage("Salvo com Sucesso");
             FacesContext.getCurrentInstance().addMessage(null, messageConfirme);
-
         } catch (Exception e) {
             FacesMessage messageConfirme = new FacesMessage("ERRO so Salvar, verifique os campos, ou tente novamente mais tarde");
             FacesContext.getCurrentInstance().addMessage(null, messageConfirme);
         }
-
-
-
     }
 
     public void apagar() {
-        
-        try {
         TipoAparelho tipoAparelho = new TipoAparelho();
         Long id = Long.parseLong(codigo);
         tipoAparelho.setId(id);
-
-        boolean confirme;
-
-        confirme = repo.apagar(tipoAparelho);
+        try {
+            repo.apagar(tipoAparelho);
             FacesMessage message = new FacesMessage("Excluido com Sucesso");
             FacesContext.getCurrentInstance().addMessage(null, message);
-            
         } catch (Exception e) {
             FacesMessage message = new FacesMessage("ERRO ao Excluir, verifique os campos, ou tente novamente mais tarde");
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
-        
-
     }
 
     public TipoAparelhoBean() {
     }
-    List<TipoAparelho> listagem;
 
     public List<TipoAparelho> getListagem() {
         if (listagem == null) {

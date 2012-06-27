@@ -50,8 +50,7 @@ public class UsuarioBean implements Serializable {
     private String celular;
     private Date dataCadastro;
     Calendar calendar = Calendar.getInstance();
-    
-    
+
     public UsuarioBean() {
     }
 
@@ -201,7 +200,6 @@ public class UsuarioBean implements Serializable {
             Logger.getLogger(UsuarioBean.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Erro ao Carregar Usuario");
         }
-
         nome = usuario.getNome();
         logon = usuario.getLogon();
         senha = usuario.getSenha();
@@ -222,7 +220,6 @@ public class UsuarioBean implements Serializable {
 
     public void salvar() {
         Usuario usuario = new Usuario();
-
         usuario.setNome(nome);
         usuario.setLogon(logon);
         usuario.setSenha(senha);
@@ -240,20 +237,14 @@ public class UsuarioBean implements Serializable {
         usuario.setCelular(celular);
         usuario.setDataCadastro(calendar.getTime());
 
-        boolean confirme;
-        confirme = repo.salvar(usuario);
-
-        if (confirme == true) {
+        try {
+            repo.salvar(usuario);
             FacesMessage message = new FacesMessage("Salvo com Sucesso");
-
             FacesContext.getCurrentInstance().addMessage(null, message);
-        } else {
+        } catch (Exception e) {
             FacesMessage message = new FacesMessage("ERRO so Salvar, verifique os campos, ou tente novamente mais tarde");
-
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
-
-
     }
 
     public void apagar() throws Exception {
@@ -277,9 +268,8 @@ public class UsuarioBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }
-    
-    
-        public void apagar(String cod) {
+
+    public void apagar(String cod) {
         Usuario usuario = new Usuario();
         Long id = Long.parseLong(cod);
         usuario.setId(id);
@@ -299,19 +289,16 @@ public class UsuarioBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }
-
     List<Usuario> listagem;
 
     public List<Usuario> getListagem() {
-        if (listagem ==  null)
+        if (listagem == null) {
             listagem = repo.listaTodos();
+        }
         return listagem;
     }
 
     public void setListagem(List<Usuario> listagem) {
         this.listagem = listagem;
     }
-
-    
-    
 }
