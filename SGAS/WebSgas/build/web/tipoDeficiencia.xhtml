@@ -11,75 +11,79 @@
     <h:body>
 
         <ui:include src="cabecalho.xhtml"/>
-        <p:panel>
-            <h:form>
-                <br/>
-                <h:outputLabel id="tituloCodigo" value="Codigo: "/>
-                <br/>
-                <p:inputText id="codigo" value="#{tipoDeficienciaBean.codigo}" size="20"/>
-                <br/>
-                <h:outputLabel id="tituloAparelho" value="Aparelho: "/>
-                <br/>
+        <p:tabView id="abas" >
+            <p:tab id="cadastro" title="Cadastro">
+                <p:panel>
+                    <h:form>
+                        <br/>
+                        <h:outputLabel id="tituloCodigo" value="Codigo: "/>
+                        <br/>
+                        <p:inputText id="codigo" value="#{tipoDeficienciaBean.codigo}" size="20"/>
+                        <br/>
+                        <h:outputLabel id="tituloAparelho" value="Aparelho: "/>
+                        <br/>
+
+
+
+
+                        <p:autoComplete value="#{tipoDeficienciaBean.aparelho}" id="buscaProduto" completeMethod="#{tipoDeficienciaBean.buscaAparelhos}"  
+                                        converter="TipoAparelhoConverter" var="p" itemLabel="#{p.descricao}" itemValue="#{p}" />  
 
 
 
 
 
+                        <br/>
+                        <h:outputLabel id="tituloCategoria" value="Categoria: "/>
+                        <br/>
+                        <p:inputText id="categoria" value="#{tipoDeficienciaBean.categoria}" size="20"/>
+                        <br/>
+                        <h:outputLabel id="tituloDescricao" value="Descrição: "/>
+                        <br/>
+                        <p:inputText id="descricao" value="#{tipoDeficienciaBean.descricao}" size="50"/>
+                        <br/>
+                        <br/>
+
+
+                        <p:commandButton id="btNovo" value="Novo" onclick="confirmationNovo.show()" type="reset"/>
+                        <p:commandButton id="btAltera" value="Altera" onclick="confirmationAltera.show()" type="button"/>
+                        <p:commandButton id="btApagar" value="Excluir" onclick="confirmationApagar.show()" type="button"/>
+                        <p:commandButton id="btSalvar" value="Salvar" onclick="confirmationSalvar.show()" type="button"/>
+
+                        <!-- Criando metodo de confirmação so Salvar -->
+                        <p:confirmDialog id="confirmDialogSalvar" message="Tem certeza que deseja salvar?"
+                                         header="Confirmação para salvar" severity="alert" widgetVar="confirmationSalvar">
+
+                            <p:commandButton id="confirmSalvar" value="Sim" update="messages" oncomplete="confirmationSalvar.hide()"
+                                             actionListener="#{tipoDeficienciaBean.salvar()}" />
+                            <p:commandButton id="naoSalvar" value="Não" onclick="confirmationSalvar.hide()" type="button" /> 
+                        </p:confirmDialog>
+                        <!-- Imprimir msg de confirmação ou erro ao salvar -->
 
 
 
-                <p:autoComplete value="#{tipoDeficienciaBean.aparelho}" id="buscaProduto" completeMethod="#{tipoDeficienciaBean.buscaAparelhos}"  
-                                converter="TipoAparelhoConverter" var="p" itemLabel="#{p.descricao}" itemValue="#{p}" />  
+                        <!-- Criando metodo de confirmação so Apagar -->
+                        <p:confirmDialog id="confirmDialogApagar" message="Tem certeza que deseja Excluir?"
+                                         header="Confirmação para excluir" severity="alert" widgetVar="confirmationApagar">
+
+                            <p:commandButton id="confirmApagar" value="Sim" update="messages" oncomplete="confirmationApagar.hide()"
+                                             actionListener="#{tipoDeficienciaBean.apagar()}" />
+                            <p:commandButton id="naoApagar" value="Não" onclick="confirmationApagar.hide()" type="button" /> 
+                        </p:confirmDialog>
+                        <!-- Imprimir msg de confirmação ou erro ao salvar -->
+
+                        <p:growl id="messages" />
 
 
+                    </h:form>
+                </p:panel>
+            </p:tab>
+            <p:tab id="visualizar" title="Visualizar"> 
 
+                em breve..
 
-
-                <br/>
-                <h:outputLabel id="tituloCategoria" value="Categoria: "/>
-                <br/>
-                <p:inputText id="categoria" value="#{tipoDeficienciaBean.categoria}" size="20"/>
-                <br/>
-                <h:outputLabel id="tituloDescricao" value="Descrição: "/>
-                <br/>
-                <p:inputText id="descricao" value="#{tipoDeficienciaBean.descricao}" size="50"/>
-                <br/>
-                <br/>
-
-
-                <p:commandButton id="btNovo" value="Novo" onclick="confirmationNovo.show()" type="reset"/>
-                <p:commandButton id="btAltera" value="Altera" onclick="confirmationAltera.show()" type="button"/>
-                <p:commandButton id="btApagar" value="Excluir" onclick="confirmationApagar.show()" type="button"/>
-                <p:commandButton id="btSalvar" value="Salvar" onclick="confirmationSalvar.show()" type="button"/>
-
-                <!-- Criando metodo de confirmação so Salvar -->
-                <p:confirmDialog id="confirmDialogSalvar" message="Tem certeza que deseja salvar?"
-                                 header="Confirmação para salvar" severity="alert" widgetVar="confirmationSalvar">
-
-                    <p:commandButton id="confirmSalvar" value="Sim" update="messages" oncomplete="confirmationSalvar.hide()"
-                                     actionListener="#{tipoDeficienciaBean.salvar()}" />
-                    <p:commandButton id="naoSalvar" value="Não" onclick="confirmationSalvar.hide()" type="button" /> 
-                </p:confirmDialog>
-                <!-- Imprimir msg de confirmação ou erro ao salvar -->
-
-
-
-                <!-- Criando metodo de confirmação so Apagar -->
-                <p:confirmDialog id="confirmDialogApagar" message="Tem certeza que deseja Excluir?"
-                                 header="Confirmação para excluir" severity="alert" widgetVar="confirmationApagar">
-
-                    <p:commandButton id="confirmApagar" value="Sim" update="messages" oncomplete="confirmationApagar.hide()"
-                                     actionListener="#{tipoDeficienciaBean.apagar()}" />
-                    <p:commandButton id="naoApagar" value="Não" onclick="confirmationApagar.hide()" type="button" /> 
-                </p:confirmDialog>
-                <!-- Imprimir msg de confirmação ou erro ao salvar -->
-
-                <p:growl id="messages" />
-
-
-            </h:form>
-        </p:panel>
-
+            </p:tab>
+        </p:tabView>
         <ui:include src="rodape.xhtml"/>
     </h:body>
 </html>

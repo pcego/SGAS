@@ -10,72 +10,81 @@
     </h:head>
     <h:body>
         <ui:include src="cabecalho.xhtml"/>
-        <p:panel>
-            <h:form>
-                <h:outputLabel id="tituloCodigo" value="Codigo: "/>
-                <br/>
-                <p:inputText id="codigo" value="#{perfilBean.codigo}"/>
-                <br/>
-                <h:outputLabel id="tituloVaga" value="Vaga: "/>
-                <br/>
-                <p:inputText id="vafa" value="#{perfilBean.vaga}"/>
-                <br/>
-                <h:outputLabel id="tituloHabilidade" value="Habilidade: "/>
-                <br/>
-                <p:inputText id="habilidade" value="#{perfilBean.habilidade}"/>
-                <br/>
-                <h:outputLabel id="tituloSexo" value="Sexo: "/>
-                <br/>
-                <p:inputText id="sexo" value="#{perfilBean.sexo}"/>
-                <br/>
-                <h:outputLabel id="tituloIdadeMinima" value="Idade Minima: "/>
-                <br/>
-                <p:inputText id="idadeMinima" value="#{perfilBean.idadeMinima}"/>
-                <br/>
-                <h:outputLabel id="tituloIdadeMaxima" value="idade Maxima: "/>
-                <br/>
-                <p:inputText id="idadeMaxima" value="#{perfilBean.idadeMaxima}"/>
-                <br/>
-                <h:outputLabel id="tituloEscolaridade" value="Escolaridade: "/>
-                <br/>
-                <p:inputText id="escolaridade" value="#{perfilBean.escolaridade}"/>
-                <br/>
+        <p:tabView id="abas">
+            <p:tab id="cadastro" title="Cadastro">
+                <p:panel>
+                    <h:form>
+                        <h:outputLabel id="tituloCodigo" value="Codigo: "/>
+                        <br/>
+                        <p:inputText id="codigo" value="#{perfilBean.codigo}"/>
+                        <br/>
+                        <h:outputLabel id="tituloVaga" value="Vaga: "/>
+                        <br/>
+                        <p:inputText id="vafa" value="#{perfilBean.vaga}"/>
+                        <br/>
+                        <h:outputLabel id="tituloHabilidade" value="Habilidade: "/>
+                        <br/>
+                        <p:inputText id="habilidade" value="#{perfilBean.habilidade}"/>
+                        <br/>
+                        <h:outputLabel id="tituloSexo" value="Sexo: "/>
+                        <br/>
+                        <p:inputText id="sexo" value="#{perfilBean.sexo}"/>
+                        <br/>
+                        <h:outputLabel id="tituloIdadeMinima" value="Idade Minima: "/>
+                        <br/>
+                        <p:inputText id="idadeMinima" value="#{perfilBean.idadeMinima}"/>
+                        <br/>
+                        <h:outputLabel id="tituloIdadeMaxima" value="idade Maxima: "/>
+                        <br/>
+                        <p:inputText id="idadeMaxima" value="#{perfilBean.idadeMaxima}"/>
+                        <br/>
+                        <h:outputLabel id="tituloEscolaridade" value="Escolaridade: "/>
+                        <br/>
+                        <p:inputText id="escolaridade" value="#{perfilBean.escolaridade}"/>
+                        <br/>
 
 
 
-                <p:commandButton id="btNovo" value="Novo" onclick="confirmationNovo.show()" type="reset"/>
-                <p:commandButton id="btAltera" value="Altera" onclick="confirmationAltera.show()" type="button"/>
-                <p:commandButton id="btApagar" value="Excluir" onclick="confirmationApagar.show()" type="button"/>
-                <p:commandButton id="btSalvar" value="Salvar" onclick="confirmationSalvar.show()" type="button"/>
+                        <p:commandButton id="btNovo" value="Novo" onclick="confirmationNovo.show()" type="reset"/>
+                        <p:commandButton id="btAltera" value="Altera" onclick="confirmationAltera.show()" type="button"/>
+                        <p:commandButton id="btApagar" value="Excluir" onclick="confirmationApagar.show()" type="button"/>
+                        <p:commandButton id="btSalvar" value="Salvar" onclick="confirmationSalvar.show()" type="button"/>
 
-                <!-- Criando metodo de confirmação so Salvar -->
-                <p:confirmDialog id="confirmDialogSalvar" message="Tem certeza que deseja salvar?"
-                                 header="Confirmação para salvar" severity="alert" widgetVar="confirmationSalvar">
+                        <!-- Criando metodo de confirmação so Salvar -->
+                        <p:confirmDialog id="confirmDialogSalvar" message="Tem certeza que deseja salvar?"
+                                         header="Confirmação para salvar" severity="alert" widgetVar="confirmationSalvar">
 
-                    <p:commandButton id="confirmSalvar" value="Sim" update="messages" oncomplete="confirmationSalvar.hide()"
-                                     actionListener="#{perfilBean.salvar()}" />
-                    <p:commandButton id="naoSalvar" value="Não" onclick="confirmationSalvar.hide()" type="button" /> 
-                </p:confirmDialog>
-                <!-- Imprimir msg de confirmação ou erro ao salvar -->
-
-
-
-                <!-- Criando metodo de confirmação so Apagar -->
-                <p:confirmDialog id="confirmDialogApagar" message="Tem certeza que deseja Excluir?"
-                                 header="Confirmação para excluir" severity="alert" widgetVar="confirmationApagar">
-
-                    <p:commandButton id="confirmApagar" value="Sim" update="messages" oncomplete="confirmationApagar.hide()"
-                                     actionListener="#{perfilBean.apagar()}" />
-                    <p:commandButton id="naoApagar" value="Não" onclick="confirmationApagar.hide()" type="button" /> 
-                </p:confirmDialog>
-                <!-- Imprimir msg de confirmação ou erro ao salvar -->
-
-                <p:growl id="messages" />
+                            <p:commandButton id="confirmSalvar" value="Sim" update="messages" oncomplete="confirmationSalvar.hide()"
+                                             actionListener="#{perfilBean.salvar()}" />
+                            <p:commandButton id="naoSalvar" value="Não" onclick="confirmationSalvar.hide()" type="button" /> 
+                        </p:confirmDialog>
+                        <!-- Imprimir msg de confirmação ou erro ao salvar -->
 
 
-            </h:form>
-        </p:panel>
-        <ui:include src="rodape.xhtml"/>
-    </h:body>
+
+                        <!-- Criando metodo de confirmação so Apagar -->
+                        <p:confirmDialog id="confirmDialogApagar" message="Tem certeza que deseja Excluir?"
+                                         header="Confirmação para excluir" severity="alert" widgetVar="confirmationApagar">
+
+                            <p:commandButton id="confirmApagar" value="Sim" update="messages" oncomplete="confirmationApagar.hide()"
+                                             actionListener="#{perfilBean.apagar()}" />
+                            <p:commandButton id="naoApagar" value="Não" onclick="confirmationApagar.hide()" type="button" /> 
+                        </p:confirmDialog>
+                        <!-- Imprimir msg de confirmação ou erro ao salvar -->
+
+                        <p:growl id="messages" />
+
+
+                    </h:form>
+                </p:panel>
+            </p:tab>
+            <p:tab id="visualizar" title="Visualizar">
+                
+                em breve...
+                
+            </p:tab>
+    </p:tabView>
+    <ui:include src="rodape.xhtml"/>
+</h:body>
 </html>
 
