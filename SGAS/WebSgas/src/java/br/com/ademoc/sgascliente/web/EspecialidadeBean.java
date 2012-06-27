@@ -7,6 +7,7 @@ package br.com.ademoc.sgascliente.web;
 import br.com.ademoc.sgas.DomainModel.IRepositorioEspecialidade;
 import br.com.ademoc.sgas.DomainModel.Especialidade;
 import java.io.Serializable;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -25,6 +26,19 @@ public class EspecialidadeBean implements Serializable {
     IRepositorioEspecialidade repo;
     private String codigo;
     private String descricao;
+    List<Especialidade> listagem;
+
+    public List<Especialidade> getListagem() {
+        if (listagem ==null){
+            listagem = repo.listaTodos();
+        }
+        return listagem;
+    }
+
+    public void setListagem(List<Especialidade> listagem) {
+        this.listagem = listagem;
+    }
+    
     
     public String getCodigo() {
         return codigo;

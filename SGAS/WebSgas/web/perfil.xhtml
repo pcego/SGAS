@@ -6,45 +6,41 @@
       xmlns:p="http://primefaces.prime.com.tr/ui" 
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
-        <title>SGAS WEb - Cadastro - Deficiência </title>
+        <title>SGAS WEb - Cadastro - Categoria de Perfil do Candidato</title>
     </h:head>
     <h:body>
-
         <ui:include src="cabecalho.xhtml"/>
         <p:panel>
             <h:form>
-                <br/>
                 <h:outputLabel id="tituloCodigo" value="Codigo: "/>
                 <br/>
-                <p:inputText id="codigo" value="#{tipoDeficienciaBean.codigo}" size="20"/>
+                <p:inputText id="codigo" value="#{perfilBean.codigo}"/>
                 <br/>
-                <h:outputLabel id="tituloAparelho" value="Aparelho: "/>
+                <h:outputLabel id="tituloVaga" value="Vaga: "/>
+                <br/>
+                <p:inputText id="vafa" value="#{perfilBean.vaga}"/>
+                <br/>
+                <h:outputLabel id="tituloHabilidade" value="Habilidade: "/>
+                <br/>
+                <p:inputText id="habilidade" value="#{perfilBean.habilidade}"/>
+                <br/>
+                <h:outputLabel id="tituloSexo" value="Sexo: "/>
+                <br/>
+                <p:inputText id="sexo" value="#{perfilBean.sexo}"/>
+                <br/>
+                <h:outputLabel id="tituloIdadeMinima" value="Idade Minima: "/>
+                <br/>
+                <p:inputText id="idadeMinima" value="#{perfilBean.idadeMinima}"/>
+                <br/>
+                <h:outputLabel id="tituloIdadeMaxima" value="idade Maxima: "/>
+                <br/>
+                <p:inputText id="idadeMaxima" value="#{perfilBean.idadeMaxima}"/>
+                <br/>
+                <h:outputLabel id="tituloEscolaridade" value="Escolaridade: "/>
+                <br/>
+                <p:inputText id="escolaridade" value="#{perfilBean.escolaridade}"/>
                 <br/>
 
-
-
-
-
-
-
-
-                <p:autoComplete value="#{tipoDeficienciaBean.aparelho}" id="buscaProduto" completeMethod="#{tipoDeficienciaBean.buscaAparelhos}"  
-                                converter="TipoAparelhoConverter" var="p" itemLabel="#{p.descricao}" itemValue="#{p}" />  
-
-
-
-
-
-                <br/>
-                <h:outputLabel id="tituloCategoria" value="Categoria: "/>
-                <br/>
-                <p:inputText id="categoria" value="#{tipoDeficienciaBean.categoria}" size="20"/>
-                <br/>
-                <h:outputLabel id="tituloDescricao" value="Descrição: "/>
-                <br/>
-                <p:inputText id="descricao" value="#{tipoDeficienciaBean.descricao}" size="50"/>
-                <br/>
-                <br/>
 
 
                 <p:commandButton id="btNovo" value="Novo" onclick="confirmationNovo.show()" type="reset"/>
@@ -57,7 +53,7 @@
                                  header="Confirmação para salvar" severity="alert" widgetVar="confirmationSalvar">
 
                     <p:commandButton id="confirmSalvar" value="Sim" update="messages" oncomplete="confirmationSalvar.hide()"
-                                     actionListener="#{tipoDeficienciaBean.salvar()}" />
+                                     actionListener="#{perfilBean.salvar()}" />
                     <p:commandButton id="naoSalvar" value="Não" onclick="confirmationSalvar.hide()" type="button" /> 
                 </p:confirmDialog>
                 <!-- Imprimir msg de confirmação ou erro ao salvar -->
@@ -69,7 +65,7 @@
                                  header="Confirmação para excluir" severity="alert" widgetVar="confirmationApagar">
 
                     <p:commandButton id="confirmApagar" value="Sim" update="messages" oncomplete="confirmationApagar.hide()"
-                                     actionListener="#{tipoDeficienciaBean.apagar()}" />
+                                     actionListener="#{perfilBean.apagar()}" />
                     <p:commandButton id="naoApagar" value="Não" onclick="confirmationApagar.hide()" type="button" /> 
                 </p:confirmDialog>
                 <!-- Imprimir msg de confirmação ou erro ao salvar -->
@@ -79,7 +75,6 @@
 
             </h:form>
         </p:panel>
-
         <ui:include src="rodape.xhtml"/>
     </h:body>
 </html>

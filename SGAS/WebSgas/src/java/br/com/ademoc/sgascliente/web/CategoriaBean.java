@@ -7,6 +7,7 @@ package br.com.ademoc.sgascliente.web;
 import br.com.ademoc.sgas.DomainModel.IRepositorioCategoria;
 import br.com.ademoc.sgas.DomainModel.Categoria;
 import java.io.Serializable;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -19,12 +20,24 @@ import javax.faces.context.FacesContext;
  */
 @Named(value = "categoriaBean")
 @RequestScoped
-public class CategoriaBean implements Serializable{
+public class CategoriaBean implements Serializable {
 
     @EJB
     IRepositorioCategoria repo;
     private String codigo;
     private String descricao;
+    List<Categoria> listagem;
+
+    public List<Categoria> getListagem() {
+        if (listagem == null) {
+            listagem = repo.listaTodas();
+        }
+        return listagem;
+    }
+
+    public void setListagem(List<Categoria> listagem) {
+        this.listagem = listagem;
+    }
 
     public String getCodigo() {
         return codigo;
@@ -82,7 +95,6 @@ public class CategoriaBean implements Serializable{
         }
     }
 
-    
     public CategoriaBean() {
     }
 }

@@ -1,39 +1,38 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html  xmlns="http://www.w3.org/1999/xhtml" 
+<html xmlns="http://www.w3.org/1999/xhtml" 
        xmlns:h="http://java.sun.com/jsf/html"
        xmlns:ui="http://java.sun.com/jsf/facelets" 
        xmlns:p="http://primefaces.prime.com.tr/ui"
        xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
-        <title>SGAS WEB - Lista Usuarios</title>
+        <title>SGAS WEB - Lista Tipos Aparelhos</title>
     </h:head>
     <h:body>
         <ui:include src="cabecalho.xhtml"/>
         <br/>
         <h:form>
-            <p:dataTable id="tblClientes" value="#{usuario.listagem}" var="item" 
+            <p:dataTable id="tblClientes" value="#{tipoAparelho.listagem}" var="item" 
                          paginator="true" rows="4"  emptyMessage="Nenhum registro...">              
 
 
 
-                <p:column sortBy="#{item.id}" filterBy="#{item.id}"  > 
-                    <f:facet name="header" > 
+                <p:column sortBy="#{item.id}" filterBy="#{item.id}" > 
+                    <f:facet name="header"> 
                         <h:outputText value="ID" /> 
                     </f:facet> 
                     <h:outputText value="#{item.id}"/> 
                 </p:column> 
 
 
-                <p:column sortBy="#{item.nome}" filterBy="#{item.nome}"> 
+                <p:column sortBy="#{item.descricao}" filterBy="#{item.descricao}"> 
                     <f:facet name="header"> 
                         <h:outputText value="Nome"/> 
                     </f:facet> 
-                    <h:outputText value="#{item.nome}"/> 
+                    <h:outputText value="#{item.descricao}"/> 
                 </p:column> 
                 
             </p:dataTable>
-
 
 
             <p:growl id="messages" />
@@ -44,4 +43,3 @@
         <ui:include src="rodape.xhtml"/>
     </h:body>
 </html>
-

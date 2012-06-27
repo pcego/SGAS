@@ -22,8 +22,16 @@
                 <br/>
 
 
-                <p:autoComplete value="#{tipoDeficienciaBean.selectedPlayer1}" id="basicPojo" completeMethod="#{tipoDeficienciaBean.completePlayer(query)}"
-                                var="p" itemLabel="#{p.nome}" itemValue="#{p}" converter="TipoAparelho" forceSelection="true"/>
+
+
+
+
+
+
+                <p:autoComplete value="#{tipoDeficienciaBean.aparelho}" id="buscaProduto" completeMethod="#{tipoDeficienciaBean.buscaAparelhos}"  
+                                converter="TipoAparelhoConverter" var="p" itemLabel="#{p.descricao}" itemValue="#{p}" />  
+
+
 
 
 
