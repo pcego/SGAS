@@ -37,7 +37,7 @@ public class TipoDeficienciaBean implements Serializable {
     private TipoAparelho aparelho;
     private Categoria categoria;
     private String descricao;
-    TipoDeficiencia tipoDeficiencia;
+    private TipoDeficiencia tipoDeficiencia;
     List<TipoDeficiencia> listagem;
     List<Categoria> categorias;
     List<TipoAparelho> aparelhos;
