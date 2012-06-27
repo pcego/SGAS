@@ -8,13 +8,18 @@ import br.com.ademoc.sgas.DomainModel.IRepositorioTipoDeficiencia;
 import br.com.ademoc.sgas.DomainModel.TipoDeficiencia;
 import br.com.ademoc.sgas.DomainModel.TipoAparelho;
 import br.com.ademoc.sgas.DomainModel.Categoria;
+import br.com.ademoc.sgas.DomainModel.IRepositorioTipoAparelho;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
+import javax.faces.convert.ConverterException;
 
 /**
  *
@@ -22,14 +27,64 @@ import javax.faces.context.FacesContext;
  */
 @Named(value = "tipoDeficienciaBean")
 @RequestScoped
-public class TipoDeficienciaBean implements Serializable{
+public class TipoDeficienciaBean implements Serializable {
 
     @EJB
     IRepositorioTipoDeficiencia repo;
+    IRepositorioTipoAparelho repoTipoAparelho;
     private String codigo;
     private TipoAparelho aparelho;
     private Categoria categoria;
     private String descricao;
+    /*
+     * List<TipoAparelho> listaTipoAparelho;
+     *
+     * private TipoAparelho selectedPlayer1;
+     *
+     * public void AutoCompleteBean() { listaTipoAparelho =
+     * repoTipoAparelho.listaTodos(); }
+     *
+     * public TipoAparelho getSelectedPlayer1() { return selectedPlayer1; }
+     *
+     * public void setSelectedPlayer1(TipoAparelho selectedPlayer1) {
+     * this.selectedPlayer1 = selectedPlayer1; }
+     *
+     * public List<TipoAparelho> completePlayer(String query) {
+     * List<TipoAparelho> suggestions = new ArrayList<TipoAparelho>();
+     *
+     * for (TipoAparelho p : listaTipoAparelho) { if
+     * (p.getDescricao().startsWith(query)) { suggestions.add(p); } }
+     *
+     * return suggestions; }
+     *
+     */
+    private TipoAparelho selectedPlayer1;
+    private List<TipoAparelho> players;
+    private Iterable<TipoAparelho> playerDB;
+
+    public void AutoCompleteBean() {
+        players = TipoAparelhoConverter.listagem;
+    }
+
+    public TipoAparelho getSelectedPlayer1() {
+        return selectedPlayer1;
+    }
+
+    public void setSelectedPlayer1(TipoAparelho selectedPlayer1) {
+        this.selectedPlayer1 = selectedPlayer1;
+    }
+
+    public List<TipoAparelho> completePlayer(String query) {
+        List<TipoAparelho> suggestions = new ArrayList<TipoAparelho>();
+
+        for (TipoAparelho p : players) {
+            if (p.getDescricao().startsWith(query)) {
+                suggestions.add(p);
+            }
+        }
+
+        return suggestions;
+    }
 
     public TipoAparelho getAparelho() {
         return aparelho;
@@ -62,14 +117,13 @@ public class TipoDeficienciaBean implements Serializable{
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    
 
     public TipoDeficienciaBean() {
     }
-    
-        public void salvar() {
+
+    public void salvar() {
         TipoDeficiencia deficiencia = new TipoDeficiencia();
-        
+
         deficiencia.setCategoria(categoria);
         deficiencia.setTipoAparelho(aparelho);
         deficiencia.setDescricao(descricao);

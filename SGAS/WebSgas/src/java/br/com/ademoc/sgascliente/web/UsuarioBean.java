@@ -18,6 +18,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import java.util.Calendar;
+import java.util.Iterator;
+import java.util.List;
 import javax.enterprise.context.RequestScoped;
 
 /**
@@ -30,7 +32,6 @@ public class UsuarioBean implements Serializable {
 
     @EJB
     IRepositorioUsuario repo;
-    
     private String codigo;
     private String nome;
     private String logon;
@@ -49,9 +50,9 @@ public class UsuarioBean implements Serializable {
     private String celular;
     private Date dataCadastro;
     Calendar calendar = Calendar.getInstance();
-
-    public UsuarioBean() {        
-        
+    
+    
+    public UsuarioBean() {
     }
 
     public Date getDtcadastro() {
@@ -255,9 +256,32 @@ public class UsuarioBean implements Serializable {
 
     }
 
-    public void apagar() {
+    public void apagar() throws Exception {
         Usuario usuario = new Usuario();
         Long id = Long.parseLong(codigo);
+        usuario.setId(id);
+
+        usuario = repo.abrir(id);
+        boolean confirme;
+
+        confirme = repo.apagar(usuario);
+
+
+        if (confirme == true) {
+            FacesMessage message = new FacesMessage("Excluido com Sucesso");
+
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        } else if (confirme == false) {
+            FacesMessage message = new FacesMessage("ERRO ao Excluir, verifique os campos, ou tente novamente mais tarde");
+
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+    }
+    
+    
+        public void apagar(String cod) {
+        Usuario usuario = new Usuario();
+        Long id = Long.parseLong(cod);
         usuario.setId(id);
 
         boolean confirme;
@@ -274,7 +298,20 @@ public class UsuarioBean implements Serializable {
 
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
-
-
     }
+
+    List<Usuario> listagem;
+
+    public List<Usuario> getListagem() {
+        if (listagem ==  null)
+            listagem = repo.listaTodos();
+        return listagem;
+    }
+
+    public void setListagem(List<Usuario> listagem) {
+        this.listagem = listagem;
+    }
+
+    
+    
 }
