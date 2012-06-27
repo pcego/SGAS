@@ -3,111 +3,183 @@
 <html xmlns="http://www.w3.org/1999/xhtml" 
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets" 
-      xmlns:p="http://primefaces.prime.com.tr/ui" >
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title>SGAS WEB - Cadastro de Usuario</title>
     </h:head>
     <h:body>
+        <!--incluindo Cabeçalho-->
         <ui:include src="cabecalho.xhtml"/>
-        <p:panel>
-            <h:form >
-                <br/>
-                <h:outputLabel id="tituloCodigo" value="Codigo: "/>
-                <br/>
-                <p:inputText id="codigo" value="#{usuario.codigo}"/>
-                <br/>
-                <h:outputLabel id="tituloNome" value="Nome: "/>
-                <br/>
-                <p:inputText id="nome" value="#{usuario.nome}" size="40" />
-                <br/>
-                <h:outputLabel id="tituloLogon" value="Logon: "/>
-                <br/>
-                <p:inputText id="logon" value="#{usuario.logon}" size="20" />
-                <br/>
-                <h:outputLabel id="tituloSenha" value="Senha: " />
-                <br/>
-                <p:password id="senha" value="#{usuario.senha}" feedback="true" minLength="8" size="20" />
-                <br/>
-                <h:outputLabel id="tituloNivel" value="Nivel Admin: "/>
-                <br/>
-                <h:selectBooleanCheckbox id="nivel" value="#{usuario.nivel}" />            
-                <br/>
-                <h:outputLabel id="tituloRua" value="Rua: "/>
-                <br/>
-                <p:inputText id="endRua" value="#{usuario.endRua}" size="40" />
-                <br/>
-                <h:outputLabel id="tituloNumero" value=" Numero: "/>
-                <br/>
-                <p:inputText id="endNumero" value="#{usuario.endNumero}" size="15" />
-                <br/>
-                <h:outputLabel id="tituloNComplemento" value="Complemento: "/>
-                <br/>
-                <p:inputText id="endComplemento" value="#{usuario.endComplemento}" size="40" />
-                <br/>
-                <h:outputLabel id="tituloBairro" value="Bairro: "/>
-                <br/>
-                <p:inputText id="endBairro" value="#{usuario.endBairro}" size="20"/>
-                <br/>
-                <h:outputLabel id="tituloCidade" value="Cidade: "/>
-                <br/>
-                <p:inputText id="endCidade" value="#{usuario.endCidade}" size="20"/>
-                <br/>
-                <h:outputLabel id="tituloEstado" value="Estado: "/>
-                <br/>
-                <p:inputText id="endEstado" value="#{usuario.endEstado}" size="20"/>
-                <br/>
-                <h:outputLabel id="tituloCep" value="Cep: " />
-                <br/>
-                <p:inputMask id="endCep" value="#{usuario.endCep}" mask="99999-999"  size="20"/>
-                <br/>
-                <h:outputLabel id="tituloEmail" value="Email: "/>
-                <br/>
-                <p:inputText id="email" value="#{usuario.email}" size="40"/>
-                <br/>
-                <h:outputLabel id="tituloTelefone" value="Telefone: "/>
-                <br/>
-                <p:inputMask id="telefone" value="#{usuario.telefone}" mask="(99)99999999" size="20" />
-                <br/>
-                <h:outputLabel id="tituloCelular" value="Celular: "/>
-                <br/>
-                <p:inputMask id="celular" value="#{usuario.celular}"  mask="(99)99999999" size="20" />
-                <br/>
-
-
-                
-
-                <p:commandButton id="btNovo" value="Novo" onclick="confirmationNovo.show()" type="reset"/>
-                <p:commandButton id="btAltera" value="Altera" onclick="confirmationAltera.show()" type="button"/>
-                <p:commandButton id="btApagar" value="Excluir" onclick="confirmationApagar.show()" type="button"/>
-                <p:commandButton id="btSalvar" value="Salvar" onclick="confirmationSalvar.show()" type="button"/>
-
-                <!-- Criando metodo de confirmação so Salvar -->
-                <p:confirmDialog id="confirmDialogSalvar" message="Tem certeza que deseja salvar?"
-                                 header="Confirmação para salvar" severity="alert" widgetVar="confirmationSalvar">
-
-                    <p:commandButton id="confirmSalvar" value="Sim" update="messages" oncomplete="confirmationSalvar.hide()"
-                                     actionListener="#{usuario.salvar()}" />
-                    <p:commandButton id="naoSalvar" value="Não" onclick="confirmationSalvar.hide()" type="button" /> 
-                </p:confirmDialog>
-                <!-- Imprimir msg de confirmação ou erro ao salvar -->
+        <!--Criando Abas -->
+        <p:tabView id="TabUsuario">
+            <!--Inicio aba Cadastro de Usuario-->
+            <p:tab id="cadastro" title="Cadastro">
+                <p:panel>
+                    <h:form >
+                        <br/>
+                        <h:outputLabel id="tituloCodigo" value="Codigo: "/>
+                        <br/>
+                        <p:inputText id="codigo" value="#{usuario.codigo}"/>
+                        <br/>
+                        <h:outputLabel id="tituloNome" value="Nome: "/>
+                        <br/>
+                        <p:inputText id="nome" value="#{usuario.nome}" size="40" />
+                        <br/>
+                        <h:outputLabel id="tituloLogon" value="Logon: "/>
+                        <br/>
+                        <p:inputText id="logon" value="#{usuario.logon}" size="20" />
+                        <br/>
+                        <h:outputLabel id="tituloSenha" value="Senha: " />
+                        <br/>
+                        <p:password id="senha" value="#{usuario.senha}" feedback="true" minLength="8" size="20" />
+                        <br/>
+                        <h:outputLabel id="tituloNivel" value="Nivel Admin: "/>
+                        <br/>
+                        <h:selectBooleanCheckbox id="nivel" value="#{usuario.nivel}" />            
+                        <br/>
+                        <h:outputLabel id="tituloRua" value="Rua: "/>
+                        <br/>
+                        <p:inputText id="endRua" value="#{usuario.endRua}" size="40" />
+                        <br/>
+                        <h:outputLabel id="tituloNumero" value=" Numero: "/>
+                        <br/>
+                        <p:inputText id="endNumero" value="#{usuario.endNumero}" size="15" />
+                        <br/>
+                        <h:outputLabel id="tituloNComplemento" value="Complemento: "/>
+                        <br/>
+                        <p:inputText id="endComplemento" value="#{usuario.endComplemento}" size="40" />
+                        <br/>
+                        <h:outputLabel id="tituloBairro" value="Bairro: "/>
+                        <br/>
+                        <p:inputText id="endBairro" value="#{usuario.endBairro}" size="20"/>
+                        <br/>
+                        <h:outputLabel id="tituloCidade" value="Cidade: "/>
+                        <br/>
+                        <p:inputText id="endCidade" value="#{usuario.endCidade}" size="20"/>
+                        <br/>
+                        <h:outputLabel id="tituloEstado" value="Estado: "/>
+                        <br/>
+                        <p:inputText id="endEstado" value="#{usuario.endEstado}" size="20"/>
+                        <br/>
+                        <h:outputLabel id="tituloCep" value="Cep: " />
+                        <br/>
+                        <p:inputMask id="endCep" value="#{usuario.endCep}" mask="99999-999"  size="20"/>
+                        <br/>
+                        <h:outputLabel id="tituloEmail" value="Email: "/>
+                        <br/>
+                        <p:inputText id="email" value="#{usuario.email}" size="40"/>
+                        <br/>
+                        <h:outputLabel id="tituloTelefone" value="Telefone: "/>
+                        <br/>
+                        <p:inputMask id="telefone" value="#{usuario.telefone}" mask="(99)99999999" size="20" />
+                        <br/>
+                        <h:outputLabel id="tituloCelular" value="Celular: "/>
+                        <br/>
+                        <p:inputMask id="celular" value="#{usuario.celular}"  mask="(99)99999999" size="20" />
+                        <br/>
 
 
 
-                <!-- Criando metodo de confirmação so Apagar -->
-                <p:confirmDialog id="confirmDialogApagar" message="Tem certeza que deseja Excluir?"
-                                 header="Confirmação para excluir" severity="alert" widgetVar="confirmationApagar">
 
-                    <p:commandButton id="confirmApagar" value="Sim" update="messages" oncomplete="confirmationApagar.hide()"
-                                     actionListener="#{usuario.apagar()}" />
-                    <p:commandButton id="naoApagar" value="Não" onclick="confirmationApagar.hide()" type="button" /> 
-                </p:confirmDialog>
-                <!-- Imprimir msg de confirmação ou erro ao salvar -->
+                        <p:commandButton id="btNovo" value="Novo" onclick="confirmationNovo.show()" type="reset"/>
+                        <p:commandButton id="btAltera" value="Altera" onclick="confirmationAltera.show()" type="button"/>
+                        <p:commandButton id="btApagar" value="Excluir" onclick="confirmationApagar.show()" type="button"/>
+                        <p:commandButton id="btSalvar" value="Salvar" onclick="confirmationSalvar.show()" type="button"/>
 
-                <p:growl id="messages" />
+                        <!-- Criando metodo de confirmação so Salvar -->
+                        <p:confirmDialog id="confirmDialogSalvar" message="Tem certeza que deseja salvar?"
+                                         header="Confirmação para salvar" severity="alert" widgetVar="confirmationSalvar">
+
+                            <p:commandButton id="confirmSalvar" value="Sim" update="TabUsuario" oncomplete="confirmationSalvar.hide()"
+                                             actionListener="#{usuario.salvar()}" />
+                            <p:commandButton id="naoSalvar" value="Não" onclick="confirmationSalvar.hide()" type="button" /> 
+                        </p:confirmDialog>
+                        <!-- Imprimir msg de confirmação ou erro ao salvar -->
 
 
-            </h:form>
-        </p:panel>
+
+                        <!-- Criando metodo de confirmação so Apagar -->
+                        <p:confirmDialog id="confirmDialogApagar" message="Tem certeza que deseja Excluir?"
+                                         header="Confirmação para excluir" severity="alert" widgetVar="confirmationApagar">
+
+                            <p:commandButton id="confirmApagar" value="Sim" update="TabUsuario" oncomplete="confirmationApagar.hide()"
+                                             actionListener="#{usuario.apagar()}" />
+                            <p:commandButton id="naoApagar" value="Não" onclick="confirmationApagar.hide()" type="button" /> 
+                        </p:confirmDialog>
+                        <!-- Imprimir msg de confirmação ou erro ao salvar -->
+
+                        <p:growl id="messages" />
+
+
+                    </h:form>
+                </p:panel>
+            </p:tab>
+            <!--FIM aba Cadastro de Usuario-->
+            
+            <!--Inicio aba Visualizar Usuario-->
+            <p:tab id="visualiza" title="Visualiza">
+                <h:form>
+                    <p:dataTable id="tblClientes" value="#{usuario.listagem}" var="item" 
+                                 paginator="true" rows="4"  emptyMessage="Nenhum registro...">              
+
+
+
+                        <p:column sortBy="#{item.id}" filterBy="#{item.id}" > 
+                            <f:facet name="header"> 
+                                <h:outputText value="ID" /> 
+                            </f:facet> 
+                            <h:outputText value="#{item.id}"/> 
+                        </p:column> 
+
+
+                        <p:column sortBy="#{item.nome}" filterBy="#{item.nome}"> 
+                            <f:facet name="header"> 
+                                <h:outputText value="Nome"/> 
+                            </f:facet> 
+                            <h:outputText value="#{item.nome}"/> 
+                        </p:column> 
+                        <p:column> 
+                            <f:facet name="header"> 
+                                <h:outputText value="Editar"/> 
+                            </f:facet> 
+                            <a href="faces/editarCliente.xhtml?id=#{item.id}">Editar</a>
+                        </p:column> 
+
+
+                        <p:column> 
+                            <f:facet name="header"> 
+                                <h:outputText value="Excluir"/> 
+                            </f:facet> 
+                            <p:commandButton id="btApagar" value="Excluir"  onclick="confirmationApagar.show()" type="butto">
+                                <f:setPropertyActionListener target="#{usuario.codigo}" value="#{item.id}" />
+                            </p:commandButton>
+                        </p:column> 
+
+                    </p:dataTable>
+
+
+                    <!-- Criando metodo de confirmação so Apagar -->
+                    <p:confirmDialog id="confirmDialogApagar" message="Tem certeza que deseja Excluir?"
+                                     header="Confirmação para excluir" severity="alert" widgetVar="confirmationApagar">
+
+                        <p:commandButton id="confirmApagar" value="Sim" update="messages" oncomplete="confirmationApagar.hide()"
+                                         action="#{usuario.apagar()}" >
+                        </p:commandButton>
+                        <p:commandButton id="naoApagar" value="Não" onclick="confirmationApagar.hide()" type="button" /> 
+                    </p:confirmDialog>
+                    <!-- Imprimir msg de confirmação ou erro ao salvar -->
+
+                    <p:growl id="messages" />
+
+
+                </h:form>
+
+
+            </p:tab>
+            <!--Fim aba Visualiza Usuario-->
+        </p:tabView>
+<!--Incluindo Rodape-->
         <ui:include src="rodape.xhtml"/>
     </h:body>
 </html>

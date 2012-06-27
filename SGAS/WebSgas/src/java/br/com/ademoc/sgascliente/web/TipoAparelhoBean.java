@@ -7,6 +7,7 @@ package br.com.ademoc.sgascliente.web;
 import br.com.ademoc.sgas.DomainModel.IRepositorioTipoAparelho;
 import br.com.ademoc.sgas.DomainModel.TipoAparelho;
 import java.io.Serializable;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -19,12 +20,13 @@ import javax.faces.context.FacesContext;
  */
 @Named(value = "tipoAparelho")
 @RequestScoped
-public class TipoAparelhoBean implements Serializable{
+public class TipoAparelhoBean implements Serializable {
 
     @EJB
     IRepositorioTipoAparelho repo;
     private String codigo;
     private String descricao;
+    List<TipoAparelho> listagem;
 
     public String getCodigo() {
         return codigo;
@@ -41,25 +43,17 @@ public class TipoAparelhoBean implements Serializable{
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    
-    
-    
-       public void salvar() {
-        TipoAparelho tipoAparelho = new TipoAparelho();
 
-        tipoAparelho.setDescricao(descricao);
-
-        boolean confirme;
-        confirme = repo.salvar(tipoAparelho);
-
-        if (confirme == true) {
-            FacesMessage message = new FacesMessage("Salvo com Sucesso");
-
-            FacesContext.getCurrentInstance().addMessage(null, message);
-        } else {
-            FacesMessage message = new FacesMessage("ERRO so Salvar, verifique os campos, ou tente novamente mais tarde");
-
-            FacesContext.getCurrentInstance().addMessage(null, message);
+    public void salvar() {
+        try {
+            TipoAparelho tipoAparelho = new TipoAparelho();
+            tipoAparelho.setDescricao(descricao);
+            repo.salvar(tipoAparelho);
+            FacesMessage messageConfirme = new FacesMessage("Salvo com Sucesso");
+            FacesContext.getCurrentInstance().addMessage(null, messageConfirme);
+        } catch (Exception e) {
+            FacesMessage messageConfirme = new FacesMessage("ERRO so Salvar, verifique os campos, ou tente novamente mais tarde");
+            FacesContext.getCurrentInstance().addMessage(null, messageConfirme);
         }
     }
 
@@ -67,23 +61,27 @@ public class TipoAparelhoBean implements Serializable{
         TipoAparelho tipoAparelho = new TipoAparelho();
         Long id = Long.parseLong(codigo);
         tipoAparelho.setId(id);
-
-        boolean confirme;
-
-        confirme = repo.apagar(tipoAparelho);
-
-
-        if (confirme == true) {
+        try {
+            repo.apagar(tipoAparelho);
             FacesMessage message = new FacesMessage("Excluido com Sucesso");
-
             FacesContext.getCurrentInstance().addMessage(null, message);
-        } else if (confirme == false) {
+        } catch (Exception e) {
             FacesMessage message = new FacesMessage("ERRO ao Excluir, verifique os campos, ou tente novamente mais tarde");
-
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }
-    
+
     public TipoAparelhoBean() {
+    }
+
+    public List<TipoAparelho> getListagem() {
+        if (listagem == null) {
+            listagem = repo.listaTodos();
+        }
+        return listagem;
+    }
+
+    public void setListagem(List<TipoAparelho> listagem) {
+        this.listagem = listagem;
     }
 }

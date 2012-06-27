@@ -132,7 +132,6 @@ public class ProfissionalBean implements Serializable {
 
     public void salvar() {
         Profissional profissional = new Profissional();
-
         profissional.setEspecialidade(especialidade);
         profissional.setUsuario(usuario);
         profissional.setNome(nome);
@@ -141,18 +140,12 @@ public class ProfissionalBean implements Serializable {
         profissional.setStatus(status);
         profissional.setDtAtualizacao(calendar.getTime());
         profissional.setUsuarioAtualizacao(usuarioAtualizacao);
-
-
-        boolean confirme;
-        confirme = repo.salvar(profissional);
-
-        if (confirme == true) {
+        try {
+            repo.salvar(profissional);
             FacesMessage message = new FacesMessage("Salvo com Sucesso");
-
             FacesContext.getCurrentInstance().addMessage(null, message);
-        } else {
+        } catch (Exception e) {
             FacesMessage message = new FacesMessage("ERRO so Salvar, verifique os campos, ou tente novamente mais tarde");
-
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }
@@ -161,19 +154,12 @@ public class ProfissionalBean implements Serializable {
         Profissional profissional = new Profissional();
         Long id = Long.parseLong(codigo);
         profissional.setId(id);
-
-        boolean confirme;
-
-        confirme = repo.apagar(profissional);
-
-
-        if (confirme == true) {
+        try {
+            repo.apagar(profissional);
             FacesMessage message = new FacesMessage("Excluido com Sucesso");
-
             FacesContext.getCurrentInstance().addMessage(null, message);
-        } else if (confirme == false) {
+        } catch (Exception e) {
             FacesMessage message = new FacesMessage("ERRO ao Excluir, verifique os campos, ou tente novamente mais tarde");
-
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }

@@ -5,14 +5,14 @@
 package br.com.ademoc.sgascliente.web;
 
 import br.com.ademoc.sgas.DomainModel.IRepositorioTipoDeficiencia;
+import br.com.ademoc.sgas.DomainModel.IRepositorioTipoAparelho;
+import br.com.ademoc.sgas.DomainModel.IRepositorioCategoria;
 import br.com.ademoc.sgas.DomainModel.TipoDeficiencia;
 import br.com.ademoc.sgas.DomainModel.TipoAparelho;
 import br.com.ademoc.sgas.DomainModel.Categoria;
-import br.com.ademoc.sgas.DomainModel.IRepositorioTipoAparelho;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -32,57 +32,69 @@ public class TipoDeficienciaBean implements Serializable {
     @EJB
     IRepositorioTipoDeficiencia repo;
     IRepositorioTipoAparelho repoTipoAparelho;
+    IRepositorioCategoria repoCategoria;
     private String codigo;
     private TipoAparelho aparelho;
     private Categoria categoria;
     private String descricao;
-    /*
-     * List<TipoAparelho> listaTipoAparelho;
-     *
-     * private TipoAparelho selectedPlayer1;
-     *
-     * public void AutoCompleteBean() { listaTipoAparelho =
-     * repoTipoAparelho.listaTodos(); }
-     *
-     * public TipoAparelho getSelectedPlayer1() { return selectedPlayer1; }
-     *
-     * public void setSelectedPlayer1(TipoAparelho selectedPlayer1) {
-     * this.selectedPlayer1 = selectedPlayer1; }
-     *
-     * public List<TipoAparelho> completePlayer(String query) {
-     * List<TipoAparelho> suggestions = new ArrayList<TipoAparelho>();
-     *
-     * for (TipoAparelho p : listaTipoAparelho) { if
-     * (p.getDescricao().startsWith(query)) { suggestions.add(p); } }
-     *
-     * return suggestions; }
-     *
-     */
-    private TipoAparelho selectedPlayer1;
-    private List<TipoAparelho> players;
-    private Iterable<TipoAparelho> playerDB;
+    private TipoDeficiencia tipoDeficiencia;
+    List<TipoDeficiencia> listagem;
+    List<Categoria> categorias;
+    List<TipoAparelho> aparelhos;
 
-    public void AutoCompleteBean() {
-        players = TipoAparelhoConverter.listagem;
+    public TipoDeficiencia getTipoDeficiencia() {
+        return tipoDeficiencia;
     }
 
-    public TipoAparelho getSelectedPlayer1() {
-        return selectedPlayer1;
+    public void setVenda(TipoDeficiencia tipoDeficiencia) {
+        this.tipoDeficiencia = tipoDeficiencia;
+        this.codigo = tipoDeficiencia.getId().toString();
+        this.aparelho = tipoDeficiencia.getTipoAparelho();
+        this.categoria = tipoDeficiencia.getCategoria();
+        this.descricao = tipoDeficiencia.getDescricao();
     }
 
-    public void setSelectedPlayer1(TipoAparelho selectedPlayer1) {
-        this.selectedPlayer1 = selectedPlayer1;
+    public List<TipoAparelho> getAparelhos() {
+        if (aparelhos == null) {
+            aparelhos = repoTipoAparelho.listaTodos();
+        }
+        return aparelhos;
     }
 
-    public List<TipoAparelho> completePlayer(String query) {
-        List<TipoAparelho> suggestions = new ArrayList<TipoAparelho>();
+    public void setAparelhos(List<TipoAparelho> aparelhos) {
+        this.aparelhos = aparelhos;
+    }
 
-        for (TipoAparelho p : players) {
-            if (p.getDescricao().startsWith(query)) {
-                suggestions.add(p);
-            }
+    public List<Categoria> getCategorias() {
+        if (categorias == null) {
+            categorias = repoCategoria.listaTodas();
+        }
+        return categorias;
+    }
+
+    public void setCategorias(List<Categoria> categorias) {
+        this.categorias = categorias;
+    }
+
+    public List<TipoDeficiencia> getListagem() {
+        if (listagem == null) {
+            listagem = repo.listarTodos();
         }
 
+        return listagem;
+    }
+
+    public void setListagem(List<TipoDeficiencia> listagem) {
+        this.listagem = listagem;
+    }
+
+    public List<TipoAparelho> buscaAparelhos(String val) {
+        List<TipoAparelho> suggestions = new ArrayList<TipoAparelho>();
+        for (TipoAparelho c : getAparelhos()) {
+            if (c.getDescricao().startsWith(val)) {
+                suggestions.add(c);
+            }
+        }
         return suggestions;
     }
 
@@ -123,21 +135,15 @@ public class TipoDeficienciaBean implements Serializable {
 
     public void salvar() {
         TipoDeficiencia deficiencia = new TipoDeficiencia();
-
         deficiencia.setCategoria(categoria);
         deficiencia.setTipoAparelho(aparelho);
         deficiencia.setDescricao(descricao);
-
-        boolean confirme;
-        confirme = repo.salvar(deficiencia);
-
-        if (confirme == true) {
+        try {
+            repo.salvar(deficiencia);
             FacesMessage message = new FacesMessage("Salvo com Sucesso");
-
             FacesContext.getCurrentInstance().addMessage(null, message);
-        } else {
+        } catch (Exception e) {
             FacesMessage message = new FacesMessage("ERRO so Salvar, verifique os campos, ou tente novamente mais tarde");
-
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }
@@ -146,20 +152,14 @@ public class TipoDeficienciaBean implements Serializable {
         TipoDeficiencia deficiencia = new TipoDeficiencia();
         Long id = Long.parseLong(codigo);
         deficiencia.setId(id);
-
-        boolean confirme;
-
-        confirme = repo.apagar(deficiencia);
-
-
-        if (confirme == true) {
+        try {
+            repo.apagar(deficiencia);
             FacesMessage message = new FacesMessage("Excluido com Sucesso");
-
             FacesContext.getCurrentInstance().addMessage(null, message);
-        } else if (confirme == false) {
+        } catch (Exception e) {
             FacesMessage message = new FacesMessage("ERRO ao Excluir, verifique os campos, ou tente novamente mais tarde");
-
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }
+    
 }

@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.prime.com.tr/ui">
+    <h:head>
+        <title>Editar Venda</title>
+    </h:head>
+    <h:body>
+        <ui:include src="cabecalho.xhtml" />
+        <h:form>
+            <p:breadCrumb>  
+                <p:menuitem value="Principal" url="/" />
+                <p:menuitem value="Gerenciar Vendas" url="faces/listarVendas.xhtml" />  
+                <p:menuitem value="Editar Venda" url="#" />  
+            </p:breadCrumb>
+            <p:growl id="messages" />  
+            <p:panel id="dados" header="Editar dados da venda">
+                <h:panelGrid columns="2" cellpadding="5" cellspacing="5" border="2"> 
+                    <h:panelGrid columns="2" cellpadding="5">  
+                        <h:outputText value="ID:" />
+                        <h:outputText id="lblId" value="#{venda.id}" />
+
+                        <h:outputText value="Nome:" />
+                        <p:autoComplete value="#{tipoDeficienciaBean.aparelho}" id="customPojo" completeMethod="#{tipoDeficienciaBean.buscaAparelhos}"  
+                                        converter="TipoAparelhoConverter" var="p" itemLabel="#{p.descricao}" itemValue="#{p}" />  
+
+                        <h:outputText value="Data:" />
+                        <p:calendar value="#{venda.data}" id="popupCal" /> 
+                    </h:panelGrid>
+                    <p:dataTable id="tblItens"  value="#{venda.itens}" var="item">
+                        <f:facet name="header">   
+                            
+                            Produto: <p:autoComplete value="#{venda.produto}" id="buscaProduto" completeMethod="#{venda.buscaProdutos}"  
+                                         var="p" itemLabel="#{p.descricao}" itemValue="#{p}" />  
+                            Quantidade: <p:inputMask value="#{venda.quantidade}"  mask="99" />
+                            <p:commandButton value="Adicionar" action="#{venda.addItem}" />
+                        </f:facet>                       
+                        <p:column sortBy="#{item.produto.descricao}"> 
+                            <f:facet name="header"> 
+                            <h:outputText value="Produto"/> 
+                            </f:facet> 
+                            <h:outputText value="#{item.produto.descricao}"/> 
+                        </p:column> 
+                        <p:column> 
+                            <f:facet name="header"> 
+                            <h:outputText value="Quantidade"/> 
+                            </f:facet> 
+                            <h:outputText value="#{item.quantidade}"/> 
+                        </p:column> 
+                        <p:column> 
+                            <f:facet name="header"> 
+                            <h:outputText value="Valor Unitário"/> 
+                            </f:facet> 
+                            <h:outputText value="#{item.produto.valor}"/> 
+                        </p:column>
+                        <p:column>                   
+                            <h:commandLink value="Apagar" action="#{venda.apagar()}" onclick="return confirm('Deseja realmente deletar item da venda?');">
+                                <f:setPropertyActionListener target="#{venda.id}" value="#{item.id}" />
+                            </h:commandLink>
+                        </p:column>
+                        <f:facet name="footer">                      
+                            Total:
+                        </f:facet>
+                    </p:dataTable>
+                </h:panelGrid>
+                <h:panelGrid columns="3" cellpadding="5">
+                    <p:commandButton id="btnSalvar" value="Salvar" onclick="msgSalvar.show()" />
+                    <p:commandButton id="btnApagar" value="Apagar" onclick="msgApagar.show()" />
+                    <p:commandButton id="btnCancelar" value="Cancelar" onclick="msgCancelar.show()" />
+                </h:panelGrid>
+            </p:panel>
+            
+            <p:confirmDialog id="dlgSalvar" message="Deseja realmente salvar os dados?"  
+                             header="Cofirmar" modal="true" severity="alert" widgetVar="msgSalvar">
+                <p:commandButton id="confirmS" value="Sim" oncomplete="msgSalvar.hide(); msgSalvo.show()"  
+                          update="dados" action="#{venda.salvar()}" />  
+                <p:commandButton id="declineS" value="Não" onclick="msgSalvar.hide()" type="button" />   
+            </p:confirmDialog>  
+            
+            <p:confirmDialog id="dlgApagar" message="Deseja realmente apagar os dados?"  
+                header="Cofirmar" modal="true"  severity="alert" widgetVar="msgApagar">
+                <p:commandButton id="confirmA" ajax="false" value="Sim"  action="#{venda.apagar()}" />  
+                <p:commandButton id="declineA" value="Não" onclick="msgApagar.hide()" type="button" />   
+            </p:confirmDialog>
+            
+            <p:confirmDialog id="dlgCancelar" message="Deseja realmente cancelar a edição?"  
+                header="Cofirmar" modal="true"  severity="alert" widgetVar="msgCancelar">
+                <p:commandButton id="confirmC" ajax="false"  value="Sim" action="#{venda.listar()}" />  
+                <p:commandButton id="declineC" value="Não" onclick="msgCancelar.hide()" type="button" />   
+            </p:confirmDialog>
+            
+            <p:dialog id="dlgSalvo3" header="Confirmação" modal="true"  widgetVar="msgSalvo">  
+                <h:outputText value="#{venda.mensagem}" />  
+            </p:dialog>
+            
+        </h:form>
+    </h:body>
+</html>

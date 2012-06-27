@@ -10,8 +10,15 @@ root {
     display: block;
 }
 
-titulo{
-    font-size: 20;
-    color: activeborder;
+direita {
+  float:right;
+  width:10%;
+  height: 65%;
+  background: #EBEBEB;
 }
+
+rodape {  
+    color: background
+
+} 
 

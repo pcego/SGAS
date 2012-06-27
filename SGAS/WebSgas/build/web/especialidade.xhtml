@@ -10,51 +10,78 @@
     </h:head>
     <h:body>
         <ui:include src="cabecalho.xhtml"/>
-        <p:panel>
-            <h:form>
-                <br/>
-                <h:outputLabel id="tituloCodigo" value="Codigo: "/>
-                <br/>
-                <p:inputText id="codigo" value="#{especialidade.codigo}" size="20"/>
-                <br/>
-                <h:outputLabel id="tituloNome" value="Especialidade: "/>
-                <br/>
-                <p:inputText id="descricao" value="#{especialidade.descricao}" size="45"/>
-                <br/>
-                <br/>
+        <p:tabView id="abas">
+            <p:tab id="cadastro" title="Cadastro">
+                <p:panel>
+                    <h:form>
+                        <br/>
+                        <h:outputLabel id="tituloCodigo" value="Codigo: "/>
+                        <br/>
+                        <p:inputText id="codigo" value="#{especialidade.codigo}" size="20"/>
+                        <br/>
+                        <h:outputLabel id="tituloNome" value="Especialidade: "/>
+                        <br/>
+                        <p:inputText id="descricao" value="#{especialidade.descricao}" size="45"/>
+                        <br/>
+                        <br/>
 
-                <p:commandButton id="btNovo" value="Novo" onclick="confirmationNovo.show()" type="reset"/>
-                <p:commandButton id="btAltera" value="Altera" onclick="confirmationAltera.show()" type="button"/>
-                <p:commandButton id="btApagar" value="Excluir" onclick="confirmationApagar.show()" type="button"/>
-                <p:commandButton id="btSalvar" value="Salvar" onclick="confirmationSalvar.show()" type="button"/>
+                        <p:commandButton id="btNovo" value="Novo" onclick="confirmationNovo.show()" type="reset"/>
+                        <p:commandButton id="btAltera" value="Altera" onclick="confirmationAltera.show()" type="button"/>
+                        <p:commandButton id="btApagar" value="Excluir" onclick="confirmationApagar.show()" type="button"/>
+                        <p:commandButton id="btSalvar" value="Salvar" onclick="confirmationSalvar.show()" type="button"/>
 
-                <!-- Criando metodo de confirmação so Salvar -->
-                <p:confirmDialog id="confirmDialogSalvar" message="Tem certeza que deseja salvar?"
-                                 header="Confirmação para salvar" severity="alert" widgetVar="confirmationSalvar">
+                        <!-- Criando metodo de confirmação so Salvar -->
+                        <p:confirmDialog id="confirmDialogSalvar" message="Tem certeza que deseja salvar?"
+                                         header="Confirmação para salvar" severity="alert" widgetVar="confirmationSalvar">
 
-                    <p:commandButton id="confirmSalvar" value="Sim" update="messages" oncomplete="confirmationSalvar.hide()"
-                                     actionListener="#{categoriaBean.salvar()}" />
-                    <p:commandButton id="naoSalvar" value="Não" onclick="confirmationSalvar.hide()" type="button" /> 
-                </p:confirmDialog>
-                <!-- Imprimir msg de confirmação ou erro ao salvar -->
+                            <p:commandButton id="confirmSalvar" value="Sim" update="messages" oncomplete="confirmationSalvar.hide()"
+                                             actionListener="#{especialidade.salvar()}" />
+                            <p:commandButton id="naoSalvar" value="Não" onclick="confirmationSalvar.hide()" type="button" /> 
+                        </p:confirmDialog>
+                        <!-- Imprimir msg de confirmação ou erro ao salvar -->
+
+                        <!-- Criando metodo de confirmação so Apagar -->
+                        <p:confirmDialog id="confirmDialogApagar" message="Tem certeza que deseja Excluir?"
+                                         header="Confirmação para excluir" severity="alert" widgetVar="confirmationApagar">
+                            <p:commandButton id="confirmApagar" value="Sim" update="messages" oncomplete="confirmationApagar.hide()"
+                                             actionListener="#{especialidade.apagar()}" />
+                            <p:commandButton id="naoApagar" value="Não" onclick="confirmationApagar.hide()" type="button" /> 
+                        </p:confirmDialog>
+                        <!-- Imprimir msg de confirmação ou erro ao salvar -->
+                        <p:growl id="messages" />
+                    </h:form>
+                </p:panel>
+            </p:tab>
+
+            <!--Inicio aba Visualizar-->
+            <p:tab id="visualizar" title="Visualizar">
+                <h:form>
+                    <p:dataTable id="tblClientes" value="#{especialidade.listagem}" var="item" 
+                                 paginator="true" rows="4"  emptyMessage="Nenhum registro...">              
+
+                        <p:column sortBy="#{item.id}" filterBy="#{item.id}" > 
+                            <f:facet name="header"> 
+                                <h:outputText value="ID" /> 
+                            </f:facet> 
+                            <h:outputText value="#{item.id}"/> 
+                        </p:column> 
 
 
+                        <p:column sortBy="#{item.descricao}" filterBy="#{item.descricao}"> 
+                            <f:facet name="header"> 
+                                <h:outputText value="Nome"/> 
+                            </f:facet> 
+                            <h:outputText value="#{item.descricao}"/> 
+                        </p:column> 
 
-                <!-- Criando metodo de confirmação so Apagar -->
-                <p:confirmDialog id="confirmDialogApagar" message="Tem certeza que deseja Excluir?"
-                                 header="Confirmação para excluir" severity="alert" widgetVar="confirmationApagar">
+                    </p:dataTable>
+                    <p:growl id="messages" />
+                </h:form>
 
-                    <p:commandButton id="confirmApagar" value="Sim" update="messages" oncomplete="confirmationApagar.hide()"
-                                     actionListener="#{categoriaBean.apagar()}" />
-                    <p:commandButton id="naoApagar" value="Não" onclick="confirmationApagar.hide()" type="button" /> 
-                </p:confirmDialog>
-                <!-- Imprimir msg de confirmação ou erro ao salvar -->
+            </p:tab>
+            <!--FIM aba Visualiza-->
 
-                <p:growl id="messages" />
-
-            </h:form>
-
-        </p:panel>
+        </p:tabView>
         <ui:include src="rodape.xhtml"/>
     </h:body>
 </html>

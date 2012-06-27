@@ -6,7 +6,7 @@
        xmlns:p="http://primefaces.prime.com.tr/ui"
        xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
-        <title>Facelet Title</title>
+        <title>SGAS WEB - Lista Usuarios</title>
     </h:head>
     <h:body>
         <ui:include src="cabecalho.xhtml"/>
@@ -17,8 +17,8 @@
 
 
 
-                <p:column sortBy="#{item.id}" filterBy="#{item.id}" > 
-                    <f:facet name="header"> 
+                <p:column sortBy="#{item.id}" filterBy="#{item.id}"  > 
+                    <f:facet name="header" > 
                         <h:outputText value="ID" /> 
                     </f:facet> 
                     <h:outputText value="#{item.id}"/> 
@@ -31,36 +31,10 @@
                     </f:facet> 
                     <h:outputText value="#{item.nome}"/> 
                 </p:column> 
-                <p:column> 
-                    <f:facet name="header"> 
-                        <h:outputText value="Editar"/> 
-                    </f:facet> 
-                    <a href="faces/editarCliente.xhtml?id=#{item.id}">Editar</a>
-                </p:column> 
-           
-
-                <p:column> 
-                    <f:facet name="header"> 
-                        <h:outputText value="Excluir"/> 
-                    </f:facet> 
-                    <p:commandButton id="btApagar" value="Excluir"  onclick="confirmationApagar.show()" type="butto">
-                        <f:setPropertyActionListener target="#{usuario.codigo}" value="#{item.id}" />
-                    </p:commandButton>
-                </p:column> 
                 
             </p:dataTable>
 
 
-            <!-- Criando metodo de confirmação so Apagar -->
-            <p:confirmDialog id="confirmDialogApagar" message="Tem certeza que deseja Excluir?"
-                             header="Confirmação para excluir" severity="alert" widgetVar="confirmationApagar">
-
-                <p:commandButton id="confirmApagar" value="Sim" update="messages" oncomplete="confirmationApagar.hide()"
-                                 action="#{usuario.apagar()}" >
-                </p:commandButton>
-                <p:commandButton id="naoApagar" value="Não" onclick="confirmationApagar.hide()" type="button" /> 
-            </p:confirmDialog>
-            <!-- Imprimir msg de confirmação ou erro ao salvar -->
 
             <p:growl id="messages" />
 

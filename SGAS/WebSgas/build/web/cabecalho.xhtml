@@ -7,7 +7,7 @@
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title>SGAS WEB - Cabecalho</title> 
-        <link href="estilo.css"/>
+        
     </h:head>
 
     <h:body>
@@ -18,7 +18,7 @@
 
             <h3>SGAS WEB </h3>
             <p:menubar>
-                <p:menuitem value="Principal" url="index.xhtml" icon="ui-icon-close" />
+                <p:menuitem  value="Principal" url="index.xhtml" icon="ui-icon-close" />
                 <p:submenu label="Cadastro" icon="ui-icon-document">
                     <p:menuitem value="Usuario" url="usuario.xhtml" />                    
                     <p:separator/>
@@ -27,8 +27,10 @@
                     <p:menuitem value="Empresa" url="#"/>
                     <p:separator/>
                     <p:menuitem value="Cliente" url="cliente.xhtml" />
+                    <p:separator/>
+                    <p:menuitem value="Vaga" url="vaga.xhtml"/>
                 </p:submenu>
- 
+
                 <p:submenu label="Cadastro Adm" icon="ui-icon-document">
 
                     <p:menuitem value="Especialidade" url="especialidade.xhtml" />
@@ -53,6 +55,7 @@
 
                 <p:submenu label="Relatorio" icon="ui-icon-help">
                     <p:menuitem value="Clientes" url="listaUsuario.xhtml" />
+
                     <p:submenu label="Vagas" icon="ui-icon-search">
                         <p:menuitem value="Aberta" url="#" />
                         <p:menuitem value="Fechada" url="#" />

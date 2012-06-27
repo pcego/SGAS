@@ -6,25 +6,43 @@
       xmlns:p="http://primefaces.prime.com.tr/ui" 
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
-        <title>SGAS WEb - Cadastro - Categoria de Deficiência</title>
+        <title>SGAS WEb - Cadastro - Categoria de Perfil do Candidato</title>
     </h:head>
-
     <h:body>
         <ui:include src="cabecalho.xhtml"/>
         <p:tabView id="abas">
             <p:tab id="cadastro" title="Cadastro">
                 <p:panel>
                     <h:form>
-                        <br/>
                         <h:outputLabel id="tituloCodigo" value="Codigo: "/>
                         <br/>
-                        <p:inputText id="codigo" value="#{categoriaBean.codigo}" size="20"/>
+                        <p:inputText id="codigo" value="#{perfilBean.codigo}"/>
                         <br/>
-                        <h:outputLabel id="tituloNome" value="Categoria: "/>
+                        <h:outputLabel id="tituloVaga" value="Vaga: "/>
                         <br/>
-                        <p:inputText id="categoria" value="#{categoriaBean.descricao}" size="45"/>
+                        <p:inputText id="vafa" value="#{perfilBean.vaga}"/>
                         <br/>
+                        <h:outputLabel id="tituloHabilidade" value="Habilidade: "/>
                         <br/>
+                        <p:inputText id="habilidade" value="#{perfilBean.habilidade}"/>
+                        <br/>
+                        <h:outputLabel id="tituloSexo" value="Sexo: "/>
+                        <br/>
+                        <p:inputText id="sexo" value="#{perfilBean.sexo}"/>
+                        <br/>
+                        <h:outputLabel id="tituloIdadeMinima" value="Idade Minima: "/>
+                        <br/>
+                        <p:inputText id="idadeMinima" value="#{perfilBean.idadeMinima}"/>
+                        <br/>
+                        <h:outputLabel id="tituloIdadeMaxima" value="idade Maxima: "/>
+                        <br/>
+                        <p:inputText id="idadeMaxima" value="#{perfilBean.idadeMaxima}"/>
+                        <br/>
+                        <h:outputLabel id="tituloEscolaridade" value="Escolaridade: "/>
+                        <br/>
+                        <p:inputText id="escolaridade" value="#{perfilBean.escolaridade}"/>
+                        <br/>
+
 
 
                         <p:commandButton id="btNovo" value="Novo" onclick="confirmationNovo.show()" type="reset"/>
@@ -37,7 +55,7 @@
                                          header="Confirmação para salvar" severity="alert" widgetVar="confirmationSalvar">
 
                             <p:commandButton id="confirmSalvar" value="Sim" update="messages" oncomplete="confirmationSalvar.hide()"
-                                             actionListener="#{categoriaBean.salvar()}" />
+                                             actionListener="#{perfilBean.salvar()}" />
                             <p:commandButton id="naoSalvar" value="Não" onclick="confirmationSalvar.hide()" type="button" /> 
                         </p:confirmDialog>
                         <!-- Imprimir msg de confirmação ou erro ao salvar -->
@@ -49,7 +67,7 @@
                                          header="Confirmação para excluir" severity="alert" widgetVar="confirmationApagar">
 
                             <p:commandButton id="confirmApagar" value="Sim" update="messages" oncomplete="confirmationApagar.hide()"
-                                             actionListener="#{categoriaBean.apagar()}" />
+                                             actionListener="#{perfilBean.apagar()}" />
                             <p:commandButton id="naoApagar" value="Não" onclick="confirmationApagar.hide()" type="button" /> 
                         </p:confirmDialog>
                         <!-- Imprimir msg de confirmação ou erro ao salvar -->
@@ -60,37 +78,13 @@
                     </h:form>
                 </p:panel>
             </p:tab>
-
-
-            <!--Inicio aba Visualizar-->
             <p:tab id="visualizar" title="Visualizar">
-
-                <h:form>
-                    <p:dataTable id="tblCategoria" value="#{categoriaBean.listagem}" var="item" 
-                                 paginator="true" rows="4"  emptyMessage="Nenhum registro...">              
-
-                        <p:column sortBy="#{item.id}" filterBy="#{item.id}" > 
-                            <f:facet name="header"> 
-                                <h:outputText value="ID" /> 
-                            </f:facet> 
-                            <h:outputText value="#{item.id}"/> 
-                        </p:column> 
-
-
-                        <p:column sortBy="#{item.descricao}" filterBy="#{item.descricao}"> 
-                            <f:facet name="header"> 
-                                <h:outputText value="Nome"/> 
-                            </f:facet> 
-                            <h:outputText value="#{item.descricao}"/> 
-                        </p:column> 
-
-                    </p:dataTable>
-                    <p:growl id="messages" />
-                </h:form>
+                
+                em breve...
+                
             </p:tab>
-            <!--FIM aba Visualizar-->
-        </p:tabView>
-        <ui:include src="rodape.xhtml"/>
-    </h:body>
+    </p:tabView>
+    <ui:include src="rodape.xhtml"/>
+</h:body>
 </html>
 
