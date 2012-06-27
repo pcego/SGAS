@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets" 
+      xmlns:p="http://primefaces.prime.com.tr/ui" 
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>SGAS WEB - Cadastro de Vagas </title>
+    </h:head>
+    <h:body>
+        <ui:include src="cabecalho.xhtml"/>
+        <!--Inicio aba cadastro-->
+        <p:tabView id="abas">
+            <p:tab id="cadastro" title="Cadastro" >
+                <p:panel>
+                    <h:form>
+                        <br/>
+                        <h:outputLabel id="tituloCodigo" value="Codigo: "/>
+                        <br/>
+                        <p:inputText id="codigo" value="#{vagaBean.codigo}" size="20"/>
+                        <br/>
+                        <h:outputLabel id="tituloEmpresa" value="Empresa: " />
+                        <br/>
+                        <p:inputText id="empresa" value="#{vagaBean.empresa}" size="20"/>
+                        <br/>
+                        <h:outputLabel id="TituloUsuario" value="Usuario: "/>
+                        <br/>
+                        <p:inputText id="usuario" value="#{vagaBean.usuario}" size="20"/>
+                        <br/>
+                        <h:outputLabel id="tituloDescricao" value="Descricao: "/>
+                        <br/>
+                        <p:inputText id="descricao" value="#{vagaBean.descricao}" size="40"/>
+                        <br/>                        
+                        <h:outputLabel id="tituloStatus" value="Status: "/>
+                        <br/>
+                        <h:selectBooleanCheckbox id="status" value="#{vagaBean.statusVaga}" />
+                        <h:outputLabel value="*Marque para ativar"  />
+                        <br/>
+                    </h:form>
+                </p:panel>
+            </p:tab>
+            <!--fim aba cadastro-->
+            <!--Inicio aba visualizar-->
+            <p:tab id="visualizar" title="Visualizar">
+                <h:form>
+                    <p:dataTable id="tblVagas" value="#{vagaBean.listagem}" var="item" 
+                                 paginator="true" rows="4"  emptyMessage="Nenhum registro...">              
+
+                        <p:column sortBy="#{item.id}" filterBy="#{item.id}" > 
+                            <f:facet name="header"> 
+                                <h:outputText value="ID" /> 
+                            </f:facet> 
+                            <h:outputText value="#{item.id}"/> 
+                        </p:column> 
+
+
+                        <p:column sortBy="#{item.descricao}" filterBy="#{item.descricao}"> 
+                            <f:facet name="header"> 
+                                <h:outputText value="Nome"/> 
+                            </f:facet> 
+                            <h:outputText value="#{item.descricao}"/> 
+                        </p:column> 
+
+                    </p:dataTable>
+                    <p:growl id="messages" />
+                </h:form>
+
+                
+            </p:tab>
+            <!--fim aba visualizar-->
+        </p:tabView>
+
+        <ui:include src="rodape.xhtml"/>
+
+    </h:body>
+</html>
+
