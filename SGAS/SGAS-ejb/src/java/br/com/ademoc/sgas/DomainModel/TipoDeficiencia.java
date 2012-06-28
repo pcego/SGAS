@@ -55,8 +55,8 @@ public class TipoDeficiencia implements Serializable {
         return categoria;
     }
 
-    public void setCategoria(Object categoria) {
-        this.categoria = (Categoria) categoria;
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
     public String getDescricao() {
@@ -71,8 +71,8 @@ public class TipoDeficiencia implements Serializable {
         return tipoAparelho;
     }
 
-    public void setTipoAparelho(Object tipoAparelho) {
-        this.tipoAparelho = (TipoAparelho) tipoAparelho;
+    public void setTipoAparelho(TipoAparelho tipoAparelho) {
+        this.tipoAparelho = tipoAparelho;
     }
 
     @Override

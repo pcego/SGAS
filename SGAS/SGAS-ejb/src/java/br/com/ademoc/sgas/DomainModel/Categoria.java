@@ -22,12 +22,10 @@ import javax.persistence.Table;
 public class Categoria implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "codigo")
     private Long id;
-    
     @Column(name = "descricao", nullable = false, length = 100)
     private String descricao;
 
@@ -73,6 +71,8 @@ public class Categoria implements Serializable {
 
     @Override
     public String toString() {
-        return "br.com.ademoc.sgas.DomainModel.Categoria[ id=" + id + " ]";
+        return this.id
+               +this.descricao;
+        //"br.com.ademoc.sgas.DomainModel.Categoria[ id=" + id + " ]";
     }
 }

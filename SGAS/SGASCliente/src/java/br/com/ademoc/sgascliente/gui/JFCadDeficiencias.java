@@ -10,8 +10,9 @@
  */
 package br.com.ademoc.sgascliente.gui;
 
-import br.com.ademoc.sgas.DomainModel.IRepositorioTipoDeficiencia;
-import br.com.ademoc.sgas.DomainModel.TipoDeficiencia;
+import br.com.ademoc.sgas.DomainModel.*;
+import java.util.Iterator;
+import java.util.List;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 
@@ -22,6 +23,8 @@ import javax.naming.InitialContext;
 public class JFCadDeficiencias extends javax.swing.JFrame {
 
     private int codigo;
+    List<TipoAparelho> ta;
+    List<Categoria> cat;
 
     /**
      * Creates new form JFCadDeficiencias
@@ -50,7 +53,7 @@ public class JFCadDeficiencias extends javax.swing.JFrame {
         jCCategoria = new javax.swing.JComboBox();
         jCAparelho = new javax.swing.JComboBox();
         jLCategoria = new javax.swing.JLabel();
-        jLTipoAparelho = new javax.swing.JLabel();
+        jLAparelho = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SGAS - Versão 1.0 - Associação das Pessoas com Deficiência de Montes Claros");
@@ -84,18 +87,33 @@ public class JFCadDeficiencias extends javax.swing.JFrame {
             }
         });
 
-        jCCategoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCCategoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione" }));
+        jCCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCCategoriaActionPerformed(evt);
+            }
+        });
+        jCCategoria.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCCategoriaFocusGained(evt);
+            }
+        });
 
-        jCAparelho.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCAparelho.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione" }));
         jCAparelho.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCAparelhoActionPerformed(evt);
             }
         });
+        jCAparelho.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCAparelhoFocusGained(evt);
+            }
+        });
 
         jLCategoria.setText("Categoria");
 
-        jLTipoAparelho.setText("Aparelho");
+        jLAparelho.setText("Aparelho");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -103,27 +121,25 @@ public class JFCadDeficiencias extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addGap(70, 70, 70)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jCCategoria, 0, 143, Short.MAX_VALUE)
-                                .addComponent(jLCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGap(18, 18, 18)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jCAparelho, 0, 143, Short.MAX_VALUE)
-                                .addComponent(jLTipoAparelho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(82, 82, 82)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jCAparelho, 0, 173, Short.MAX_VALUE)
+                            .addComponent(jLAparelho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(36, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -133,9 +149,6 @@ public class JFCadDeficiencias extends javax.swing.JFrame {
                     .addComponent(jTDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap()))
         );
-
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jCAparelho, jCCategoria});
-
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -143,15 +156,15 @@ public class JFCadDeficiencias extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1))
-                .addGap(64, 64, 64)
+                .addGap(47, 47, 47)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLTipoAparelho, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLCategoria)
+                    .addComponent(jLAparelho))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCAparelho, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(49, 49, 49)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton2)
@@ -164,8 +177,11 @@ public class JFCadDeficiencias extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jTCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jTDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap(141, Short.MAX_VALUE)))
+                    .addContainerGap(165, Short.MAX_VALUE)))
         );
+
+        preencheCombo();
+        preencheComboAparelho();
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -200,13 +216,13 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     try {
 
         Context context = (Context) new InitialContext();
-        IRepositorioTipoDeficiencia repo = (IRepositorioTipoDeficiencia) context.lookup("java:global/SGAS/SGAS-ejb/TipoDeficiencia");
+        IRepositorioTipoDeficiencia repo = (IRepositorioTipoDeficiencia) context.lookup("java:global/SGAS/SGAS-ejb/DAOTipoDeficiencia");
         TipoDeficiencia td = new TipoDeficiencia();
 
         td.setDescricao(jTDescricao.getText());
-        td.setTipoAparelho(jCAparelho.getSelectedItem());
-        td.setCategoria(jCCategoria.getSelectedItem());
-        
+        td.setTipoAparelho((TipoAparelho) jCAparelho.getSelectedItem());
+        td.setCategoria((Categoria)jCCategoria.getSelectedItem());
+
         repo.salvar(td);
 
 
@@ -219,6 +235,20 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private void jCAparelhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCAparelhoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCAparelhoActionPerformed
+
+    private void jCCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCCategoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCCategoriaActionPerformed
+
+    private void jCCategoriaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCCategoriaFocusGained
+             
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCCategoriaFocusGained
+
+    private void jCAparelhoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCAparelhoFocusGained
+             
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCAparelhoFocusGained
 
     /**
      * @param args the command line arguments
@@ -267,15 +297,60 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox jCAparelho;
     private javax.swing.JComboBox jCCategoria;
+    private javax.swing.JLabel jLAparelho;
     private javax.swing.JLabel jLCategoria;
-    private javax.swing.JLabel jLTipoAparelho;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTCodigo;
     private javax.swing.JTextField jTDescricao;
     // End of variables declaration//GEN-END:variables
-    
-   
-}
 
+    public void preencheCombo(){
+         List<Categoria> cat;
+         jCCategoria.setName("");
+         
+        try {
+
+            Context context = (Context) new InitialContext();
+            IRepositorioCategoria repo = (IRepositorioCategoria) context.lookup("java:global/SGAS/SGAS-ejb/DAOCategoria");
+            cat = repo.listaTodas();
+
+            Iterator i = cat.listIterator();
+
+            while (i.hasNext()){      
+                
+                jCCategoria.addItem(i.next());
+            }
+
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void preencheComboAparelho() {
+        
+        List<TipoAparelho> ap;
+         jCAparelho.setName("");
+         
+        try {
+
+            Context context = (Context) new InitialContext();
+            IRepositorioTipoAparelho repo = (IRepositorioTipoAparelho) context.lookup("java:global/SGAS/SGAS-ejb/DAOTipoAparelho");
+            ap = repo.listaTodos();
+
+            Iterator i = ap.listIterator();
+
+            while (i.hasNext()){      
+                
+                jCAparelho.addItem(i.next());
+            }
+
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+}
