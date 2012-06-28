@@ -18,7 +18,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import br.com.ademoc.sgascliente.util.Criptografia;
+import br.com.ademoc.sgas.Util.Criptografia;
 import java.util.Calendar;
 import javax.naming.Context;
 import javax.naming.InitialContext;
