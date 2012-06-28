@@ -28,7 +28,7 @@ public class DAOCategoria extends DAOGenerico<Categoria> implements IRepositorio
 
     @Override
     public List<Categoria> listaTodas() {
-        Query consulta = getManager().createQuery("select c from Categoria c");
+        Query consulta = getManager().createQuery("select c from Categoria c order by c.descricao");
         return consulta.getResultList();
     }
     
