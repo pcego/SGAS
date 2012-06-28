@@ -22,24 +22,20 @@ import javax.persistence.Table;
  * @author Kennedi Paulo S. Malheiros
  */
 @Entity
-@Table(name="tiposdeficiencias")
+@Table(name = "tiposdeficiencias")
 public class TipoDeficiencia implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "codigo")
     private Long id;
-        
-    @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE},fetch= FetchType.EAGER)
-    @JoinColumn(name="tipoaparelho",nullable=false)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @JoinColumn(name = "tipoaparelho", nullable = false)
     TipoAparelho tipoAparelho;
-    
-    @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE},fetch= FetchType.EAGER)
-    @JoinColumn(name="categoria",nullable=false)        
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @JoinColumn(name = "categoria", nullable = false)
     Categoria categoria;
-    
     @Column(name = "descricao", length = 100, nullable = false)
     private String descricao;
 
@@ -59,8 +55,8 @@ public class TipoDeficiencia implements Serializable {
         return categoria;
     }
 
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
+    public void setCategoria(Object categoria) {
+        this.categoria = (Categoria) categoria;
     }
 
     public String getDescricao() {
@@ -75,8 +71,8 @@ public class TipoDeficiencia implements Serializable {
         return tipoAparelho;
     }
 
-    public void setTipoAparelho(TipoAparelho tipoAparelho) {
-        this.tipoAparelho = tipoAparelho;
+    public void setTipoAparelho(Object tipoAparelho) {
+        this.tipoAparelho = (TipoAparelho) tipoAparelho;
     }
 
     @Override
