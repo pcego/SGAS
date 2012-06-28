@@ -20,7 +20,7 @@ public class Criptografia {
      */
     public static final String criptografa(String senha) {
         
-        // Aumenta a complexidade da senha digitada pelo usuário        
+        // Aumenta a complexidade da senha digitada pelo usuario        
         senha = "5tR1n6_d171C1l" + senha;
 
         // Converte a senha em um vetor de bytes        

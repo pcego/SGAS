@@ -26,17 +26,17 @@
 
 
 
-                        <p:autoComplete value="#{tipoDeficienciaBean.aparelho}" id="buscaProduto" completeMethod="#{tipoDeficienciaBean.buscaAparelhos}"  
+                        <p:autoComplete value="#{tipoDeficienciaBean.aparelho}" id="buscaAparelho" completeMethod="#{tipoDeficienciaBean.buscaAparelhos}"  
                                         converter="TipoAparelhoConverter" var="p" itemLabel="#{p.descricao}" itemValue="#{p}" />  
-
-
-
-
-
                         <br/>
                         <h:outputLabel id="tituloCategoria" value="Categoria: "/>
                         <br/>
-                        <p:inputText id="categoria" value="#{tipoDeficienciaBean.categoria}" size="20"/>
+
+                        <p:autoComplete value="#{tipoDeficienciaBean.categoria}" id="buscaCategoria" completeMethod="#{tipoDeficienciaBean.buscaCategorias}"  
+                                        converter="CategoriaConverter" var="p" itemLabel="#{p.descricao}" itemValue="#{p}" />  
+
+
+
                         <br/>
                         <h:outputLabel id="tituloDescricao" value="Descrição: "/>
                         <br/>

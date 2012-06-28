@@ -48,13 +48,13 @@ public class TipoDeficienciaBean implements Serializable {
         return tipoDeficiencia;
     }
 
-    public void setVenda(TipoDeficiencia tipoDeficiencia) {
+/*    public void setVenda(TipoDeficiencia tipoDeficiencia) {
         this.tipoDeficiencia = tipoDeficiencia;
         this.codigo = tipoDeficiencia.getId().toString();
         this.aparelho = tipoDeficiencia.getTipoAparelho();
         this.categoria = tipoDeficiencia.getCategoria();
         this.descricao = tipoDeficiencia.getDescricao();
-    }
+    } */
 
     public List<TipoAparelho> getAparelhos() {
         if (aparelhos == null) {
@@ -93,6 +93,16 @@ public class TipoDeficienciaBean implements Serializable {
     public List<TipoAparelho> buscaAparelhos(String val) {
         List<TipoAparelho> suggestions = new ArrayList<TipoAparelho>();
         for (TipoAparelho c : getAparelhos()) {
+            if (c.getDescricao().startsWith(val)) {
+                suggestions.add(c);
+            }
+        }
+        return suggestions;
+    }
+    
+     public List<Categoria> buscaCategorias(String val) {
+        List<Categoria> suggestions = new ArrayList<Categoria>();
+        for (Categoria c : getCategorias()) {
             if (c.getDescricao().startsWith(val)) {
                 suggestions.add(c);
             }
