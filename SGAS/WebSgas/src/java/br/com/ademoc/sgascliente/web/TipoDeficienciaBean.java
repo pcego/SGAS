@@ -48,13 +48,13 @@ public class TipoDeficienciaBean implements Serializable {
         return tipoDeficiencia;
     }
 
-/*    public void setVenda(TipoDeficiencia tipoDeficiencia) {
+    public void setTipoDeficiencia(TipoDeficiencia tipoDeficiencia) {
         this.tipoDeficiencia = tipoDeficiencia;
         this.codigo = tipoDeficiencia.getId().toString();
         this.aparelho = tipoDeficiencia.getTipoAparelho();
         this.categoria = tipoDeficiencia.getCategoria();
         this.descricao = tipoDeficiencia.getDescricao();
-    } */
+    } 
 
     public List<TipoAparelho> getAparelhos() {
         if (aparelhos == null) {

@@ -26,14 +26,18 @@
 
 
 
-                        <p:autoComplete value="#{tipoDeficienciaBean.aparelho}" id="buscaAparelho" completeMethod="#{tipoDeficienciaBean.buscaAparelhos}"  
-                                        converter="TipoAparelhoConverter" var="p" itemLabel="#{p.descricao}" itemValue="#{p}" />  
+                        <p:autoComplete value="#{tipoDeficienciaBean.aparelho}" id="buscaAparelho" 
+                                        completeMethod="#{tipoDeficienciaBean.buscaAparelhos}"  
+                                        converter="TipoAparelhoConverter" var="p" itemLabel="#{p.descricao}" 
+                                        itemValue="#{p}"  />  
                         <br/>
                         <h:outputLabel id="tituloCategoria" value="Categoria: "/>
                         <br/>
 
-                        <p:autoComplete value="#{tipoDeficienciaBean.categoria}" id="buscaCategoria" completeMethod="#{tipoDeficienciaBean.buscaCategorias}"  
-                                        converter="CategoriaConverter" var="p" itemLabel="#{p.descricao}" itemValue="#{p}" />  
+                        <p:autoComplete value="#{tipoDeficienciaBean.categoria}" id="buscaCategoria" 
+                                        completeMethod="#{tipoDeficienciaBean.buscaCategorias}"  
+                                        converter="CategoriaConverter" var="p" itemLabel="#{p.descricao}" 
+                                        itemValue="#{p}" />  
 
 
 
@@ -72,17 +76,53 @@
                         </p:confirmDialog>
                         <!-- Imprimir msg de confirmação ou erro ao salvar -->
 
-                       
+
 
 
                     </h:form>
                 </p:panel>
             </p:tab>
-            <p:tab id="visualizar" title="Visualizar"> 
+            <!--Inicio aba Visualizar-->
+            <p:tab id="visualizar" title="Visualizar">
 
-                em breve..
+                <h:form>
+                    <p:dataTable id="tblTipoDe" value="#{tipoDeficienciaBean.listagem}" var="item" 
+                                 paginator="true" rows="4"  emptyMessage="Nenhum registro...">              
 
+                        <p:column sortBy="#{item.id}" filterBy="#{item.id}" > 
+                            <f:facet name="header"> 
+                                <h:outputText value="ID" /> 
+                            </f:facet> 
+                            <h:outputText value="#{item.id}"/> 
+                        </p:column> 
+
+                        <p:column sortBy="#{item.tipoAparelho}" filterBy="#{item.tipoAparelho}" > 
+                            <f:facet name="header"> 
+                                <h:outputText value="Tipo Aparelho" /> 
+                            </f:facet> 
+                            <h:outputText value="#{item.tipoAparelho}"/> 
+                        </p:column> 
+
+                        <p:column sortBy="#{item.categoria}" filterBy="#{item.categoria}" > 
+                            <f:facet name="header"> 
+                                <h:outputText value="Categoria" /> 
+                            </f:facet> 
+                            <h:outputText value="#{item.categoria}"/> 
+                        </p:column> 
+
+
+                        <p:column sortBy="#{item.descricao}" filterBy="#{item.descricao}"> 
+                            <f:facet name="header"> 
+                                <h:outputText value="Descrição"/> 
+                            </f:facet> 
+                            <h:outputText value="#{item.descricao}"/> 
+                        </p:column> 
+
+                    </p:dataTable>
+
+                </h:form>
             </p:tab>
+            <!--FIM aba Visualizar-->
         </p:tabView>
         <ui:include src="rodape.xhtml"/>
     </h:body>
