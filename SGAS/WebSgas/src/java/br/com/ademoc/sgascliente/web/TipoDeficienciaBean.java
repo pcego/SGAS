@@ -31,7 +31,9 @@ public class TipoDeficienciaBean implements Serializable {
 
     @EJB
     IRepositorioTipoDeficiencia repo;
+    @EJB
     IRepositorioTipoAparelho repoTipoAparelho;
+    @EJB
     IRepositorioCategoria repoCategoria;
     private String codigo;
     private TipoAparelho aparelho;

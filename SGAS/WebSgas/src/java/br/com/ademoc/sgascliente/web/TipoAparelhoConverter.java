@@ -36,7 +36,7 @@ public class TipoAparelhoConverter implements Converter {
       try {
        
         FacesContext context = FacesContext.getCurrentInstance();
-        TipoDeficienciaBean aparelho = (TipoDeficienciaBean) context.getELContext().getELResolver().getValue(context.getELContext(), null, "aparelho");
+        TipoDeficienciaBean aparelho = (TipoDeficienciaBean) context.getELContext().getELResolver().getValue(context.getELContext(), null, "TipoDeficienciaBean");
         for(TipoAparelho c : aparelho.getAparelhos())
             if(c. getDescricao().equals(value))
                 return c;
