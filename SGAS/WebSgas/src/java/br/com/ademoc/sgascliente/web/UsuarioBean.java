@@ -236,7 +236,6 @@ public class UsuarioBean implements Serializable {
         usuario.setTelefone(telefone);
         usuario.setCelular(celular);
         usuario.setDataCadastro(calendar.getTime());
-
         try {
             repo.salvar(usuario);
             FacesMessage message = new FacesMessage("Salvo com Sucesso");

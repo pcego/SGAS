@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" 
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets" 
-      xmlns:p="http://primefaces.prime.com.tr/ui" 
+      xmlns:p="http://primefaces.org/ui" 
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title>SGAS WEb - Cadastro Profissão</title>
@@ -19,7 +19,7 @@
                 <br/>
                 <p:inputText id="codigo" value="#{profissaoBean.codigo}" size="20"/>
                 <br/>
-                <h:outputLabel id="tituloNome" value="Categoria: "/>
+                <h:outputLabel id="tituloNome" value="Descrição: "/>
                 <br/>
                 <p:inputText id="categoria" value="#{profissaoBean.descricao}" size="45"/>
                 <br/>
@@ -53,7 +53,7 @@
                 </p:confirmDialog>
                 <!-- Imprimir msg de confirmação ou erro ao salvar -->
 
-                <p:growl id="messages" />
+                
 
 
             </h:form>

@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" 
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets" 
-      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title>SGAS WEB - Cadastro de Usuario</title>
@@ -109,14 +109,14 @@
                         </p:confirmDialog>
                         <!-- Imprimir msg de confirmação ou erro ao salvar -->
 
-                        <p:growl id="messages" />
+                       
 
 
                     </h:form>
                 </p:panel>
             </p:tab>
             <!--FIM aba Cadastro de Usuario-->
-            
+
             <!--Inicio aba Visualizar Usuario-->
             <p:tab id="visualiza" title="Visualiza">
                 <h:form>
@@ -170,7 +170,6 @@
                     </p:confirmDialog>
                     <!-- Imprimir msg de confirmação ou erro ao salvar -->
 
-                    <p:growl id="messages" />
 
 
                 </h:form>
@@ -179,7 +178,7 @@
             </p:tab>
             <!--Fim aba Visualiza Usuario-->
         </p:tabView>
-<!--Incluindo Rodape-->
+        <!--Incluindo Rodape-->
         <ui:include src="rodape.xhtml"/>
     </h:body>
 </html>

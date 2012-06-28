@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" 
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets" 
-      xmlns:p="http://primefaces.prime.com.tr/ui" 
+      xmlns:p="http://primefaces.org/ui" 
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title>SGAS WEB - Cadastro de Profissional</title>
@@ -14,7 +14,7 @@
             <h:form>
                 <br/>
                 <br/>
-                
+
                 <h:outputLabel id="tituloCodigo" value="Codigo: "/>
                 <br/>
                 <p:inputText id="codigo" value="#{profissionalBean.codigo}" size="20"/>
@@ -32,18 +32,65 @@
                 <p:inputText id="cartprofissional" value="#{profissionalBean.cartProfissional}" size="20"/>
                 <br/>
                 <h:outputLabel id="tituloStatus" value="Status: "/>
-                
                 <h:selectBooleanCheckbox id="status" value="#{profissionalBean.status}"  />
-                <h:outputLabel id="tituloAtivo" value=" Ativo " />
+                <h:outputLabel id="tituloAtivo" value=" Ativo " style="font-size: 12px"/>
                 <br/>
                 <h:outputLabel id="tituloSexo" value="Sexo: "/>
                 <br/>
                 <p:inputText id="sexo" value="#{profissionalBean.sexo}" size="20"/>
+
+       
+       
+
+
+
                 <br/>
                 <h:outputLabel id="tituloEspecialidade" value="Especialidade: "/>
                 <br/>
                 <p:inputText id="especialidade" value="#{profissionalBean.especialidade}" size="20"/>
                 <br/>
+                <h:outputLabel id="tituloRua" value="Rua: "/>
+                <br/>
+                <p:inputText id="endRua" value="#{usuario.endRua}" size="40" />
+                <br/>
+                <h:outputLabel id="tituloNumero" value=" Numero: "/>
+                <br/>
+                <p:inputText id="endNumero" value="#{usuario.endNumero}" size="15" />
+                <br/>
+                <h:outputLabel id="tituloNComplemento" value="Complemento: "/>
+                <br/>
+                <p:inputText id="endComplemento" value="#{usuario.endComplemento}" size="40" />
+                <br/>
+                <h:outputLabel id="tituloBairro" value="Bairro: "/>
+                <br/>
+                <p:inputText id="endBairro" value="#{usuario.endBairro}" size="20"/>
+                <br/>
+                <h:outputLabel id="tituloCidade" value="Cidade: "/>
+                <br/>
+                <p:inputText id="endCidade" value="#{usuario.endCidade}" size="20"/>
+                <br/>
+                <h:outputLabel id="tituloEstado" value="Estado: "/>
+                <br/>
+                <p:inputText id="endEstado" value="#{usuario.endEstado}" size="20"/>
+                <br/>
+                <h:outputLabel id="tituloCep" value="Cep: " />
+                <br/>
+                <p:inputMask id="endCep" value="#{usuario.endCep}" mask="99999-999"  size="20"/>
+                <br/>
+                <h:outputLabel id="tituloEmail" value="Email: "/>
+                <br/>
+                <p:inputText id="email" value="#{usuario.email}" size="40"/>
+                <br/>
+                <h:outputLabel id="tituloTelefone" value="Telefone: "/>
+                <br/>
+                <p:inputMask id="telefone" value="#{usuario.telefone}" mask="(99)99999999" size="20" />
+                <br/>
+                <h:outputLabel id="tituloCelular" value="Celular: "/>
+                <br/>
+                <p:inputMask id="celular" value="#{usuario.celular}"  mask="(99)99999999" size="20" />
+                <br/>
+
+
                 <br/>
                 <p:commandButton id="btNovo" value="Novo" onclick="confirmationNovo.show()" type="reset"/>
                 <p:commandButton id="btAltera" value="Altera" onclick="confirmationAltera.show()" type="button"/>
@@ -72,7 +119,7 @@
                 </p:confirmDialog>
                 <!-- Imprimir msg de confirmação ou erro ao salvar -->
 
-                <p:growl id="messages" />
+
 
             </h:form>
         </p:panel>
