@@ -6,10 +6,12 @@ package br.com.ademoc.sgas.DataAccess;
 
 import br.com.ademoc.sgas.DomainModel.IRepositorioUsuario;
 import br.com.ademoc.sgas.DomainModel.Usuario;
+import java.sql.SQLException;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
 import javax.persistence.Query;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,7 +27,7 @@ public class DAOUsuario extends DAOGenerico<Usuario> implements IRepositorioUsua
 
     @Override
     protected Long getID(Usuario obj) {
-            
+
         return obj.getId();
     }
 
@@ -51,5 +53,15 @@ public class DAOUsuario extends DAOGenerico<Usuario> implements IRepositorioUsua
         Query consulta = getManager().createQuery("select u from Usuario u order by u.nome");
         return consulta.getResultList();
 
+    }
+
+    @Override
+    public Usuario validarUsuario(String logon, String senha) throws Exception{
+        
+            Query consulta = getManager().createQuery("select u from Usuario u where u.logon = :logon and u.senha = :senha");
+            consulta.setParameter("logon", logon);
+            consulta.setParameter("senha", senha);
+            return (Usuario) consulta.getSingleResult();        
+        
     }
 }

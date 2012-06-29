@@ -104,7 +104,7 @@ public class JFCadUsuarios extends javax.swing.JFrame {
         jFDataCadastro.setBackground(new java.awt.Color(227, 227, 227));
         jFDataCadastro.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
-        jBSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ademoc/guii/icones/save.png"))); // NOI18N
+        jBSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ademoc/gui/icones/save.png"))); // NOI18N
         jBSalvar.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "SALVAR", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BOTTOM));
         jBSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,7 +112,7 @@ public class JFCadUsuarios extends javax.swing.JFrame {
             }
         });
 
-        jBExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ademoc/guii/icones/ExcVagas.png"))); // NOI18N
+        jBExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ademoc/gui/icones/ExcVagas.png"))); // NOI18N
         jBExcluir.setText("Excluir");
 
         jBSair.setText("Sair");
