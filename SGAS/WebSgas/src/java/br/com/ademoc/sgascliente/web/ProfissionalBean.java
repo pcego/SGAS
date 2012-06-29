@@ -16,6 +16,7 @@ import javax.enterprise.context.RequestScoped;
 import java.util.Calendar;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import br.com.ademoc.sgas.Util.UsuarioConectado;
 
 /**
  *
@@ -234,13 +235,13 @@ public class ProfissionalBean implements Serializable {
     public void salvar() {
         Profissional profissional = new Profissional();
         profissional.setEspecialidade(especialidade);
-        profissional.setUsuario(usuario);
+        profissional.setUsuario(UsuarioConectado.getUsuarioConectado());
         profissional.setNome(nome);
         profissional.setDtNasc(dtnasc);
         profissional.setCartProfissional(cartProfissional);
         profissional.setStatus(status);
         profissional.setDtAtualizacao(calendar.getTime());
-        profissional.setUsuarioAtualizacao(usuarioAtualizacao);
+        profissional.setUsuarioAtualizacao(UsuarioConectado.getUsuarioConectado());
         profissional.setEndRua(endRua);
         profissional.setEndNumero(endNumero);
         profissional.setEndComplemento(endComplemento);

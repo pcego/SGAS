@@ -56,6 +56,7 @@ public class DAOUsuario extends DAOGenerico<Usuario> implements IRepositorioUsua
     }
 
     @Override
+<<<<<<< HEAD
     public Usuario validarUsuario(String logon, String senha) throws Exception{
         
             Query consulta = getManager().createQuery("select u from Usuario u where u.logon = :logon and u.senha = :senha");
@@ -63,5 +64,29 @@ public class DAOUsuario extends DAOGenerico<Usuario> implements IRepositorioUsua
             consulta.setParameter("senha", senha);
             return (Usuario) consulta.getSingleResult();        
         
+=======
+    public Usuario validarUsuario(String usuario, String senha) {
+        Query consulta = getManager().createQuery("select u from Usuario u where u.logon= :usuario and u.senha= :senha");
+        consulta.setParameter("usuario", usuario);
+        consulta.setParameter("senha", senha);
+        return (Usuario) consulta.getSingleResult();
+
+    }
+
+
+    public boolean validarUsuario2(String logon, String senha) {
+
+        Query consulta = getManager().createQuery("select u.logon, u.senha from Usuario u where logon = :logon and senha = :senha");
+        consulta.setParameter("logon", logon);
+        consulta.setParameter("senha", senha);
+
+        if (consulta.getSingleResult() != null) {
+            return true;
+        }
+
+        return false;
+
+
+>>>>>>> ea37e6d6d360198829fce21a202311e2f02cdf6e
     }
 }

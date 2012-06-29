@@ -20,6 +20,10 @@ public interface IRepositorioUsuario extends Repositorio<Usuario> {
     
     List<Usuario> listaTodos();
     
+<<<<<<< HEAD
     Usuario validarUsuario(String logon, String senha) throws Exception;
+=======
+    Usuario validarUsuario (String usuario, String senha); 
+>>>>>>> ea37e6d6d360198829fce21a202311e2f02cdf6e
     
 }
