@@ -25,7 +25,7 @@ public class DAOUsuario extends DAOGenerico<Usuario> implements IRepositorioUsua
 
     @Override
     protected Long getID(Usuario obj) {
-            
+
         return obj.getId();
     }
 
@@ -50,6 +50,31 @@ public class DAOUsuario extends DAOGenerico<Usuario> implements IRepositorioUsua
 
         Query consulta = getManager().createQuery("select u from Usuario u order by u.nome");
         return consulta.getResultList();
+
+    }
+
+    @Override
+    public Usuario validarUsuario(String usuario, String senha) {
+        Query consulta = getManager().createQuery("select u from Usuario u where u.logon= :usuario and u.senha= :senha");
+        consulta.setParameter("usuario", usuario);
+        consulta.setParameter("senha", senha);
+        return (Usuario) consulta.getSingleResult();
+
+    }
+
+
+    public boolean validarUsuario2(String logon, String senha) {
+
+        Query consulta = getManager().createQuery("select u.logon, u.senha from Usuario u where logon = :logon and senha = :senha");
+        consulta.setParameter("logon", logon);
+        consulta.setParameter("senha", senha);
+
+        if (consulta.getSingleResult() != null) {
+            return true;
+        }
+
+        return false;
+
 
     }
 }

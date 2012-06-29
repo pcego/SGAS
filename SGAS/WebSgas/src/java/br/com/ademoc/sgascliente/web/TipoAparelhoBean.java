@@ -28,6 +28,14 @@ public class TipoAparelhoBean implements Serializable {
     private String descricao;
     List<TipoAparelho> listagem;
 
+    @Override
+    public String toString() {
+        return this.codigo
+                + this.descricao;
+    }
+
+    
+
     public String getCodigo() {
         return codigo;
     }

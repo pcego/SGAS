@@ -28,6 +28,12 @@ public class CategoriaBean implements Serializable {
     private String descricao;
     List<Categoria> listagem;
 
+    @Override
+    public String toString() {
+        return this.codigo
+                + this.descricao;
+    }
+
     public List<Categoria> getListagem() {
         if (listagem == null) {
             listagem = repo.listaTodas();

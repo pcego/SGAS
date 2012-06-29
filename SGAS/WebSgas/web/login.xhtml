@@ -10,75 +10,28 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <!--
-                <f:view>
-                    <f:loadBundle basename="com.Lgweb.Tcc.Model.messages" var="msg"/>
-                    <h:form>
-                        <c:import url="/topo.jsp"></c:import>
-                        <rich:separator width="967"></rich:separator>
-                        <h:panelGrid columns="2" width="800">
-                            <h:column>
-                                <c:import url="/leftBar.jsp"></c:import>
-                            </h:column>			
-                            <h:column>
-                                <rich:panelBar height="400" width="900">
-                                    <rich:panelBarItem label="#{msg.cadastrarusuario}">
-                                        <h:panelGrid columns="3" width="732">
-                                            <h:outputText value="#{msg.codigo}"></h:outputText>
-                                            <h:inputText value="#{usuario.usuario.usuarioid}" styleClass="select" ></h:inputText>
-                                            <h:inputHidden value=""></h:inputHidden>
         
-                                            <h:outputText value="#{msg.nome}"></h:outputText>
-                                            <h:inputText value="#{usuario.usuario.nome}" styleClass="select"label="Numeração" maxlength="2" required="True" requiredMessage="#{msg.obrigatorio}" id="nome" style=" width : 425px;">
-                                            </h:inputText>
-                                            <h:message for="nome" styleClass="erro"></h:message>
+        <p:panel>
         
-                                            <h:outputText value="#{msg.sobrenome}"></h:outputText>
-                                            <h:inputText value="#{usuario.usuario.sobrenome}" styleClass="select"label="Numeração" maxlength="2" required="True" requiredMessage="#{msg.obrigatorio}" id="sobrenome" style=" width : 426px;">
-                                            </h:inputText>
-                                            <h:message for="sobrenome" styleClass="erro"></h:message>
-        
-                                            <h:outputText value="#{msg.setor}"></h:outputText>
-                                            <h:inputText value="#{usuario.usuario.setor}" styleClass="select"label="Numeração" maxlength="2" required="True" requiredMessage="#{msg.obrigatorio}" id="setor" style=" width : 201px;">
-                                            </h:inputText>
-                                            <h:message for="setor" styleClass="erro"></h:message>
-        
-                                            <h:outputText value="#{msg.login}"></h:outputText>
-                                            <h:inputText value="#{usuario.usuario.login}" styleClass="select"label="Numeração" maxlength="2" required="True" requiredMessage="#{msg.obrigatorio}" id="login">
-                                            </h:inputText>
-                                            <h:message for="login" styleClass="erro"></h:message>	
-        
-                                            <h:outputText value="#{msg.senha}"></h:outputText>
-                                            <h:inputSecret value="#{usuario.usuario.senha}" styleClass="select"label="Numeração" maxlength="2" required="True" requiredMessage="#{msg.obrigatorio}" id="senha" size="10">
-                                            </h:inputSecret>
-                                            <h:message for="senha" styleClass="erro"></h:message>
-        
-                                            <h:outputText value="#{msg.perfil}"></h:outputText>	
-                                            <h:selectOneMenu value="#{usuario.changeValue}" style=" width : 136px;" styleClass="select">
-                                                <f:selectItems value="#{usuario.lista}"/>
-                                            </h:selectOneMenu>	
-                                            <h:inputHidden value=""></h:inputHidden>
-                                            <h:outputText value="#{msg.data}"></h:outputText>	
-                                            <rich:calendar id="data1" styleClass="select" value="#{usuario.usuario.datainclusao}" style=" width : 135px;" datePattern="dd/mm/yyyy" required="true" requiredMessage="#{msg.obrigatorio}"></rich:calendar>
-                                            <h:message for="data1" styleClass="erro"></h:message>	   
-                                        </h:panelGrid>
-                                    </rich:panelBarItem>
-                                </rich:panelBar>
-                            </h:column>
-                        </h:panelGrid>
-                        <center>
-                            <h:commandButton action="#{usuario.create}" value="#{msg.salvar}" type="submit" styleClass="botoes"></h:commandButton>
-                            <h:commandButton action="Menu" value="#{msg.menu}" styleClass="botoes"></h:commandButton>
-                            <rich:separator width="969"></rich:separator>
-                            <c:import url="/Statusbar.jsp"></c:import>
-                        </center>
-        
-        
-                    </h:form>
-        
-                </f:view>
-        
-        -->
+            <h:form>
+                        <br/>
+                        <h:outputLabel id="tituloLogin" value="Login: "/>
+                        <br/>
+                        <p:inputText id="login" value="#{validarUsuarioBean.login}" size="25"/>
+                        <br/>
+                        <h:outputLabel id="tituloSenha" value="Senha: "/>
+                        <br/>
+                        <h:inputSecret id="senha" value="#{validarUsuarioBean.senha}" size="25"
+                                       required="true" autocomplete="off"/>
+                        <br/>
+                        
+                        <p:commandButton id="validar" value="OK" action="#{validarUsuarioBean.verificarUsuario()}"
+                                         update="messages"/>
+                                                
+
+            </h:form>
+        </p:panel>
+
     </h:body>
 </html>
 

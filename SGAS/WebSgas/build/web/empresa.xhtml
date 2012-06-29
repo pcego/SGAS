@@ -3,84 +3,86 @@
 <html xmlns="http://www.w3.org/1999/xhtml" 
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets" 
-      xmlns:p="http://primefaces.org/ui"
+      xmlns:p="http://primefaces.org/ui" 
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
-        <title>SGAS WEB - Cadastro de Usuario</title>
+        <title>SGAS WEb - Cadastro - Empresa</title>
     </h:head>
     <h:body>
-        <!--incluindo Cabeçalho-->
         <ui:include src="cabecalho.xhtml"/>
-        <!--Criando Abas -->
-        <p:tabView id="TabUsuario">
-            <!--Inicio aba Cadastro de Usuario-->
+        <p:tabView id="abas">
+
             <p:tab id="cadastro" title="Cadastro">
                 <p:panel>
-                    <h:form >
-                        <br/>
+                    <h:form>
                         <h:outputLabel id="tituloCodigo" value="Codigo: "/>
                         <br/>
-                        <p:inputText id="codigo" value="#{usuario.codigo}"/>
+                        <p:inputText id="codigo" value="#{empresaBean.codigo}" size="20"/>
                         <br/>
-                        <h:outputLabel id="tituloNome" value="Nome: "/>
+                        <h:outputLabel id="tituloRazaoSocial" value="Razão Social: "/>
                         <br/>
-                        <p:inputText id="nome" value="#{usuario.nome}" size="40" />
+                        <p:inputText id="RazaoSocial" value="#{empresaBean.razaoSocial}" size="20"/>
                         <br/>
-                        <h:outputLabel id="tituloLogon" value="Logon: "/>
+                        <h:outputLabel id="tituloFantasia" value="Fantasia: "/>
                         <br/>
-                        <p:inputText id="logon" value="#{usuario.logon}" size="20" />
+                        <p:inputText id="fantasia" value="#{empresaBean.fantasia }" size="20"/>
                         <br/>
-                        <h:outputLabel id="tituloSenha" value="Senha: " />
+                        <h:outputLabel id="tituloRamoAtividade" value="Ramo Atividade: "/>
                         <br/>
-                        <p:password id="senha" value="#{usuario.senha}" feedback="true" size="20" />
+                        <p:inputText id="ramoAtividade" value="#{empresaBean.ramoAtividade }" size="20"/>
                         <br/>
-                        <h:outputLabel id="tituloNivel" value="Nivel Admin: "/>
+                        <h:outputLabel id="tituloCnpj" value="CNPJ: "/>
                         <br/>
-                        <h:selectBooleanCheckbox id="nivel" value="#{usuario.nivel}" />            
+                        <p:inputMask id="cnpj" value="#{empresaBean.cnpj }" mask="99.999.999/9999-99" size="20"/>
+                        <br/>
+                        <h:outputLabel id="tituloInscricao" value="Inscrição: "/>
+                        <br/>
+                        <p:inputText id="inscricao" value="#{empresaBean.iscricao }" size="20"/>
+                        <br/>
+                        <h:outputLabel id="tituloResponsavel" value="Responsavel: "/>
+                        <br/>
+                        <p:inputText id="responsavel" value="#{empresaBean.responsavel}" size="20"/>
                         <br/>
                         <h:outputLabel id="tituloRua" value="Rua: "/>
                         <br/>
-                        <p:inputText id="endRua" value="#{usuario.endRua}" size="40" />
+                        <p:inputText id="endRua" value="#{empresaBean.endRua}" size="40" />
                         <br/>
                         <h:outputLabel id="tituloNumero" value=" Numero: "/>
                         <br/>
-                        <p:inputText id="endNumero" value="#{usuario.endNumero}" size="15" />
+                        <p:inputText id="endNumero" value="#{empresaBean.endNumero}" size="15" />
                         <br/>
                         <h:outputLabel id="tituloNComplemento" value="Complemento: "/>
                         <br/>
-                        <p:inputText id="endComplemento" value="#{usuario.endComplemento}" size="40" />
+                        <p:inputText id="endComplemento" value="#{empresaBean.endComplemento}" size="40" />
                         <br/>
                         <h:outputLabel id="tituloBairro" value="Bairro: "/>
                         <br/>
-                        <p:inputText id="endBairro" value="#{usuario.endBairro}" size="20"/>
+                        <p:inputText id="endBairro" value="#{empresaBean.endBairro}" size="20"/>
                         <br/>
                         <h:outputLabel id="tituloCidade" value="Cidade: "/>
                         <br/>
-                        <p:inputText id="endCidade" value="#{usuario.endCidade}" size="20"/>
+                        <p:inputText id="endCidade" value="#{empresaBean.endCidade}" size="20"/>
                         <br/>
                         <h:outputLabel id="tituloEstado" value="Estado: "/>
                         <br/>
-                        <p:inputText id="endEstado" value="#{usuario.endEstado}" size="20"/>
+                        <p:inputText id="endEstado" value="#{empresaBean.endEstado}" size="20"/>
                         <br/>
                         <h:outputLabel id="tituloCep" value="Cep: " />
                         <br/>
-                        <p:inputMask id="endCep" value="#{usuario.endCep}" mask="99999-999"  size="20"/>
+                        <p:inputMask id="endCep" value="#{empresaBean.endCep}" mask="99999-999"  size="20"/>
                         <br/>
                         <h:outputLabel id="tituloEmail" value="Email: "/>
                         <br/>
-                        <p:inputText id="email" value="#{usuario.email}" size="40"/>
+                        <p:inputText id="email" value="#{empresaBean.email}" size="40"/>
                         <br/>
                         <h:outputLabel id="tituloTelefone" value="Telefone: "/>
                         <br/>
-                        <p:inputMask id="telefone" value="#{usuario.telefone}" mask="(99)99999999" size="20" />
+                        <p:inputMask id="telefone" value="#{empresaBean.telefone}" mask="(99)99999999" size="20" />
                         <br/>
                         <h:outputLabel id="tituloCelular" value="Celular: "/>
                         <br/>
-                        <p:inputMask id="celular" value="#{usuario.celular}"  mask="(99)99999999" size="20" />
+                        <p:inputMask id="celular" value="#{empresaBean.celular}"  mask="(99)99999999" size="20" />
                         <br/>
-
-
-
 
                         <p:commandButton id="btNovo" value="Novo" onclick="confirmationNovo.show()" type="reset"/>
                         <p:commandButton id="btAltera" value="Altera" onclick="confirmationAltera.show()" type="button"/>
@@ -91,39 +93,32 @@
                         <p:confirmDialog id="confirmDialogSalvar" message="Tem certeza que deseja salvar?"
                                          header="Confirmação para salvar" severity="alert" widgetVar="confirmationSalvar">
 
-                            <p:commandButton id="confirmSalvar" value="Sim" update="TabUsuario" oncomplete="confirmationSalvar.hide()"
-                                             actionListener="#{usuario.salvar()}" />
+                            <p:commandButton id="confirmSalvar" value="Sim" update="messages" oncomplete="confirmationSalvar.hide()"
+                                             actionListener="#{empresaBean.salvar()}" />
                             <p:commandButton id="naoSalvar" value="Não" onclick="confirmationSalvar.hide()" type="button" /> 
                         </p:confirmDialog>
                         <!-- Imprimir msg de confirmação ou erro ao salvar -->
-
-
 
                         <!-- Criando metodo de confirmação so Apagar -->
                         <p:confirmDialog id="confirmDialogApagar" message="Tem certeza que deseja Excluir?"
                                          header="Confirmação para excluir" severity="alert" widgetVar="confirmationApagar">
 
-                            <p:commandButton id="confirmApagar" value="Sim" update="TabUsuario" oncomplete="confirmationApagar.hide()"
-                                             actionListener="#{usuario.apagar()}" />
+                            <p:commandButton id="confirmApagar" value="Sim" update="messages" oncomplete="confirmationApagar.hide()"
+                                             actionListener="#{empresaBean.apagar()}" />
                             <p:commandButton id="naoApagar" value="Não" onclick="confirmationApagar.hide()" type="button" /> 
                         </p:confirmDialog>
                         <!-- Imprimir msg de confirmação ou erro ao salvar -->
 
-                       
-
-
                     </h:form>
                 </p:panel>
             </p:tab>
-            <!--FIM aba Cadastro de Usuario-->
 
-            <!--Inicio aba Visualizar Usuario-->
-            <p:tab id="visualiza" title="Visualiza">
+            <!--Inicio aba Visualizar-->
+            <p:tab id="visualizar" title="Visualizar">
+
                 <h:form>
-                    <p:dataTable id="tblClientes" value="#{usuario.listagem}" var="item" 
+                    <p:dataTable id="tblCategoria" value="#{empresaBean.listagem}" var="item" 
                                  paginator="true" rows="4"  emptyMessage="Nenhum registro...">              
-
-
 
                         <p:column sortBy="#{item.id}" filterBy="#{item.id}" > 
                             <f:facet name="header"> 
@@ -133,52 +128,26 @@
                         </p:column> 
 
 
-                        <p:column sortBy="#{item.nome}" filterBy="#{item.nome}"> 
+                        <p:column sortBy="#{item.fantasia}" filterBy="#{item.fantasia}"> 
                             <f:facet name="header"> 
                                 <h:outputText value="Nome"/> 
                             </f:facet> 
-                            <h:outputText value="#{item.nome}"/> 
-                        </p:column> 
-                        <p:column> 
-                            <f:facet name="header"> 
-                                <h:outputText value="Editar"/> 
-                            </f:facet> 
-                            <a href="faces/editarCliente.xhtml?id=#{item.id}">Editar</a>
+                            <h:outputText value="#{item.fantasia}"/> 
                         </p:column> 
 
-
-                        <p:column> 
+                        <p:column sortBy="#{item.cnpj}" filterBy="#{item.cnpj}"> 
                             <f:facet name="header"> 
-                                <h:outputText value="Excluir"/> 
+                                <h:outputText value="CNPJ"/> 
                             </f:facet> 
-                            <p:commandButton id="btApagar" value="Excluir"  onclick="confirmationApagar.show()" type="butto">
-                                <f:setPropertyActionListener target="#{usuario.codigo}" value="#{item.id}" />
-                            </p:commandButton>
+                            <h:outputText value="#{item.cnpj}"/> 
                         </p:column> 
 
                     </p:dataTable>
 
-
-                    <!-- Criando metodo de confirmação so Apagar -->
-                    <p:confirmDialog id="confirmDialogApagar" message="Tem certeza que deseja Excluir?"
-                                     header="Confirmação para excluir" severity="alert" widgetVar="confirmationApagar">
-
-                        <p:commandButton id="confirmApagar" value="Sim" update="messages" oncomplete="confirmationApagar.hide()"
-                                         action="#{usuario.apagar()}" >
-                        </p:commandButton>
-                        <p:commandButton id="naoApagar" value="Não" onclick="confirmationApagar.hide()" type="button" /> 
-                    </p:confirmDialog>
-                    <!-- Imprimir msg de confirmação ou erro ao salvar -->
-
-
-
                 </h:form>
-
-
             </p:tab>
-            <!--Fim aba Visualiza Usuario-->
+            <!--FIM aba Visualizar-->
         </p:tabView>
-        <!--Incluindo Rodape-->
         <ui:include src="rodape.xhtml"/>
     </h:body>
 </html>

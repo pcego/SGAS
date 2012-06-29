@@ -39,10 +39,41 @@ public class TipoDeficienciaBean implements Serializable {
     private TipoAparelho aparelho;
     private Categoria categoria;
     private String descricao;
-    private TipoDeficiencia tipoDeficiencia;
+    TipoDeficiencia tipoDeficiencia;
     List<TipoDeficiencia> listagem;
     List<Categoria> categorias;
     List<TipoAparelho> aparelhos;
+    
+
+    @Override
+    public String toString() {
+        return this.codigo
+                + this.descricao;
+    }
+
+    public IRepositorioTipoDeficiencia getRepo() {
+        return repo;
+    }
+
+    public void setRepo(IRepositorioTipoDeficiencia repo) {
+        this.repo = repo;
+    }
+
+    public IRepositorioCategoria getRepoCategoria() {
+        return repoCategoria;
+    }
+
+    public void setRepoCategoria(IRepositorioCategoria repoCategoria) {
+        this.repoCategoria = repoCategoria;
+    }
+
+    public IRepositorioTipoAparelho getRepoTipoAparelho() {
+        return repoTipoAparelho;
+    }
+
+    public void setRepoTipoAparelho(IRepositorioTipoAparelho repoTipoAparelho) {
+        this.repoTipoAparelho = repoTipoAparelho;
+    }
 
     public TipoDeficiencia getTipoDeficiencia() {
         return tipoDeficiencia;
@@ -54,7 +85,7 @@ public class TipoDeficienciaBean implements Serializable {
         this.aparelho = tipoDeficiencia.getTipoAparelho();
         this.categoria = tipoDeficiencia.getCategoria();
         this.descricao = tipoDeficiencia.getDescricao();
-    } 
+    }
 
     public List<TipoAparelho> getAparelhos() {
         if (aparelhos == null) {
@@ -99,8 +130,8 @@ public class TipoDeficienciaBean implements Serializable {
         }
         return suggestions;
     }
-    
-     public List<Categoria> buscaCategorias(String val) {
+
+    public List<Categoria> buscaCategorias(String val) {
         List<Categoria> suggestions = new ArrayList<Categoria>();
         for (Categoria c : getCategorias()) {
             if (c.getDescricao().startsWith(val)) {
@@ -146,12 +177,12 @@ public class TipoDeficienciaBean implements Serializable {
     }
 
     public void salvar() {
-        TipoDeficiencia deficiencia = new TipoDeficiencia();
-        deficiencia.setCategoria(categoria);
-        deficiencia.setTipoAparelho(aparelho);
-        deficiencia.setDescricao(descricao);
+        
+        tipoDeficiencia.setCategoria(categoria);
+        tipoDeficiencia.setTipoAparelho(aparelho);
+        tipoDeficiencia.setDescricao(descricao);
         try {
-            repo.salvar(deficiencia);
+            repo.salvar(tipoDeficiencia);
             FacesMessage message = new FacesMessage("Salvo com Sucesso");
             FacesContext.getCurrentInstance().addMessage(null, message);
         } catch (Exception e) {
@@ -173,5 +204,4 @@ public class TipoDeficienciaBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }
-    
 }

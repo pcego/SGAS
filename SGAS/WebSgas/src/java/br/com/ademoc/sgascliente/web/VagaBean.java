@@ -13,6 +13,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
+import br.com.ademoc.sgas.Util.UsuarioConectado;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -91,7 +92,7 @@ public class VagaBean {
     public void salvar() {
         Vaga vaga = new Vaga();
         vaga.setEmpresa(empresa);
-        vaga.setUsuario(usuario);
+        vaga.setUsuario(UsuarioConectado.getUsuarioConectado());
         vaga.setDescricao(descricao);
         vaga.setStatus(statusVaga);
         vaga.setDtInclusao(calendar.getTime());
