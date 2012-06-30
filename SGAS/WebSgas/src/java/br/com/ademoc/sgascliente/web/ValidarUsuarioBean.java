@@ -81,7 +81,7 @@ public class ValidarUsuarioBean implements Serializable {
         logUsuario.setUsuario(login);
         logUsuario.setDataAcesso(calendar.getTime());
         try {
-            repo.validarUsuario(login, senha);
+            repo.validarUsuarioWeb(login, senha);
             repoLogUsuario.salvar(logUsuario);
             FacesContext.getCurrentInstance().getExternalContext().redirect("principal.xhtml");
 
