@@ -16,6 +16,7 @@ import javax.ejb.EJB;
 import br.com.ademoc.sgas.Util.UsuarioConectado;
 
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 

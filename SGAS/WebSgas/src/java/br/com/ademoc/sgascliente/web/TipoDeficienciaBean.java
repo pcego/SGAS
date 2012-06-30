@@ -16,6 +16,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -26,15 +27,18 @@ import javax.faces.convert.ConverterException;
  * @author www
  */
 @Named(value = "tipoDeficienciaBean")
-@RequestScoped
+@SessionScoped
 public class TipoDeficienciaBean implements Serializable {
 
     @EJB
     IRepositorioTipoDeficiencia repo;
+    
     @EJB
     IRepositorioTipoAparelho repoTipoAparelho;
+    
     @EJB
     IRepositorioCategoria repoCategoria;
+    
     private String codigo;
     private TipoAparelho aparelho;
     private Categoria categoria;
@@ -177,6 +181,9 @@ public class TipoDeficienciaBean implements Serializable {
     }
 
     public void salvar() {
+        
+        if(tipoDeficiencia == null)
+            tipoDeficiencia = new TipoDeficiencia();
         
         tipoDeficiencia.setCategoria(categoria);
         tipoDeficiencia.setTipoAparelho(aparelho);

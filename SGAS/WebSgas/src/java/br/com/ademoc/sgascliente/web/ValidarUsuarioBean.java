@@ -4,40 +4,42 @@
  */
 package br.com.ademoc.sgascliente.web;
 
+
+import br.com.ademoc.sgas.DomainModel.IRepositorioLogUsuario;
 import br.com.ademoc.sgas.DomainModel.IRepositorioUsuario;
 import br.com.ademoc.sgas.DomainModel.Usuario;
-import br.com.ademoc.sgas.Util.UsuarioConectado;
+import br.com.ademoc.sgas.DomainModel.LogUsuario;
 import java.io.IOException;
 
 import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Iterator;
-import java.util.List;
+
+import java.util.Calendar;
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
+import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
-import javax.swing.JOptionPane;
-import sun.misc.BASE64Encoder;
+//import sun.misc.BASE64Encoder;
 
 /**
  *
  * @author www
  */
 @Named(value = "validarUsuarioBean")
-@SessionScoped
+@RequestScoped
 public class ValidarUsuarioBean implements Serializable {
 
     public ValidarUsuarioBean() {
     }
     @EJB
     IRepositorioUsuario repo;
+    
+    @EJB
+    IRepositorioLogUsuario repoLogUsuario;
     String login, senha, alerta;
     Usuario usuario;
     boolean confirma;
+    Calendar calendar = Calendar.getInstance();
 
     public Usuario getUsuario() {
         return usuario;
@@ -73,12 +75,15 @@ public class ValidarUsuarioBean implements Serializable {
 
     public boolean verificarUsuario() throws IOException {
         Usuario usuario = new Usuario();
-        usuario.setLogon(login);
+        LogUsuario logUsuario = new LogUsuario();
+        usuario .setLogon(login);
         usuario.setSenha(senha);
+        logUsuario.setUsuario(login);
+        logUsuario.setDataAcesso(calendar.getTime());
         try {
             repo.validarUsuario(login, senha);
-            System.out.println("Entrou na tela");
-            FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+            repoLogUsuario.salvar(logUsuario);
+            FacesContext.getCurrentInstance().getExternalContext().redirect("principal.xhtml");
 
             return true;
 

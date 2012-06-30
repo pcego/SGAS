@@ -17,6 +17,7 @@ import java.util.Calendar;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import br.com.ademoc.sgas.Util.UsuarioConectado;
+import javax.enterprise.context.SessionScoped;
 
 /**
  *

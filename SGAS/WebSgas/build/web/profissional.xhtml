@@ -101,7 +101,7 @@
                 <p:confirmDialog id="confirmDialogSalvar" message="Tem certeza que deseja salvar?"
                                  header="Confirmação para salvar" severity="alert" widgetVar="confirmationSalvar">
 
-                    <p:commandButton id="confirmSalvar" value="Sim" update="messages" oncomplete="confirmationSalvar.hide()"
+                    <p:commandButton id="confirmaSalvar" value="Sim" update="messages" oncomplete="confirmationSalvar.hide()"
                                      actionListener="#{profissionalBean.salvar()}" />
                     <p:commandButton id="naoSalvar" value="Não" onclick="confirmationSalvar.hide()" type="button" /> 
                 </p:confirmDialog>
