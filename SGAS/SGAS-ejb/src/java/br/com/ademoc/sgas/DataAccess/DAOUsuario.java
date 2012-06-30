@@ -6,10 +6,12 @@ package br.com.ademoc.sgas.DataAccess;
 
 import br.com.ademoc.sgas.DomainModel.IRepositorioUsuario;
 import br.com.ademoc.sgas.DomainModel.Usuario;
+import java.sql.SQLException;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
 import javax.persistence.Query;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -54,6 +56,15 @@ public class DAOUsuario extends DAOGenerico<Usuario> implements IRepositorioUsua
     }
 
     @Override
+<<<<<<< HEAD
+    public Usuario validarUsuario(String logon, String senha) throws Exception{
+        
+            Query consulta = getManager().createQuery("select u from Usuario u where u.logon = :logon and u.senha = :senha");
+            consulta.setParameter("logon", logon);
+            consulta.setParameter("senha", senha);
+            return (Usuario) consulta.getSingleResult();        
+        
+=======
     public Usuario validarUsuario(String usuario, String senha) {
         Query consulta = getManager().createQuery("select u from Usuario u where u.logon= :usuario and u.senha= :senha");
         consulta.setParameter("usuario", usuario);
@@ -76,5 +87,6 @@ public class DAOUsuario extends DAOGenerico<Usuario> implements IRepositorioUsua
         return false;
 
 
+>>>>>>> ea37e6d6d360198829fce21a202311e2f02cdf6e
     }
 }

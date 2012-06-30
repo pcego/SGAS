@@ -72,8 +72,8 @@ public class Cliente extends DadosGeral implements Serializable {
     @Column(name = "qtddeffamilia", nullable = false)
     private int qtdDefFamilia;
     
-    @Column(name = "rendafamiliar", nullable = false,precision=8,scale=2)
-    private double rendaFamiliar;
+    @Column(name = "rendafamiliar", nullable = false, length=100)
+    private String rendaFamiliar;
     
     @Column(name = "moradia", length = 20, nullable = false)
     private String moradia;
@@ -260,11 +260,11 @@ public class Cliente extends DadosGeral implements Serializable {
         this.qtdDefFamilia = qtdDefFamilia;
     }
 
-    public double getRendaFamiliar() {
+    public String getRendaFamiliar() {
         return rendaFamiliar;
     }
 
-    public void setRendaFamiliar(double rendaFamiliar) {
+    public void setRendaFamiliar(String rendaFamiliar) {
         this.rendaFamiliar = rendaFamiliar;
     }
 

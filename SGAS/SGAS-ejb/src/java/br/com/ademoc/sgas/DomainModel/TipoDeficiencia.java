@@ -30,12 +30,15 @@ public class TipoDeficiencia implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "codigo")
     private Long id;
+    
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "tipoaparelho", nullable = false)
     TipoAparelho tipoAparelho;
+    
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "categoria", nullable = false)
     Categoria categoria;
+    
     @Column(name = "descricao", length = 100, nullable = false)
     private String descricao;
 

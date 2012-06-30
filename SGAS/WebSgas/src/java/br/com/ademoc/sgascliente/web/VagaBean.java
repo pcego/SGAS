@@ -131,4 +131,6 @@ public class VagaBean {
     public void setListagem(List<Vaga> listagem) {
         this.listagem = listagem;
     }
+     
+   
 }

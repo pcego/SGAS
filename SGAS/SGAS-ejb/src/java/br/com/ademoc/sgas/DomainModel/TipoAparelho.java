@@ -26,6 +26,7 @@ public class TipoAparelho implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "codigo")
     private Long id;
+    
     @Column(name = "descricao", length = 100, nullable = false)
     private String descricao;
 
